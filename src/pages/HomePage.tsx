@@ -6,6 +6,7 @@ import {
   Award,
   BookOpen,
   Cake,
+  CalendarHeart,
   Coffee,
   Compass,
   Feather,
@@ -13,9 +14,13 @@ import {
   Flower2,
   Gem,
   Heart,
+  HeartHandshake,
+  Home,
   MailCheck,
+  Moon,
   Palette,
   Send,
+  Smile,
   Sparkles,
   Sun,
   Trophy,
@@ -26,11 +31,30 @@ import {
   CATEGORIES,
   SPECIAL_COLLECTIONS,
 } from '../data/catalog'
+import { LOVE_CALENDAR_MONTHS } from '../data/loveCalendar'
+import { SITE_CONFIG, buildCanonicalUrl } from '../config/siteConfig'
 import { loadFavorites, toggleFavoriteId } from '../utils/cardStorage'
+import { AdPlacement } from '../components/AdPlacement'
 import { CardArtwork } from '../components/CardArtwork'
 import { HeroCardDeck } from '../components/HeroCardDeck'
 import { QuickPreviewDialog } from '../components/QuickPreviewDialog'
+import { SeoHead } from '../components/SeoHead'
 import { TemplateCard } from '../components/TemplateCard'
+
+const HOME_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: SITE_CONFIG.brandName,
+  description: SITE_CONFIG.description,
+  applicationCategory: 'DesignApplication',
+  operatingSystem: 'Web',
+  url: buildCanonicalUrl('/'),
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+}
 
 function CategoryIcon({ name }: { name: string }) {
   const cls = 'h-5 w-5 text-[#472C42]'
@@ -49,6 +73,14 @@ function CategoryIcon({ name }: { name: string }) {
       return <Gem className={cls} aria-hidden="true" />
     case 'Heart':
       return <Heart className={cls} aria-hidden="true" />
+    case 'HeartHandshake':
+      return <HeartHandshake className={cls} aria-hidden="true" />
+    case 'Home':
+      return <Home className={cls} aria-hidden="true" />
+    case 'Moon':
+      return <Moon className={cls} aria-hidden="true" />
+    case 'Smile':
+      return <Smile className={cls} aria-hidden="true" />
     case 'Sun':
       return <Sun className={cls} aria-hidden="true" />
     case 'MailHeart':
@@ -74,6 +106,7 @@ export function HomePage() {
   }, [])
 
   const featuredCards = CARD_TEMPLATES.filter((c) => c.featured).slice(0, 8)
+  const featuredArticles = BLOG_ARTICLES.slice(0, 6)
 
   const handleToggleFavorite = (id: string) => {
     setFavorites(toggleFavoriteId(id))
@@ -81,6 +114,13 @@ export function HomePage() {
 
   return (
     <div className="paper-grain">
+      <SeoHead
+        title="Vellum & Bloom — Bespoke Digital Greeting Cards & Keepsakes"
+        description={SITE_CONFIG.description}
+        canonicalPath="/"
+        jsonLd={HOME_SCHEMA}
+      />
+
       {/* B. HERO SECTION */}
       <section className="relative overflow-hidden pt-10 pb-16 sm:pt-16 sm:pb-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -151,10 +191,10 @@ export function HomePage() {
               <div className="grid grid-cols-3 gap-4 border-t pt-6 max-w-lg" style={{ borderColor: 'var(--border-subtle)' }}>
                 <div>
                   <p className="text-xl sm:text-2xl font-semibold" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
-                    12+
+                    {CATEGORIES.length} Occasions
                   </p>
                   <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
-                    Handcrafted Occasions
+                    {CARD_TEMPLATES.length}+ Original Cards
                   </p>
                 </div>
                 <div>
@@ -189,7 +229,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* C. POPULAR CATEGORIES (12 Occasions) */}
+      {/* C. POPULAR CATEGORIES */}
       <section className="py-16 sm:py-20 border-t" style={{ borderColor: 'var(--border-subtle)' }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between mb-10">
@@ -211,7 +251,7 @@ export function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+          <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
             {CATEGORIES.map((category, index) => (
               <motion.div
                 key={category.slug}
@@ -221,7 +261,7 @@ export function HomePage() {
                 transition={{ duration: 0.35, delay: index * 0.03 }}
               >
                 <Link
-                  to={`/explore?category=${category.slug}`}
+                  to={`/occasions/${category.slug}`}
                   className="group flex h-full flex-col justify-between rounded-3xl border p-4 transition-all duration-300 hover:-translate-y-1"
                   style={{
                     backgroundColor: 'var(--bg-surface)',
@@ -312,6 +352,9 @@ export function HomePage() {
           )}
         </div>
       </section>
+
+      {/* Separated optional Ad slot (renders null unless AdSense is enabled & consented) */}
+      <AdPlacement location="home" />
 
       {/* E. HOW IT WORKS (3 Simple Steps) */}
       <section className="py-16 sm:py-22 border-t" style={{ borderColor: 'var(--border-subtle)' }}>
@@ -546,6 +589,66 @@ export function HomePage() {
         </div>
       </section>
 
+      {/* G2. THE LOVE CALENDAR ENTRY SECTION */}
+      <section className="py-14 sm:py-18 border-t" style={{ borderColor: 'var(--border-subtle)' }}>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div
+            className="rounded-[2rem] border p-6 sm:p-10"
+            style={{
+              backgroundColor: 'var(--bg-surface)',
+              borderColor: 'var(--border-subtle)',
+              boxShadow: 'var(--shadow-soft)',
+            }}
+          >
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between pb-7 border-b" style={{ borderColor: 'var(--border-subtle)' }}>
+              <div className="max-w-2xl space-y-2">
+                <p className="text-xs font-semibold tracking-[0.2em] uppercase" style={{ color: 'var(--accent-rose)' }}>
+                  Year-Round Romance Anthology
+                </p>
+                <h2 className="text-3xl sm:text-4xl font-semibold" style={{ color: 'var(--text-primary)' }}>
+                  The Love Calendar
+                </h2>
+                <p className="font-display text-xl italic" style={{ color: 'var(--accent-rose)' }}>
+                  “365 days. Countless reasons to celebrate love.”
+                </p>
+                <p className="text-sm sm:text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                  Browse twelve monthly collections, relationship milestones, and romantic celebrations crafted to help you mark every meaningful season together.
+                </p>
+              </div>
+              <Link
+                to="/love-calendar"
+                className="inline-flex shrink-0 min-h-11 items-center gap-2 rounded-full bg-[#472C42] px-6 py-3 text-sm font-semibold text-[#FFF9F3] shadow-sm transition-transform hover:-translate-y-0.5"
+              >
+                <CalendarHeart className="h-4 w-4 text-[#D9B77E]" aria-hidden="true" />
+                <span>Explore The Love Calendar</span>
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </div>
+
+            <div className="mt-6 grid grid-cols-2 gap-2.5 sm:grid-cols-4 lg:grid-cols-6">
+              {LOVE_CALENDAR_MONTHS.map((month) => (
+                <Link
+                  key={month.slug}
+                  to={`/love-calendar/${month.slug}`}
+                  className="rounded-2xl border px-3.5 py-2.5 transition-all hover:-translate-y-0.5"
+                  style={{
+                    backgroundColor: 'var(--bg-canvas)',
+                    borderColor: 'var(--border-subtle)',
+                  }}
+                >
+                  <span className="block text-[0.65rem] font-semibold tracking-[0.14em] uppercase" style={{ color: month.accentColor }}>
+                    {String(month.monthNumber).padStart(2, '0')} · {month.shortName}
+                  </span>
+                  <span className="mt-0.5 block truncate font-display text-base font-semibold" style={{ color: 'var(--text-primary)' }}>
+                    {month.collectionTitle.replace('Month of ', '')}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* H. BLOG / INSPIRATION SECTION */}
       <section
         className="py-16 sm:py-22 border-t"
@@ -566,13 +669,13 @@ export function HomePage() {
               className="inline-flex items-center gap-1.5 text-sm font-semibold hover:underline"
               style={{ color: 'var(--text-primary)' }}
             >
-              <span>Read all articles</span>
+              <span>Read all {BLOG_ARTICLES.length} guides</span>
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {BLOG_ARTICLES.map((article) => (
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {featuredArticles.map((article) => (
               <article
                 key={article.slug}
                 className="group flex flex-col justify-between rounded-3xl border p-6 transition-all duration-300 hover:-translate-y-1"

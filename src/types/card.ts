@@ -1,15 +1,19 @@
 export type CategorySlug =
-  | 'for-her'
-  | 'for-him'
-  | 'for-mom'
-  | 'for-dad'
+  | 'girlfriend-boyfriend'
+  | 'mother'
+  | 'father'
+  | 'parents'
+  | 'husband-wife'
   | 'birthday'
   | 'anniversary'
-  | 'love-romance'
   | 'friendship'
+  | 'valentines-day'
   | 'thank-you'
   | 'congratulations'
   | 'festivals'
+  | 'appreciation'
+  | 'good-morning'
+  | 'good-night'
   | 'just-because'
 
 export type CollectionSlug =
@@ -32,6 +36,45 @@ export type ArtworkMotif =
   | 'golden-laurel'
   | 'sunset-horizon'
   | 'cozy-teacup'
+  | 'morning-sunbeam'
+  | 'velvet-heart-seal'
+  | 'couple-rings'
+  | 'olive-family-tree'
+  | 'confetti-celebration'
+  | 'butterfly-meadow'
+  | 'starry-lullaby'
+  | 'ribbon-giftbox'
+  | 'tulip-greeting'
+  | 'aurora-bloom'
+  | 'fireworks-burst'
+  | 'warm-embrace'
+  | 'welsh-daffodil-heart'
+  | 'rose-bloom'
+  | 'engagement-ring-box'
+  | 'chocolate-truffles'
+  | 'plush-teddy-bear'
+  | 'intertwined-hands-vow'
+  | 'kiss-silhouette-hearts'
+  | 'playful-comic-kapow'
+  | 'playful-kick-bounce'
+  | 'perfume-flacon'
+  | 'charming-wink-note'
+  | 'handwritten-wax-letter'
+  | 'long-distance-moonmail'
+  | 'self-love-botanical'
+  | 'floral-emblem-grace'
+  | 'white-rose-ivory'
+  | 'sunburst-smile'
+  | 'dark-cocoa-minimal'
+  | 'book-and-rose'
+  | 'olive-branch-kiss'
+  | 'chinese-520-lantern'
+  | 'carnival-rose-fiesta'
+  | 'vinyl-headphones-duet'
+  | 'wellness-heart-pulse'
+  | 'tailored-gift-watch'
+  | 'christmas-eve-tree'
+  | 'christmas-holiday-hearth'
 
 export type BackgroundPattern =
   | 'vellum'
@@ -39,12 +82,38 @@ export type BackgroundPattern =
   | 'botanical-watermark'
   | 'starlight'
   | 'linen-minimal'
+  | 'double-gold'
+  | 'scalloped-frame'
+  | 'none'
 
 export type CardFontId =
   | 'editorial-serif'
   | 'handwritten-script'
   | 'literary-lora'
   | 'modern-sans'
+  | 'caveat-note'
+
+export type CardLayout = 'portrait' | 'landscape' | 'square'
+
+export type CardTextAlign = 'left' | 'center' | 'right'
+
+export type CardFontSize = 'sm' | 'md' | 'lg' | 'xl'
+
+export type DecorativeEffect =
+  | 'hearts'
+  | 'flowers'
+  | 'stars'
+  | 'confetti'
+
+export type StickerId =
+  | 'wax-heart'
+  | 'pressed-rose'
+  | 'gold-star'
+  | 'butterfly'
+  | 'sparkle-burst'
+  | 'ribbon-bow'
+  | 'sunbeam'
+  | 'crescent'
 
 export interface CardPalette {
   id: string
@@ -57,6 +126,15 @@ export interface CardPalette {
   accent: string
   foil: string
   badgeBg: string
+}
+
+export interface GradientPreset {
+  id: string
+  name: string
+  from: string
+  via: string
+  to: string
+  textColor: string
 }
 
 export interface CardFontPreset {
@@ -88,6 +166,18 @@ export interface CollectionInfo {
   templateIds: string[]
 }
 
+export type FrontCoverStyle =
+  | 'atelier'
+  | 'editorial-poster'
+  | 'crest-medallion'
+  | 'split-ribbon'
+
+export type InsideMessageStyle =
+  | 'classic'
+  | 'letterpress-ruled'
+  | 'poetic-framed'
+  | 'keepsake-card'
+
 export interface CardTemplate {
   id: string
   title: string
@@ -102,9 +192,15 @@ export interface CardTemplate {
   defaultFontId: CardFontId
   defaultHeadline: string
   defaultMessage: string
+  defaultEffects?: DecorativeEffect[]
+  defaultStickers?: StickerId[]
+  defaultLayout?: CardLayout
+  frontStyle?: FrontCoverStyle
+  insideStyle?: InsideMessageStyle
   sealInitial: string
   featured?: boolean
   badge?: string
+  loveCalendarOccasionId?: string
 }
 
 export interface PersonalizedCard {
@@ -112,11 +208,23 @@ export interface PersonalizedCard {
   templateId: string
   recipientName: string
   senderName: string
+  relationship?: string
   headline: string
   message: string
   paletteId: string
+  backgroundMode?: 'palette' | 'solid' | 'gradient'
+  customBgColor?: string
+  gradientId?: string
+  customGradientFrom?: string
+  customGradientTo?: string
+  customTextColor?: string
   pattern: BackgroundPattern
   fontId: CardFontId
+  fontSize?: CardFontSize
+  textAlign?: CardTextAlign
+  layout?: CardLayout
+  effects?: DecorativeEffect[]
+  stickers?: StickerId[]
   sealText: string
   giftNote: string
   updatedAt: string
@@ -131,12 +239,28 @@ export interface BlogArticle {
   excerpt: string
   coverMotif: ArtworkMotif
   coverPaletteId: string
+  occasionSlug?: CategorySlug
   sections: {
     heading: string
     paragraphs: string[]
     quote?: string
+    examples?: string[]
   }[]
+  conclusion?: string
+  ctaLabel?: string
   recommendedTemplateId: string
+}
+
+export interface CategorySeoGuide {
+  slug: CategorySlug
+  seoTitle: string
+  metaDescription: string
+  heroHeadline: string
+  introParagraph: string
+  writingTips: string[]
+  sampleWishes: string[]
+  recommendedArticleSlug: string
+  relatedSlugs: CategorySlug[]
 }
 
 export interface FaqItem {

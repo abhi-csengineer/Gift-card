@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Replace https://example.com with your live custom domain prior to production deployment -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://example.com/</loc><priority>1.0</priority></url>
+  <url><loc>https://example.com/explore</loc><priority>0.9</priority></url>
+  <url><loc>https://example.com/occasions</loc><priority>0.9</priority></url>
+  <url><loc>https://example.com/love-calendar</loc><priority>0.9</priority></url>
+  <url><loc>https://example.com/create</loc><priority>0.9</priority></url>
+  <url><loc>https://example.com/inspiration</loc><priority>0.9</priority></url>
+
+  <!-- The Love Calendar (12 Monthly Collections) -->
+  <url><loc>https://example.com/love-calendar/january</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/love-calendar/february</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/love-calendar/march</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/love-calendar/april</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/love-calendar/may</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/love-calendar/june</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/love-calendar/july</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/love-calendar/august</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/love-calendar/september</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/love-calendar/october</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/love-calendar/november</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/love-calendar/december</loc><priority>0.8</priority></url>
+
+  <!-- 16 Occasion SEO Pages -->
+  <url><loc>https://example.com/occasions/girlfriend-boyfriend</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/occasions/mother</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/occasions/father</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/occasions/parents</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/occasions/husband-wife</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/occasions/birthday</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/occasions/anniversary</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/occasions/friendship</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/occasions/valentines-day</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/occasions/thank-you</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/occasions/congratulations</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/occasions/festivals</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/occasions/appreciation</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/occasions/good-morning</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/occasions/good-night</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/occasions/just-because</loc><priority>0.8</priority></url>
+
+  <!-- Stationery Journal & SEO Guides -->
+  <url><loc>https://example.com/inspiration/50-heartfelt-birthday-wishes-for-mom</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/inspiration/beautiful-messages-to-make-your-girlfriend-smile</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/inspiration/emotional-birthday-wishes-for-dad</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/inspiration/anniversary-messages-for-couples</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/inspiration/how-to-write-a-meaningful-thank-you-message</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/inspiration/best-digital-greeting-card-ideas</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/inspiration/how-to-create-and-send-a-personalized-digital-card</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/inspiration/heartfelt-messages-for-parents</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/inspiration/friendship-appreciation-messages</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/inspiration/creative-ways-to-surprise-someone-you-love</loc><priority>0.8</priority></url>
+  <url><loc>https://example.com/inspiration/art-of-writing-a-card-they-keep</loc><priority>0.7</priority></url>
+  <url><loc>https://example.com/inspiration/why-just-because-notes-matter-most</loc><priority>0.7</priority></url>
+  <url><loc>https://example.com/inspiration/pairing-typography-and-color-to-mood</loc><priority>0.7</priority></url>
+
+  <!-- Trust, About, Contact, FAQ, Legal & Sitemap -->
+  <url><loc>https://example.com/about</loc><priority>0.6</priority></url>
+  <url><loc>https://example.com/contact</loc><priority>0.6</priority></url>
+  <url><loc>https://example.com/faq</loc><priority>0.7</priority></url>
+  <url><loc>https://example.com/sitemap</loc><priority>0.5</priority></url>
+  <url><loc>https://example.com/privacy</loc><priority>0.4</priority></url>
+  <url><loc>https://example.com/terms</loc><priority>0.4</priority></url>
+  <url><loc>https://example.com/disclaimer</loc><priority>0.4</priority></url>
+  <url><loc>https://example.com/cookies</loc><priority>0.4</priority></url>
+  <url><loc>https://example.com/copyright</loc><priority>0.4</priority></url>
+</urlset>

@@ -1,13 +1,22 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, Sparkles } from 'lucide-react'
 import { CARD_TEMPLATES, CATEGORIES, SPECIAL_COLLECTIONS } from '../data/catalog'
+import { Breadcrumbs } from '../components/Breadcrumbs'
 import { GreetingCardPreview } from '../components/GreetingCardPreview'
+import { SeoHead } from '../components/SeoHead'
 
 export function OccasionsPage() {
   return (
-    <div className="paper-grain py-12 sm:py-16">
+    <div className="paper-grain py-10 sm:py-16">
+      <SeoHead
+        title="Occasions Directory — Digital Cards for Every Moment"
+        description="Browse all 16 greeting card categories from Mom, Dad, Birthdays, and Anniversaries to Thank You, Festivals, Good Morning, and Just Because."
+        canonicalPath="/occasions"
+      />
+
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-16">
         <div className="max-w-3xl space-y-3">
+          <Breadcrumbs items={[{ label: 'Occasions' }]} />
           <p className="text-xs font-semibold tracking-[0.18em] uppercase" style={{ color: 'var(--accent-rose)' }}>
             Occasions Directory
           </p>
@@ -15,11 +24,11 @@ export function OccasionsPage() {
             Find the Right Sentiment for Every Moment
           </h1>
           <p className="text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-            From milestone birthdays and golden anniversaries to spontaneous Tuesday thank-yous, pick an occasion below to jump straight into tailored stationery.
+            From milestone birthdays and golden anniversaries to spontaneous Tuesday thank-yous, explore a dedicated occasion guide or jump straight into tailored stationery.
           </p>
         </div>
 
-        {/* All 12 Categories */}
+        {/* All 16 Categories */}
         <section className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {CATEGORIES.map((category) => {
             const sample =
@@ -46,19 +55,21 @@ export function OccasionsPage() {
                       {category.featuredCount} ideas
                     </span>
                     <h2 className="mt-2 text-2xl font-semibold" style={{ color: 'var(--text-primary)' }}>
-                      {category.name}
+                      <Link to={`/occasions/${category.slug}`} className="hover:underline">
+                        {category.name}
+                      </Link>
                     </h2>
                     <p className="mt-1 text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                       {category.tagline}
                     </p>
                   </div>
-                  <div className="mt-3 flex items-center gap-3">
+                  <div className="mt-3 flex flex-wrap items-center gap-3">
                     <Link
-                      to={`/explore?category=${category.slug}`}
+                      to={`/occasions/${category.slug}`}
                       className="inline-flex items-center gap-1 text-xs font-semibold hover:underline"
                       style={{ color: 'var(--text-primary)' }}
                     >
-                      <span>Browse designs</span>
+                      <span>View guide &amp; cards</span>
                       <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                     </Link>
                     <Link

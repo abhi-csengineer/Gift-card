@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom'
-import { Heart, Mail, Share2, Sparkles } from 'lucide-react'
+import { Heart, Mail, MapPin, SlidersHorizontal, Sparkles } from 'lucide-react'
+import { SITE_CONFIG } from '../config/siteConfig'
+import { openPrivacySettings } from '../utils/consent'
+
+const CURRENT_YEAR = new Date().getFullYear()
 
 export function Footer() {
-  const currentYear = new Date().getFullYear()
+  const currentYear = CURRENT_YEAR
 
   return (
     <footer
@@ -31,33 +35,24 @@ export function Footer() {
               </span>
             </Link>
             <p className="max-w-md text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-              An editorial digital stationery house built for slow, thoughtful words. Craft bespoke greeting cards, seal them with warmth, and send them across any distance in seconds.
+              An editorial digital stationery studio built for slow, thoughtful words. Craft bespoke digital greeting cards, seal them with warmth, and share keepsakes across any distance.
             </p>
-            <div className="flex flex-wrap items-center gap-2.5 pt-2">
-              <a
-                href="https://www.instagram.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Follow Vellum & Bloom on Instagram"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border transition-transform hover:-translate-y-0.5"
-                style={{ borderColor: 'var(--border-subtle)', color: 'var(--text-secondary)' }}
-              >
-                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-                </svg>
-              </a>
-              <a
-                href="https://www.pinterest.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Follow Vellum & Bloom on Pinterest"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border transition-transform hover:-translate-y-0.5"
-                style={{ borderColor: 'var(--border-subtle)', color: 'var(--text-secondary)' }}
-              >
-                <Share2 className="h-4 w-4" aria-hidden="true" />
-              </a>
+            <p className="max-w-md text-xs leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+              Digital greeting cards only—no monetary gift vouchers or stored cash value. Drafts stay locally in your browser.
+            </p>
+            <div className="space-y-1.5 text-xs" style={{ color: 'var(--text-secondary)' }}>
+              <p className="flex items-center gap-2">
+                <Mail className="h-3.5 w-3.5 text-[#D9B77E] shrink-0" aria-hidden="true" />
+                <a href={`mailto:${SITE_CONFIG.contactEmail}`} className="hover:underline">
+                  {SITE_CONFIG.contactEmail}
+                </a>
+              </p>
+              <p className="flex items-center gap-2">
+                <MapPin className="h-3.5 w-3.5 text-[#D9B77E] shrink-0" aria-hidden="true" />
+                <span>{SITE_CONFIG.locationLabel}</span>
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2.5 pt-1">
               <Link
                 to="/contact"
                 aria-label="Contact Vellum & Bloom"
@@ -67,6 +62,15 @@ export function Footer() {
                 <Mail className="h-3.5 w-3.5" aria-hidden="true" />
                 <span>Write to Studio</span>
               </Link>
+              <button
+                type="button"
+                onClick={openPrivacySettings}
+                className="inline-flex h-10 items-center gap-2 rounded-full border px-4 text-xs font-medium transition-colors hover:opacity-85 cursor-pointer"
+                style={{ borderColor: 'var(--border-subtle)', color: 'var(--text-secondary)' }}
+              >
+                <SlidersHorizontal className="h-3.5 w-3.5" aria-hidden="true" />
+                <span>Privacy Settings</span>
+              </button>
             </div>
           </div>
 
@@ -78,8 +82,9 @@ export function Footer() {
             <ul className="space-y-2.5 text-sm" style={{ color: 'var(--text-secondary)' }}>
               <li><Link to="/explore" className="hover:underline">Explore Cards</Link></li>
               <li><Link to="/occasions" className="hover:underline">Occasions</Link></li>
+              <li><Link to="/love-calendar" className="hover:underline">The Love Calendar</Link></li>
               <li><Link to="/create" className="hover:underline">Create a Card</Link></li>
-              <li><Link to="/inspiration" className="hover:underline">Inspiration Journal</Link></li>
+              <li><Link to="/inspiration" className="hover:underline">Stationery Journal</Link></li>
             </ul>
           </div>
 
@@ -106,6 +111,7 @@ export function Footer() {
               <li><Link to="/terms" className="hover:underline">Terms and Conditions</Link></li>
               <li><Link to="/disclaimer" className="hover:underline">Disclaimer</Link></li>
               <li><Link to="/cookies" className="hover:underline">Cookie Policy</Link></li>
+              <li><Link to="/copyright" className="hover:underline">Copyright Policy</Link></li>
             </ul>
           </div>
         </div>

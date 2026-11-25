@@ -15,10 +15,11 @@ export function Navbar() {
 
   const navItems = [
     { to: '/', label: 'Home', end: true },
-    { to: '/explore', label: 'Explore Cards' },
+    { to: '/explore', label: 'Explore' },
     { to: '/occasions', label: 'Occasions' },
-    { to: '/create', label: 'Create a Card' },
-    { to: '/about', label: 'About Us' },
+    { to: '/love-calendar', label: 'Love Calendar' },
+    { to: '/create', label: 'Create' },
+    { to: '/about', label: 'About' },
   ]
 
   const searchResults = useMemo(() => {
@@ -127,14 +128,14 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav aria-label="Primary" className="hidden lg:flex lg:items-center lg:gap-1">
+          <nav aria-label="Primary" className="hidden lg:flex lg:items-center lg:gap-0.5">
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
                 end={item.end}
                 className={({ isActive }) =>
-                  `relative rounded-full px-4 py-2 text-sm font-medium transition-all ${
+                  `relative whitespace-nowrap shrink-0 rounded-full px-3 py-2 text-sm font-medium transition-all ${
                     isActive ? 'font-semibold' : 'hover:opacity-80'
                   }`
                 }
@@ -307,6 +308,21 @@ export function Navbar() {
                 Occasions
               </p>
               <div className="flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    closeSearch()
+                    navigate('/love-calendar')
+                  }}
+                  className="rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-colors hover:opacity-85 cursor-pointer"
+                  style={{
+                    backgroundColor: 'var(--bg-blush)',
+                    borderColor: 'var(--border-subtle)',
+                    color: 'var(--text-primary)',
+                  }}
+                >
+                  The Love Calendar
+                </button>
                 {matchingCategories.map((cat) => (
                   <button
                     key={cat.slug}

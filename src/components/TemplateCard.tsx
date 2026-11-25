@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Eye, Heart, Sparkles } from 'lucide-react'
 import type { CardTemplate } from '../types/card'
@@ -16,8 +17,28 @@ export function TemplateCard({
   onToggleFavorite,
   onQuickPreview,
 }: TemplateCardProps) {
+  const cardRef = useRef<HTMLElement>(null)
+  const [visible, setVisible] = useState(() => typeof IntersectionObserver === 'undefined')
+
+  useEffect(() => {
+    const el = cardRef.current
+    if (!el || visible || typeof IntersectionObserver === 'undefined') return
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setVisible(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: '240px' },
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [visible])
+
   return (
     <article
+      ref={cardRef}
       className="group flex flex-col overflow-hidden rounded-3xl border p-3.5 transition-all duration-300 hover:-translate-y-1"
       style={{
         backgroundColor: 'var(--bg-surface)',
@@ -25,11 +46,18 @@ export function TemplateCard({
         boxShadow: 'var(--shadow-soft)',
       }}
     >
-      {/* Card artwork thumbnail */}
+      {/* Card artwork thumbnail (lazy-rendered on scroll) */}
       <div className="relative">
         <Link to={`/create/${template.id}`} className="block overflow-hidden rounded-[1.25rem]">
           <div className="transition-transform duration-500 ease-out group-hover:scale-[1.03]">
-            <GreetingCardPreview templateId={template.id} compact />
+            {visible ? (
+              <GreetingCardPreview templateId={template.id} compact />
+            ) : (
+              <div
+                className="aspect-[3/4] w-full animate-pulse rounded-[1.25rem]"
+                style={{ backgroundColor: 'var(--bg-muted)' }}
+              />
+            )}
           </div>
         </Link>
 

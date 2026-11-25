@@ -5,21 +5,31 @@ import {
   CARD_TEMPLATES,
   CATEGORIES,
   SPECIAL_COLLECTIONS,
+  normalizeCategorySlug,
 } from '../data/catalog'
 import { loadFavorites, toggleFavoriteId } from '../utils/cardStorage'
+import { AdPlacement } from '../components/AdPlacement'
+import { Breadcrumbs } from '../components/Breadcrumbs'
 import { QuickPreviewDialog } from '../components/QuickPreviewDialog'
+import { SeoHead } from '../components/SeoHead'
 import { TemplateCard } from '../components/TemplateCard'
 
 export function ExplorePage() {
   const [searchParams, setSearchParams] = useSearchParams()
-  const activeCategory = searchParams.get('category') ?? 'all'
+  const activeCategory = normalizeCategorySlug(searchParams.get('category'))
   const activeCollection = searchParams.get('collection') ?? 'all'
-  const initialQuery = searchParams.get('q') ?? ''
+  const urlQuery = searchParams.get('q') ?? ''
 
-  const [query, setQuery] = useState(initialQuery)
+  const [prevUrlQuery, setPrevUrlQuery] = useState(urlQuery)
+  const [query, setQuery] = useState(urlQuery)
   const [onlyFavorites, setOnlyFavorites] = useState(false)
   const [favorites, setFavorites] = useState<string[]>(() => loadFavorites())
   const [previewId, setPreviewId] = useState<string | null>(null)
+
+  if (urlQuery !== prevUrlQuery) {
+    setPrevUrlQuery(urlQuery)
+    setQuery(urlQuery)
+  }
 
   const setFilter = (key: string, value: string) => {
     const next = new URLSearchParams(searchParams)
@@ -41,7 +51,7 @@ export function ExplorePage() {
     const q = query.trim().toLowerCase()
     return CARD_TEMPLATES.filter((card) => {
       if (onlyFavorites && !favorites.includes(card.id)) return false
-      if (activeCategory !== 'all' && !card.categories.includes(activeCategory as never)) {
+      if (activeCategory !== 'all' && !card.categories.includes(activeCategory)) {
         return false
       }
       if (activeCollection !== 'all' && card.collection !== activeCollection) {
@@ -56,10 +66,17 @@ export function ExplorePage() {
   }, [activeCategory, activeCollection, favorites, onlyFavorites, query])
 
   return (
-    <div className="paper-grain py-12 sm:py-16">
+    <div className="paper-grain py-10 sm:py-16">
+      <SeoHead
+        title={`Explore Cards — ${CARD_TEMPLATES.length} Bespoke Digital Card Templates`}
+        description="Browse and filter digital greeting card designs by relationship, occasion, and style—then customize colors, typography, and messages instantly."
+        canonicalPath="/explore"
+      />
+
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="max-w-3xl space-y-3">
+          <Breadcrumbs items={[{ label: 'Explore Cards' }]} />
           <p className="text-xs font-semibold tracking-[0.18em] uppercase" style={{ color: 'var(--accent-rose)' }}>
             Card Gallery
           </p>
@@ -200,7 +217,7 @@ export function ExplorePage() {
               No matching cards found
             </p>
             <p className="mx-auto max-w-md text-sm" style={{ color: 'var(--text-secondary)' }}>
-              Try clearing one of your filters or exploring all twelve occasions to find the right artwork.
+              Try clearing one of your filters or exploring all sixteen occasions to find the right artwork.
             </p>
             <button
               type="button"
@@ -223,6 +240,8 @@ export function ExplorePage() {
             ))}
           </div>
         )}
+
+        <AdPlacement location="explore" />
       </div>
 
       <QuickPreviewDialog templateId={previewId} onClose={() => setPreviewId(null)} />

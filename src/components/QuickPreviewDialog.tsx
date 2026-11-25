@@ -18,7 +18,6 @@ export function QuickPreviewDialog({ templateId, onClose }: QuickPreviewDialogPr
     const dialog = dialogRef.current
     if (!dialog) return
     if (templateId) {
-      setSide('front')
       if (!dialog.open) dialog.showModal()
     } else if (dialog.open) {
       dialog.close()
@@ -28,7 +27,10 @@ export function QuickPreviewDialog({ templateId, onClose }: QuickPreviewDialogPr
   useEffect(() => {
     const dialog = dialogRef.current
     if (!dialog) return
-    const handleClose = () => onClose()
+    const handleClose = () => {
+      setSide('front')
+      onClose()
+    }
     dialog.addEventListener('close', handleClose)
 
     if (!('closedBy' in HTMLDialogElement.prototype)) {

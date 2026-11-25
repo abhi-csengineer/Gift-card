@@ -1,14 +1,41 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ChevronDown, Sparkles } from 'lucide-react'
 import { FAQ_ITEMS } from '../data/catalog'
+import { Breadcrumbs } from '../components/Breadcrumbs'
+import { SeoHead } from '../components/SeoHead'
 
 export function FaqPage() {
   const [openId, setOpenId] = useState<string>(FAQ_ITEMS[0].id)
 
+  const faqSchema = useMemo(
+    () => ({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: FAQ_ITEMS.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
+    }),
+    [],
+  )
+
   return (
-    <div className="paper-grain py-12 sm:py-16">
+    <div className="paper-grain py-10 sm:py-16">
+      <SeoHead
+        title="Frequently Asked Questions — Greeting Cards & Privacy"
+        description="Answers on creating digital greeting cards, WhatsApp link sharing, PNG/JPG downloads, local browser storage, and privacy."
+        canonicalPath="/faq"
+        jsonLd={faqSchema}
+      />
+
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 space-y-10">
+        <Breadcrumbs items={[{ label: 'FAQ' }]} />
+
         <div className="space-y-3 text-center">
           <p className="text-xs font-semibold tracking-[0.18em] uppercase" style={{ color: 'var(--accent-rose)' }}>
             Frequently Asked Questions
@@ -17,7 +44,7 @@ export function FaqPage() {
             Everything You Need to Know
           </h1>
           <p className="text-base" style={{ color: 'var(--text-secondary)' }}>
-            Answers about personalizing cards, sharing links on WhatsApp, PNG downloads, and local draft storage.
+            Answers about personalizing cards, sharing links on WhatsApp, PNG/JPG downloads, privacy, and local draft storage.
           </p>
         </div>
 

@@ -1,13 +1,18 @@
 import type {
   BackgroundPattern,
-  BlogArticle,
   CardFontPreset,
   CardPalette,
   CardTemplate,
   CategoryInfo,
+  CategorySlug,
   CollectionInfo,
+  DecorativeEffect,
   FaqItem,
+  GradientPreset,
+  StickerId,
 } from '../types/card'
+import { SEO_ARTICLES } from './articles'
+import { LOVE_CALENDAR_PALETTES, LOVE_CALENDAR_TEMPLATES } from './loveCalendarTemplates'
 
 export const CARD_PALETTES: CardPalette[] = [
   {
@@ -82,6 +87,106 @@ export const CARD_PALETTES: CardPalette[] = [
     foil: '#E4C48E',
     badgeBg: 'rgba(248, 221, 228, 0.16)',
   },
+  {
+    id: 'sage-botanical',
+    name: 'Sage & Meadow',
+    bg: '#EEF3EC',
+    bgSecondary: '#DCE7DA',
+    surface: '#FAFDF9',
+    text: '#2B3E31',
+    mutedText: '#586E5E',
+    accent: '#688F73',
+    foil: '#C4A262',
+    badgeBg: '#DCE7DA',
+  },
+  {
+    id: 'twilight-indigo',
+    name: 'Starry Night Indigo',
+    bg: '#1F243E',
+    bgSecondary: '#141729',
+    surface: '#292F4F',
+    text: '#FAF6F0',
+    mutedText: '#CBD1E6',
+    accent: '#E9B97E',
+    foil: '#E4C48E',
+    badgeBg: 'rgba(233, 185, 126, 0.18)',
+  },
+  {
+    id: 'coral-peach',
+    name: 'Sunlit Apricot',
+    bg: '#FFF0E6',
+    bgSecondary: '#FAD8C8',
+    surface: '#FFF9F5',
+    text: '#4D2B28',
+    mutedText: '#7D554F',
+    accent: '#D77A61',
+    foil: '#CFA05C',
+    badgeBg: '#FAD8C8',
+  },
+  {
+    id: 'pearl-alabaster',
+    name: 'Alabaster Pearl',
+    bg: '#F8F7F4',
+    bgSecondary: '#EAE5DC',
+    surface: '#FFFFFF',
+    text: '#2C2629',
+    mutedText: '#665E62',
+    accent: '#9A6D7E',
+    foil: '#B89758',
+    badgeBg: '#EAE5DC',
+  },
+  ...LOVE_CALENDAR_PALETTES,
+]
+
+export const GRADIENT_PRESETS: GradientPreset[] = [
+  {
+    id: 'rosewater-dawn',
+    name: 'Rosewater Dawn',
+    from: '#FFF9F3',
+    via: '#FBE4EA',
+    to: '#F2D0DC',
+    textColor: '#3A2135',
+  },
+  {
+    id: 'lavender-mist',
+    name: 'Lavender Mist',
+    from: '#F3EEFF',
+    via: '#E8E2F7',
+    to: '#F8DDE4',
+    textColor: '#362344',
+  },
+  {
+    id: 'velvet-plum',
+    name: 'Velvet Plum Night',
+    from: '#472C42',
+    via: '#341E30',
+    to: '#5B3249',
+    textColor: '#FFF9F3',
+  },
+  {
+    id: 'golden-morning',
+    name: 'Golden Morning',
+    from: '#FFF8E8',
+    via: '#FCE6C9',
+    to: '#FAD5C5',
+    textColor: '#452A23',
+  },
+  {
+    id: 'midnight-lullaby',
+    name: 'Midnight Lullaby',
+    from: '#1B203B',
+    via: '#282E4F',
+    to: '#3B2C49',
+    textColor: '#FAF6F0',
+  },
+  {
+    id: 'botanical-dew',
+    name: 'Botanical Dew',
+    from: '#F4F8F2',
+    via: '#E4EFE2',
+    to: '#F9F3E7',
+    textColor: '#283C2E',
+  },
 ]
 
 export const BACKGROUND_PATTERNS: {
@@ -94,6 +199,9 @@ export const BACKGROUND_PATTERNS: {
   { id: 'botanical-watermark', name: 'Botanical Veil', description: 'Airy floral sprigs along the border' },
   { id: 'starlight', name: 'Celestial Dust', description: 'Fine scattered gold starlight flecks' },
   { id: 'linen-minimal', name: 'Linen Letterpress', description: 'Crisp minimalist double-hairline frame' },
+  { id: 'double-gold', name: 'Heirloom Double Gold', description: 'Ornate corner-accented gold frame' },
+  { id: 'scalloped-frame', name: 'Scalloped Lace', description: 'Playful scalloped stationery border' },
+  { id: 'none', name: 'Borderless Clean', description: 'Pure open edge-to-edge canvas' },
 ]
 
 export const CARD_FONTS: CardFontPreset[] = [
@@ -129,40 +237,97 @@ export const CARD_FONTS: CardFontPreset[] = [
     canvasFamily: 'Plus Jakarta Sans',
     sampleText: 'Simple words, deeply felt',
   },
+  {
+    id: 'caveat-note',
+    name: 'Caveat Handwritten',
+    description: 'Warm, candid pen-on-paper note',
+    cssFamily: '"Caveat", cursive',
+    canvasFamily: 'Caveat',
+    sampleText: 'Just a warm note for you',
+  },
+]
+
+export const STICKER_OPTIONS: {
+  id: StickerId
+  label: string
+  symbol: string
+}[] = [
+  { id: 'wax-heart', label: 'Heart Seal', symbol: '♥' },
+  { id: 'pressed-rose', label: 'Pressed Bloom', symbol: '❀' },
+  { id: 'gold-star', label: 'Gold Star', symbol: '✦' },
+  { id: 'butterfly', label: 'Butterfly', symbol: '❦' },
+  { id: 'sparkle-burst', label: 'Sparkles', symbol: '✧' },
+  { id: 'ribbon-bow', label: 'Keepsake Seal', symbol: '✿' },
+  { id: 'sunbeam', label: 'Sunbeam', symbol: '☀' },
+  { id: 'crescent', label: 'Moonlight', symbol: '☽' },
+]
+
+export const DECORATIVE_EFFECT_OPTIONS: {
+  id: DecorativeEffect
+  label: string
+  description: string
+}[] = [
+  { id: 'hearts', label: 'Floating Hearts', description: 'Gentle rising blush hearts' },
+  { id: 'flowers', label: 'Floral Petals', description: 'Soft drifting botanical petals' },
+  { id: 'stars', label: 'Twinkling Stars', description: 'Subtle shimmering gold stars' },
+  { id: 'confetti', label: 'Festive Confetti', description: 'Celebratory pastel confetti ribbons' },
+]
+
+export const RELATIONSHIP_PRESETS = [
+  'Girlfriend',
+  'Boyfriend',
+  'Mom',
+  'Dad',
+  'Parents',
+  'Wife',
+  'Husband',
+  'Best Friend',
+  'Sister',
+  'Brother',
+  'Partner',
+  'Mentor',
 ]
 
 export const CATEGORIES: CategoryInfo[] = [
   {
-    slug: 'for-her',
-    name: 'For Her',
-    tagline: 'Graceful keepsakes & botanical notes',
+    slug: 'girlfriend-boyfriend',
+    name: 'Girlfriend / Boyfriend',
+    tagline: 'Tender notes, date-night keepsakes & romance',
     accentBg: '#F8DDE4',
-    iconName: 'Sparkles',
+    iconName: 'Heart',
     featuredCount: 18,
   },
   {
-    slug: 'for-him',
-    name: 'For Him',
-    tagline: 'Tailored minimalism & warm gratitude',
-    accentBg: '#E8E2F7',
-    iconName: 'Compass',
-    featuredCount: 14,
-  },
-  {
-    slug: 'for-mom',
-    name: 'For Mom',
+    slug: 'mother',
+    name: 'Mother',
     tagline: 'Peonies, warmth & endless appreciation',
     accentBg: '#F8DDE4',
     iconName: 'Flower2',
     featuredCount: 16,
   },
   {
-    slug: 'for-dad',
-    name: 'For Dad',
+    slug: 'father',
+    name: 'Father',
     tagline: 'Heritage prints & heartfelt pride',
     accentBg: '#F3E5D0',
     iconName: 'Award',
+    featuredCount: 14,
+  },
+  {
+    slug: 'parents',
+    name: 'Parents',
+    tagline: 'Gratitude for home, wisdom & steady love',
+    accentBg: '#E4EFE2',
+    iconName: 'Home',
     featuredCount: 12,
+  },
+  {
+    slug: 'husband-wife',
+    name: 'Husband / Wife',
+    tagline: 'Shared vows, quiet mornings & devotion',
+    accentBg: '#F5D6DF',
+    iconName: 'Gem',
+    featuredCount: 16,
   },
   {
     slug: 'birthday',
@@ -177,24 +342,24 @@ export const CATEGORIES: CategoryInfo[] = [
     name: 'Anniversary',
     tagline: 'Gold-foil milestones & shared years',
     accentBg: '#F8DDE4',
-    iconName: 'Gem',
+    iconName: 'Sparkles',
     featuredCount: 15,
-  },
-  {
-    slug: 'love-romance',
-    name: 'Love & Romance',
-    tagline: 'Moonlit letters & tender confessions',
-    accentBg: '#F5D6DF',
-    iconName: 'Heart',
-    featuredCount: 22,
   },
   {
     slug: 'friendship',
     name: 'Friendship',
     tagline: 'Sunlit daisies & inside-joke notes',
     accentBg: '#E8E2F7',
-    iconName: 'Sun',
-    featuredCount: 13,
+    iconName: 'Smile',
+    featuredCount: 14,
+  },
+  {
+    slug: 'valentines-day',
+    name: "Valentine's Day",
+    tagline: 'Wax-sealed confessions & crimson blooms',
+    accentBg: '#F8D4DD',
+    iconName: 'HeartHandshake',
+    featuredCount: 15,
   },
   {
     slug: 'thank-you',
@@ -221,6 +386,30 @@ export const CATEGORIES: CategoryInfo[] = [
     featuredCount: 17,
   },
   {
+    slug: 'appreciation',
+    name: 'Appreciation',
+    tagline: 'Recognizing kindness & quiet dedication',
+    accentBg: '#E8E2F7',
+    iconName: 'Compass',
+    featuredCount: 13,
+  },
+  {
+    slug: 'good-morning',
+    name: 'Good Morning',
+    tagline: 'Warm sunbeams & gentle starts to the day',
+    accentBg: '#FCE6C9',
+    iconName: 'Sun',
+    featuredCount: 12,
+  },
+  {
+    slug: 'good-night',
+    name: 'Good Night',
+    tagline: 'Starlight lullabies & peaceful dreams',
+    accentBg: '#DFDAEE',
+    iconName: 'Moon',
+    featuredCount: 12,
+  },
+  {
     slug: 'just-because',
     name: 'Just Because',
     tagline: 'Spontaneous warmth on ordinary days',
@@ -230,28 +419,54 @@ export const CATEGORIES: CategoryInfo[] = [
   },
 ]
 
+const LEGACY_CATEGORY_MAP: Record<string, CategorySlug> = {
+  'for-her': 'girlfriend-boyfriend',
+  'for-him': 'husband-wife',
+  'for-mom': 'mother',
+  'for-dad': 'father',
+  'love-romance': 'girlfriend-boyfriend',
+}
+
+export function normalizeCategorySlug(slug: string | null): CategorySlug | 'all' {
+  if (!slug || slug === 'all') return 'all'
+  if (LEGACY_CATEGORY_MAP[slug]) return LEGACY_CATEGORY_MAP[slug]
+  const found = CATEGORIES.find((c) => c.slug === slug)
+  return found ? found.slug : 'all'
+}
+
 export const SPECIAL_COLLECTIONS: CollectionInfo[] = [
   {
     slug: 'romantic',
     name: 'Romantic Collection',
     subtitle: 'Poetic Love Letters',
     description:
-      'Velvet plum tones, blush botanicals, and moonlit vows crafted for anniversaries, date nights, and quiet "I love you" moments.',
+      'Velvet plum tones, blush botanicals, and moonlit vows crafted for anniversaries, Valentine’s Day, and quiet "I love you" moments.',
     mood: 'Tender · Intimate · Velvet',
     accentColor: '#C86A80',
     surfaceTint: '#F8DDE4',
-    templateIds: ['rose-arch-anniversary', 'moonlit-velvet-love', 'sunset-horizon-note'],
+    templateIds: [
+      'rose-arch-anniversary',
+      'moonlit-velvet-love',
+      'sunset-horizon-note',
+      'velvet-valentine-seal',
+      'golden-rings-spouse',
+    ],
   },
   {
     slug: 'family-love',
     name: 'Family Love Collection',
     subtitle: 'Heartfelt Home Keepsakes',
     description:
-      'Warm peony watercolors and heritage motifs honoring mothers, fathers, siblings, and the people who raised us with steady grace.',
+      'Warm peony watercolors and heritage motifs honoring mothers, fathers, parents, and the people who raised us with steady grace.',
     mood: 'Warm · Nostalgic · Grounded',
     accentColor: '#9B7436',
     surfaceTint: '#F7EAD8',
-    templateIds: ['peony-note-for-mom', 'heritage-compass-dad', 'pressed-wildflower-thanks'],
+    templateIds: [
+      'peony-note-for-mom',
+      'heritage-compass-dad',
+      'olive-tree-parents',
+      'pressed-wildflower-thanks',
+    ],
   },
   {
     slug: 'birthday',
@@ -262,7 +477,12 @@ export const SPECIAL_COLLECTIONS: CollectionInfo[] = [
     mood: 'Joyful · Radiant · Festive',
     accentColor: '#B88D48',
     surfaceTint: '#F6E7CF',
-    templateIds: ['champagne-birthday-toast', 'daisy-sunshine-friend', 'festive-lantern-glow'],
+    templateIds: [
+      'champagne-birthday-toast',
+      'confetti-birthday-spark',
+      'daisy-sunshine-friend',
+      'festive-lantern-glow',
+    ],
   },
   {
     slug: 'minimalist',
@@ -273,7 +493,13 @@ export const SPECIAL_COLLECTIONS: CollectionInfo[] = [
     mood: 'Calm · Modern · Architectural',
     accentColor: '#472C42',
     surfaceTint: '#E8E2F7',
-    templateIds: ['linen-monogram-him', 'cozy-just-because', 'pressed-wildflower-thanks'],
+    templateIds: [
+      'linen-monogram-him',
+      'cozy-just-because',
+      'pressed-wildflower-thanks',
+      'morning-sunbeam-wish',
+      'starry-lullaby-night',
+    ],
   },
   {
     slug: 'elegant',
@@ -284,17 +510,23 @@ export const SPECIAL_COLLECTIONS: CollectionInfo[] = [
     mood: 'Refined · Ceremonial · Timeless',
     accentColor: '#A98040',
     surfaceTint: '#F3E5D0',
-    templateIds: ['golden-laurel-congrats', 'rose-arch-anniversary', 'champagne-birthday-toast'],
+    templateIds: [
+      'golden-laurel-congrats',
+      'rose-arch-anniversary',
+      'champagne-birthday-toast',
+      'aurora-evening-toast',
+    ],
   },
 ]
 
 export const CARD_TEMPLATES: CardTemplate[] = [
+  // 1
   {
     id: 'rose-arch-anniversary',
     title: 'Rose Arch Keepsake',
     occasion: 'Anniversary',
     category: 'anniversary',
-    categories: ['anniversary', 'love-romance', 'for-her'],
+    categories: ['anniversary', 'husband-wife', 'girlfriend-boyfriend'],
     collection: 'romantic',
     shortDescription: 'Delicate blush roses twining around a champagne-gold editorial arch.',
     motif: 'botanical-arch',
@@ -304,16 +536,19 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     defaultHeadline: 'Every Year With You',
     defaultMessage:
       'Thank you for turning ordinary mornings into my favorite memories. Here is to every chapter still waiting for us.',
+    defaultEffects: ['flowers'],
+    defaultStickers: ['pressed-rose'],
     sealInitial: 'A',
     featured: true,
     badge: 'Bestseller',
   },
+  // 2
   {
     id: 'champagne-birthday-toast',
     title: 'Champagne & Starlight',
     occasion: 'Birthday',
     category: 'birthday',
-    categories: ['birthday', 'for-her', 'congratulations'],
+    categories: ['birthday', 'friendship', 'congratulations'],
     collection: 'birthday',
     shortDescription: 'Effervescent gold sparkles and a celebratory toast on midnight plum.',
     motif: 'champagne-toast',
@@ -323,16 +558,19 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     defaultHeadline: 'A Toast to Your New Year',
     defaultMessage:
       'May this next year bring you fearless joy, gentle mornings, and everything you have quietly wished for.',
+    defaultEffects: ['confetti', 'stars'],
+    defaultStickers: ['gold-star'],
     sealInitial: 'B',
     featured: true,
     badge: 'Staff Pick',
   },
+  // 3
   {
     id: 'moonlit-velvet-love',
     title: 'Moonlit Crescent Letter',
-    occasion: 'Love & Romance',
-    category: 'love-romance',
-    categories: ['love-romance', 'for-her', 'anniversary'],
+    occasion: 'Girlfriend / Boyfriend',
+    category: 'girlfriend-boyfriend',
+    categories: ['girlfriend-boyfriend', 'valentines-day', 'good-night'],
     collection: 'romantic',
     shortDescription: 'Celestial lavender crescents and delicate constellations for night-sky romantics.',
     motif: 'celestial-moon',
@@ -342,34 +580,40 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     defaultHeadline: 'Under Every Moon',
     defaultMessage:
       'No matter how busy the world gets, you remain my favorite place to return to at the end of every day.',
+    defaultEffects: ['stars', 'hearts'],
+    defaultStickers: ['crescent'],
     sealInitial: 'L',
     featured: true,
     badge: 'Romantic',
   },
+  // 4
   {
     id: 'peony-note-for-mom',
     title: 'Morning Peony Letter',
-    occasion: 'For Mom',
-    category: 'for-mom',
-    categories: ['for-mom', 'thank-you', 'birthday'],
+    occasion: 'Mother',
+    category: 'mother',
+    categories: ['mother', 'parents', 'thank-you', 'appreciation'],
     collection: 'family-love',
     shortDescription: 'Soft painted peonies and warm blush stationery crafted especially for Mom.',
     motif: 'peony-bouquet',
     defaultPaletteId: 'soft-blush',
     defaultPattern: 'botanical-watermark',
     defaultFontId: 'literary-lora',
-    defaultHeadline: 'For Everything You Are',
+    defaultHeadline: 'For Everything You Are, Mom',
     defaultMessage:
       'Your patience, warmth, and quiet strength shaped my whole world. I hope today wraps you in the same love you always give.',
+    defaultEffects: ['flowers'],
+    defaultStickers: ['pressed-rose'],
     sealInitial: 'M',
     featured: true,
   },
+  // 5
   {
     id: 'heritage-compass-dad',
     title: 'True North Heritage',
-    occasion: 'For Dad',
-    category: 'for-dad',
-    categories: ['for-dad', 'for-him', 'thank-you'],
+    occasion: 'Father',
+    category: 'father',
+    categories: ['father', 'parents', 'appreciation', 'thank-you'],
     collection: 'family-love',
     shortDescription: 'Gold-line compass rose on tailored champagne linen for fathers & mentors.',
     motif: 'heritage-compass',
@@ -379,15 +623,18 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     defaultHeadline: 'Thank You for Guiding the Way',
     defaultMessage:
       'Through every season, your steady wisdom and quiet kindness have been my compass. Grateful for you today and always.',
+    defaultEffects: [],
+    defaultStickers: ['gold-star'],
     sealInitial: 'D',
     featured: true,
   },
+  // 6
   {
     id: 'golden-laurel-congrats',
     title: 'Gilded Laurel Milestone',
     occasion: 'Congratulations',
     category: 'congratulations',
-    categories: ['congratulations', 'for-him', 'for-her'],
+    categories: ['congratulations', 'appreciation'],
     collection: 'elegant',
     shortDescription: 'Hand-drawn golden laurel wreath framing a proud milestone announcement.',
     motif: 'golden-laurel',
@@ -397,16 +644,19 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     defaultHeadline: 'So Proud of You',
     defaultMessage:
       'Every late evening and quiet ounce of dedication led right here. Celebrate every second of this well-earned moment.',
+    defaultEffects: ['confetti'],
+    defaultStickers: ['gold-star'],
     sealInitial: 'C',
     featured: true,
     badge: 'New',
   },
+  // 7
   {
     id: 'pressed-wildflower-thanks',
     title: 'Pressed Meadow Gratitude',
     occasion: 'Thank You',
     category: 'thank-you',
-    categories: ['thank-you', 'just-because', 'for-mom'],
+    categories: ['thank-you', 'appreciation', 'just-because'],
     collection: 'minimalist',
     shortDescription: 'Botanical meadow stems pressed onto warm vellum with generous breathing room.',
     motif: 'pressed-wildflowers',
@@ -416,9 +666,12 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     defaultHeadline: 'With Sincere Gratitude',
     defaultMessage:
       'Your thoughtfulness meant more than words can neatly hold. Thank you for showing up with such kindness.',
+    defaultEffects: ['flowers'],
+    defaultStickers: ['pressed-rose'],
     sealInitial: 'T',
     featured: true,
   },
+  // 8
   {
     id: 'daisy-sunshine-friend',
     title: 'Sunlit Daisy Note',
@@ -434,15 +687,18 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     defaultHeadline: 'Life Is Brighter With You',
     defaultMessage:
       'Thank you for every laugh-until-we-cry afternoon, honest conversation, and unshakeable loyalty.',
+    defaultEffects: ['confetti'],
+    defaultStickers: ['sparkle-burst'],
     sealInitial: 'F',
     featured: true,
   },
+  // 9
   {
     id: 'linen-monogram-him',
     title: 'Atelier Monogram Folio',
-    occasion: 'For Him',
-    category: 'for-him',
-    categories: ['for-him', 'birthday', 'anniversary'],
+    occasion: 'Husband / Wife',
+    category: 'husband-wife',
+    categories: ['husband-wife', 'father', 'birthday', 'anniversary'],
     collection: 'minimalist',
     shortDescription: 'Architectural double-border crest with clean modern typography.',
     motif: 'minimalist-monogram',
@@ -454,14 +710,13 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       'Wishing you calm mornings, bold adventures, and moments worth remembering long after the day ends.',
     sealInitial: 'H',
   },
+  // 10
   {
     id: 'festive-lantern-glow',
     title: 'Warm Lanterns & Joy',
     occasion: 'Festivals',
     category: 'festivals',
-    categories: ['festivals', 'congratulations', 'family-love' as never].filter(
-      (c): c is CardTemplate['categories'][number] => c !== ('family-love' as never),
-    ),
+    categories: ['festivals', 'parents', 'congratulations'],
     collection: 'birthday',
     shortDescription: 'Glowing festive lanterns and golden filigree radiating warmth and abundance.',
     motif: 'festive-lanterns',
@@ -471,14 +726,17 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     defaultHeadline: 'Warmest Festive Wishes',
     defaultMessage:
       'May your home glow with laughter, your table overflow with warmth, and the season ahead bless everyone you hold dear.',
+    defaultEffects: ['stars'],
+    defaultStickers: ['gold-star'],
     sealInitial: 'J',
   },
+  // 11
   {
     id: 'sunset-horizon-note',
     title: 'Rosewater Horizon',
-    occasion: 'For Her',
-    category: 'for-her',
-    categories: ['for-her', 'love-romance', 'just-because'],
+    occasion: 'Girlfriend / Boyfriend',
+    category: 'girlfriend-boyfriend',
+    categories: ['girlfriend-boyfriend', 'just-because', 'good-morning'],
     collection: 'romantic',
     shortDescription: 'Layered dusk gradient horizon with delicate gold sunbeams.',
     motif: 'sunset-horizon',
@@ -488,14 +746,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     defaultHeadline: 'Thinking of You',
     defaultMessage:
       'Just a quiet reminder across the miles that you are deeply cherished, admired, and on my mind today.',
+    defaultEffects: ['hearts'],
     sealInitial: 'R',
   },
+  // 12
   {
     id: 'cozy-just-because',
     title: 'Afternoon Tea & Quiet Joy',
     occasion: 'Just Because',
     category: 'just-because',
-    categories: ['just-because', 'friendship', 'thank-you'],
+    categories: ['just-because', 'friendship', 'thank-you', 'good-morning'],
     collection: 'minimalist',
     shortDescription: 'A warm porcelain teacup sketch inviting someone to pause and breathe.',
     motif: 'cozy-teacup',
@@ -507,9 +767,431 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       'No big milestone needed—just sending a cup of warmth, a deep breath, and a reminder that I am cheering for you.',
     sealInitial: 'W',
   },
+  // 13
+  {
+    id: 'velvet-valentine-seal',
+    title: 'Crimson Wax Confession',
+    occasion: "Valentine's Day",
+    category: 'valentines-day',
+    categories: ['valentines-day', 'girlfriend-boyfriend', 'husband-wife'],
+    collection: 'romantic',
+    shortDescription: 'Velvet heart wax emblem framed in champagne foil for heartfelt devotion.',
+    motif: 'velvet-heart-seal',
+    defaultPaletteId: 'rose-velvet',
+    defaultPattern: 'double-gold',
+    defaultFontId: 'handwritten-script',
+    defaultHeadline: 'Be My Always',
+    defaultMessage:
+      'Out of all the places I have been and stories I have lived, loving you remains my favorite home.',
+    defaultEffects: ['hearts'],
+    defaultStickers: ['wax-heart'],
+    sealInitial: 'V',
+    badge: 'Valentine',
+  },
+  // 14
+  {
+    id: 'blush-valentine-tulips',
+    title: 'Tulips in Morning Light',
+    occasion: "Valentine's Day",
+    category: 'valentines-day',
+    categories: ['valentines-day', 'girlfriend-boyfriend', 'mother'],
+    collection: 'romantic',
+    shortDescription: 'Fresh spring tulips in blush coral and ivory for tender declarations.',
+    motif: 'tulip-greeting',
+    defaultPaletteId: 'coral-peach',
+    defaultPattern: 'scalloped-frame',
+    defaultFontId: 'editorial-serif',
+    defaultHeadline: 'My Heart Chooses You',
+    defaultMessage:
+      'Every little laugh, late-night walk, and quiet glance makes falling for you the easiest thing I have ever done.',
+    defaultEffects: ['hearts', 'flowers'],
+    defaultStickers: ['wax-heart'],
+    sealInitial: 'V',
+  },
+  // 15
+  {
+    id: 'golden-rings-spouse',
+    title: 'Intertwined Promise',
+    occasion: 'Husband / Wife',
+    category: 'husband-wife',
+    categories: ['husband-wife', 'anniversary', 'valentines-day'],
+    collection: 'elegant',
+    shortDescription: 'Twin champagne-gold rings nestled inside an heirloom ivory arch.',
+    motif: 'couple-rings',
+    defaultPaletteId: 'pearl-alabaster',
+    defaultPattern: 'double-gold',
+    defaultFontId: 'editorial-serif',
+    defaultHeadline: 'Forever My Favorite Partner',
+    defaultMessage:
+      'Through quiet routines and grand adventures alike, building this life beside you is my proudest joy.',
+    defaultEffects: ['hearts'],
+    defaultStickers: ['wax-heart'],
+    sealInitial: 'S',
+  },
+  // 16
+  {
+    id: 'olive-tree-parents',
+    title: 'Roots & Gratitude Tree',
+    occasion: 'Parents',
+    category: 'parents',
+    categories: ['parents', 'mother', 'father', 'thank-you'],
+    collection: 'family-love',
+    shortDescription: 'Sage olive branches symbolizing family roots, shelter, and enduring love.',
+    motif: 'olive-family-tree',
+    defaultPaletteId: 'sage-botanical',
+    defaultPattern: 'botanical-watermark',
+    defaultFontId: 'literary-lora',
+    defaultHeadline: 'Thank You for Being Our Roots',
+    defaultMessage:
+      'Everything good I carry into the world began under your roof. Thank you both for every sacrifice and every embrace.',
+    defaultEffects: ['flowers'],
+    defaultStickers: ['pressed-rose'],
+    sealInitial: 'P',
+  },
+  // 17
+  {
+    id: 'parents-hearth-anniversary',
+    title: 'Our Family Sanctuary',
+    occasion: 'Parents',
+    category: 'parents',
+    categories: ['parents', 'anniversary', 'appreciation'],
+    collection: 'family-love',
+    shortDescription: 'Warm champagne linen with botanical laurels celebrating Mom & Dad together.',
+    motif: 'golden-laurel',
+    defaultPaletteId: 'champagne-linen',
+    defaultPattern: 'double-gold',
+    defaultFontId: 'editorial-serif',
+    defaultHeadline: 'To the Heart of Our Family',
+    defaultMessage:
+      'Watching the grace and kindness you share with each other and with us remains the finest example we could ask for.',
+    sealInitial: 'F',
+  },
+  // 18
+  {
+    id: 'morning-sunbeam-wish',
+    title: 'Golden Hour Sunrise',
+    occasion: 'Good Morning',
+    category: 'good-morning',
+    categories: ['good-morning', 'girlfriend-boyfriend', 'friendship', 'just-because'],
+    collection: 'minimalist',
+    shortDescription: 'Radiant morning sunbeams over warm apricot vellum to start the day gently.',
+    motif: 'morning-sunbeam',
+    defaultPaletteId: 'coral-peach',
+    defaultPattern: 'vellum',
+    defaultFontId: 'caveat-note',
+    defaultHeadline: 'Good Morning, Sunshine',
+    defaultMessage:
+      'Before today rushes ahead, pause for a breath—you are loved, capable, and going to do wonderfully today.',
+    defaultEffects: ['stars'],
+    defaultStickers: ['sunbeam'],
+    sealInitial: 'G',
+    badge: 'Morning',
+  },
+  // 19
+  {
+    id: 'espresso-morning-note',
+    title: 'First Cup Morning Note',
+    occasion: 'Good Morning',
+    category: 'good-morning',
+    categories: ['good-morning', 'husband-wife', 'appreciation'],
+    collection: 'minimalist',
+    shortDescription: 'Steam rising from a morning cup with warm linen borders.',
+    motif: 'cozy-teacup',
+    defaultPaletteId: 'pearl-alabaster',
+    defaultPattern: 'linen-minimal',
+    defaultFontId: 'modern-sans',
+    defaultHeadline: 'Wishing You a Gentle Morning',
+    defaultMessage:
+      'May your coffee be warm, your schedule kind, and your afternoon filled with unexpected small wins.',
+    defaultStickers: ['sunbeam'],
+    sealInitial: 'M',
+  },
+  // 20
+  {
+    id: 'starry-lullaby-night',
+    title: 'Indigo Starlight Lullaby',
+    occasion: 'Good Night',
+    category: 'good-night',
+    categories: ['good-night', 'girlfriend-boyfriend', 'husband-wife'],
+    collection: 'romantic',
+    shortDescription: 'Deep starry indigo sky with golden crescent and drifting dreamlight.',
+    motif: 'starry-lullaby',
+    defaultPaletteId: 'twilight-indigo',
+    defaultPattern: 'starlight',
+    defaultFontId: 'handwritten-script',
+    defaultHeadline: 'Sweet Dreams Tonight',
+    defaultMessage:
+      'Let today rest gently behind you. Sleep deeply knowing how much you mean to me—see you in the morning light.',
+    defaultEffects: ['stars'],
+    defaultStickers: ['crescent'],
+    sealInitial: 'N',
+    badge: 'Night Sky',
+  },
+  // 21
+  {
+    id: 'lavender-moon-rest',
+    title: 'Pillow of Lavender Dreams',
+    occasion: 'Good Night',
+    category: 'good-night',
+    categories: ['good-night', 'friendship', 'just-because'],
+    collection: 'minimalist',
+    shortDescription: 'Dreamy lavender sky with silver-gold stars for a peaceful night’s rest.',
+    motif: 'celestial-moon',
+    defaultPaletteId: 'lavender-dusk',
+    defaultPattern: 'vellum',
+    defaultFontId: 'literary-lora',
+    defaultHeadline: 'Rest Easy Under the Stars',
+    defaultMessage:
+      'Whatever felt heavy today can wait until tomorrow. Wishing you calm dreams and a refreshed heart.',
+    defaultEffects: ['stars'],
+    defaultStickers: ['crescent'],
+    sealInitial: 'Z',
+  },
+  // 22
+  {
+    id: 'confetti-birthday-spark',
+    title: 'Ribbon & Confetti Celebration',
+    occasion: 'Birthday',
+    category: 'birthday',
+    categories: ['birthday', 'friendship', 'congratulations'],
+    collection: 'birthday',
+    shortDescription: 'Playful celebratory confetti ribbons and golden sparks on warm blush.',
+    motif: 'confetti-celebration',
+    defaultPaletteId: 'soft-blush',
+    defaultPattern: 'scalloped-frame',
+    defaultFontId: 'handwritten-script',
+    defaultHeadline: 'Happiest Birthday to You!',
+    defaultMessage:
+      'Here is to cake for breakfast, loud laughter with people who adore you, and a year overflowing with bright adventures.',
+    defaultEffects: ['confetti'],
+    defaultStickers: ['sparkle-burst'],
+    sealInitial: 'H',
+  },
+  // 23
+  {
+    id: 'ribbon-gift-birthday',
+    title: 'Wrapped With Joy',
+    occasion: 'Birthday',
+    category: 'birthday',
+    categories: ['birthday', 'mother', 'girlfriend-boyfriend'],
+    collection: 'elegant',
+    shortDescription: 'A satin-tied keepsake box surrounded by delicate gold stars.',
+    motif: 'ribbon-giftbox',
+    defaultPaletteId: 'warm-ivory',
+    defaultPattern: 'double-gold',
+    defaultFontId: 'editorial-serif',
+    defaultHeadline: 'A Birthday Keepsake for You',
+    defaultMessage:
+      'Every year you grow wiser, kinder, and brighter to be around. So grateful to celebrate another trip around the sun with you.',
+    defaultEffects: ['confetti'],
+    defaultStickers: ['ribbon-bow'],
+    sealInitial: 'G',
+  },
+  // 24
+  {
+    id: 'butterfly-meadow-mom',
+    title: 'Garden Butterfly Tribute',
+    occasion: 'Mother',
+    category: 'mother',
+    categories: ['mother', 'appreciation', 'thank-you'],
+    collection: 'family-love',
+    shortDescription: 'Delicate sage botanicals and floating butterflies honoring Mom’s care.',
+    motif: 'butterfly-meadow',
+    defaultPaletteId: 'sage-botanical',
+    defaultPattern: 'botanical-watermark',
+    defaultFontId: 'editorial-serif',
+    defaultHeadline: 'Thank You for Helping Me Grow',
+    defaultMessage:
+      'Like a quiet garden keeper, you nurtured every dream I had with patience and grace. I love you more than words hold.',
+    defaultEffects: ['flowers'],
+    defaultStickers: ['butterfly'],
+    sealInitial: 'M',
+  },
+  // 25
+  {
+    id: 'sage-appreciation-mentor',
+    title: 'Quiet Strength & Gratitude',
+    occasion: 'Appreciation',
+    category: 'appreciation',
+    categories: ['appreciation', 'thank-you', 'father'],
+    collection: 'minimalist',
+    shortDescription: 'Tailored sage stationery celebrating steady support and everyday kindness.',
+    motif: 'olive-family-tree',
+    defaultPaletteId: 'sage-botanical',
+    defaultPattern: 'linen-minimal',
+    defaultFontId: 'modern-sans',
+    defaultHeadline: 'You Make Such a Difference',
+    defaultMessage:
+      'Often the people who give the most quietly get thanked the least. Today I simply want to say how deeply I appreciate you.',
+    sealInitial: 'A',
+  },
+  // 26
+  {
+    id: 'aurora-evening-toast',
+    title: 'Aurora Milestone Toast',
+    occasion: 'Congratulations',
+    category: 'congratulations',
+    categories: ['congratulations', 'festivals', 'birthday'],
+    collection: 'elegant',
+    shortDescription: 'Luminous twilight botanicals & starlight celebrating a major triumph.',
+    motif: 'aurora-bloom',
+    defaultPaletteId: 'twilight-indigo',
+    defaultPattern: 'foil-arch',
+    defaultFontId: 'editorial-serif',
+    defaultHeadline: 'Bravo on This Milestone',
+    defaultMessage:
+      'Watching your vision turn into reality has been inspiring. Raise a glass—this victory belongs completely to you.',
+    defaultEffects: ['confetti', 'stars'],
+    defaultStickers: ['gold-star'],
+    sealInitial: 'B',
+  },
+  // 27
+  {
+    id: 'butterfly-friendship-note',
+    title: 'Kindred Spirits Forever',
+    occasion: 'Friendship',
+    category: 'friendship',
+    categories: ['friendship', 'appreciation', 'just-because'],
+    collection: 'family-love',
+    shortDescription: 'Whimsical meadow butterflies celebrating friends who feel like family.',
+    motif: 'butterfly-meadow',
+    defaultPaletteId: 'warm-ivory',
+    defaultPattern: 'scalloped-frame',
+    defaultFontId: 'caveat-note',
+    defaultHeadline: 'Lucky to Call You My Friend',
+    defaultMessage:
+      'Even when weeks pass between catch-ups, picking right back up with you feels effortless. Thank you for always being real.',
+    defaultEffects: ['flowers'],
+    defaultStickers: ['butterfly'],
+    sealInitial: 'K',
+  },
+  // 28
+  {
+    id: 'dad-anchor-pride',
+    title: 'Steady Harbor Keepsake',
+    occasion: 'Father',
+    category: 'father',
+    categories: ['father', 'birthday', 'appreciation'],
+    collection: 'minimalist',
+    shortDescription: 'Deep indigo and champagne gold compass honoring Dad’s steady guidance.',
+    motif: 'heritage-compass',
+    defaultPaletteId: 'twilight-indigo',
+    defaultPattern: 'linen-minimal',
+    defaultFontId: 'literary-lora',
+    defaultHeadline: 'To the Best Dad',
+    defaultMessage:
+      'Thank you for teaching me patience, integrity, and how to laugh when things go sideways. Always proud to be yours.',
+    defaultStickers: ['gold-star'],
+    sealInitial: 'D',
+  },
+  // 29
+  {
+    id: 'festival-spark-diwali',
+    title: 'Festival of Golden Lights',
+    occasion: 'Festivals',
+    category: 'festivals',
+    categories: ['festivals', 'parents', 'friendship'],
+    collection: 'elegant',
+    shortDescription: 'Warm apricot & gold lantern celebration for joyous seasonal gatherings.',
+    motif: 'festive-lanterns',
+    defaultPaletteId: 'coral-peach',
+    defaultPattern: 'double-gold',
+    defaultFontId: 'editorial-serif',
+    defaultHeadline: 'May Every Room Shine Bright',
+    defaultMessage:
+      'Wishing you and your family peace, sweet treats around the table, and bright new beginnings this festive season.',
+    defaultEffects: ['stars', 'confetti'],
+    defaultStickers: ['sparkle-burst'],
+    sealInitial: 'F',
+  },
+  // 30
+  {
+    id: 'anniversary-velvet-years',
+    title: 'Years of Golden Grace',
+    occasion: 'Anniversary',
+    category: 'anniversary',
+    categories: ['anniversary', 'husband-wife', 'parents'],
+    collection: 'elegant',
+    shortDescription: 'Midnight plum & intertwined gold rings for milestone wedding anniversaries.',
+    motif: 'couple-rings',
+    defaultPaletteId: 'deep-plum',
+    defaultPattern: 'double-gold',
+    defaultFontId: 'editorial-serif',
+    defaultHeadline: 'Happy Anniversary, My Love',
+    defaultMessage:
+      'Not only for the grand days we celebrate, but for every quiet hand-hold in between—I would choose you again in a heartbeat.',
+    defaultEffects: ['hearts', 'stars'],
+    defaultStickers: ['wax-heart'],
+    sealInitial: 'A',
+  },
+  // 31
+  {
+    id: 'girlfriend-bouquet-note',
+    title: 'Blush Peony Sweetheart',
+    occasion: 'Girlfriend / Boyfriend',
+    category: 'girlfriend-boyfriend',
+    categories: ['girlfriend-boyfriend', 'valentines-day', 'birthday'],
+    collection: 'romantic',
+    shortDescription: 'Lush blush peony illustration made for sweethearts and date-night surprises.',
+    motif: 'peony-bouquet',
+    defaultPaletteId: 'soft-blush',
+    defaultPattern: 'foil-arch',
+    defaultFontId: 'handwritten-script',
+    defaultHeadline: 'You Are My Favorite Person',
+    defaultMessage:
+      'Just looking at your name on my screen makes any day better. Save tonight for us—I have a smile waiting for you.',
+    defaultEffects: ['hearts', 'flowers'],
+    defaultStickers: ['wax-heart'],
+    sealInitial: 'Y',
+  },
+  // 32
+  {
+    id: 'thank-you-ribbon-parcel',
+    title: 'Grateful Heart Parcel',
+    occasion: 'Thank You',
+    category: 'thank-you',
+    categories: ['thank-you', 'appreciation', 'friendship'],
+    collection: 'elegant',
+    shortDescription: 'Alabaster pearl stationery tied with a champagne keepsake ribbon.',
+    motif: 'ribbon-giftbox',
+    defaultPaletteId: 'pearl-alabaster',
+    defaultPattern: 'linen-minimal',
+    defaultFontId: 'literary-lora',
+    defaultHeadline: 'A Heartfelt Thank You',
+    defaultMessage:
+      'Your generosity left such a warm mark on my week. Thank you for giving so freely and thoughtfully.',
+    defaultStickers: ['ribbon-bow'],
+    sealInitial: 'T',
+  },
+  ...LOVE_CALENDAR_TEMPLATES,
 ]
 
 export const MESSAGE_PROMPTS: Record<string, string[]> = {
+  'Girlfriend / Boyfriend': [
+    'Even in the middle of a busy week, a quick thought of you is enough to make me smile.',
+    'Thank you for being my favorite conversation, my safest place, and my favorite adventure.',
+    'I love the way life feels softer, brighter, and funnier whenever you are around.',
+  ],
+  Mother: [
+    'Thank you for every unseen sacrifice, warm meal, and word of encouragement that carried me here.',
+    'No matter how old I grow, your kindness and steady love remain my greatest blessing, Mom.',
+    'I hope today brings you rest, beauty, and a fraction of the joy you pour into everyone else.',
+  ],
+  Father: [
+    'Thank you for teaching me how to stand steady, work with integrity, and never lose my sense of humor.',
+    'Your quiet support has meant more to me across the years than I always remember to say out loud.',
+    'Grateful for your wisdom, your patience, and every road you helped pave for me, Dad.',
+  ],
+  Parents: [
+    'Thank you both for making our home a place of laughter, warmth, and unconditional encouragement.',
+    'Every good lesson I carry into adulthood started at your table. So grateful to be yours.',
+    'Wishing you both peaceful mornings, good health, and endless reasons to smile together.',
+  ],
+  'Husband / Wife': [
+    'Marriage with you feels less like a promise kept once and more like a hundred gentle kindnesses every day.',
+    'Thank you for still making ordinary evenings feel like somewhere I cannot wait to be.',
+    'Through every high and every quiet season, I am endlessly grateful to walk beside you.',
+  ],
   Birthday: [
     'May this year unfold gently and surprise you with joy in the most unexpected places.',
     'Here is to another chapter of loud laughter, quiet peace, and unforgettable memories together.',
@@ -520,15 +1202,50 @@ export const MESSAGE_PROMPTS: Record<string, string[]> = {
     'Thank you for choosing me in the small Tuesday moments just as much as the big celebrations.',
     'Every season with you gets warmer, steadier, and sweeter.',
   ],
-  'Love & Romance': [
-    'Even in a crowded room, my heart still knows right where you are.',
-    'You make ordinary days feel like keepsakes I never want to misplace.',
-    'I love the life we are building—quietly, patiently, and side by side.',
+  Friendship: [
+    'Thank you for being the friend I can call with good news, bad news, or nothing at all.',
+    'Life feels ten times lighter whenever we get to laugh together. Grateful for you always!',
+    'Distance and busy calendars never change how effortlessly we pick right back up.',
+  ],
+  "Valentine's Day": [
+    'Out of everyone in the world, my heart still chooses you effortlessly every single day.',
+    'Happy Valentine’s Day to the person who makes even mundane errands feel like a date.',
+    'Thank you for loving me with so much patience, humor, and warmth.',
   ],
   'Thank You': [
     'Your kindness arrived at the exact moment I needed it most. I will not forget it.',
     'Thank you for your generosity, your time, and the care you put into everything you do.',
     'Words feel small next to what you did, so please accept this little note filled with real gratitude.',
+  ],
+  Congratulations: [
+    'Every late night and quiet step of perseverance led right to this moment—celebrate loudly!',
+    'So thrilled to see your hard work bloom into something so well-deserved. Congratulations!',
+    'Here is to this proud milestone and all the exciting doors it opens next.',
+  ],
+  Festivals: [
+    'May this season fill your home with warm light, sweet traditions, and cherished company.',
+    'Sending heartfelt festive wishes for peace, abundance, and joyful reunions.',
+    'Wishing you bright celebrations today and gentle blessings throughout the year ahead.',
+  ],
+  Appreciation: [
+    'I wanted to pause and let you know that your steady effort and kindness never go unnoticed.',
+    'People like you make every room warmer just by showing up with care. Truly appreciated!',
+    'Thank you for always giving your best—even when nobody asks you to.',
+  ],
+  'Good Morning': [
+    'Good morning! Sending a warm burst of sunshine and calm energy to carry you through today.',
+    'Hope your morning coffee hits just right and today treats you with extra kindness.',
+    'Just wanted to be the first smile in your day—you have got this!',
+  ],
+  'Good Night': [
+    'Good night. Put down every worry from today—tomorrow is fresh and waiting gently.',
+    'Wishing you deep rest, peaceful dreams, and a quiet heart tonight.',
+    'Sending a soft good-night hug across the distance. Sleep well!',
+  ],
+  'Just Because': [
+    'Just wanted to pause the rush of the week and send something thoughtful your way.',
+    'No special calendar date needed—you are appreciated more often than you realize.',
+    'Sending warmth, encouragement, and a gentle smile across the miles today.',
   ],
   Default: [
     'Just wanted to pause the rush of the week and send something thoughtful your way.',
@@ -537,91 +1254,7 @@ export const MESSAGE_PROMPTS: Record<string, string[]> = {
   ],
 }
 
-export const BLOG_ARTICLES: BlogArticle[] = [
-  {
-    slug: 'art-of-writing-a-card-they-keep',
-    title: 'The Art of Writing a Greeting Card Someone Actually Keeps',
-    category: 'Writing Craft',
-    readTime: '4 min read',
-    publishedAt: 'November 18, 2026',
-    excerpt:
-      'Why specific small memories outshine grand clichés—and a simple three-part rhythm to write a note that stays in someone’s heart.',
-    coverMotif: 'botanical-arch',
-    coverPaletteId: 'warm-ivory',
-    recommendedTemplateId: 'rose-arch-anniversary',
-    sections: [
-      {
-        heading: 'Start with one specific memory, not a greeting-card cliché',
-        paragraphs: [
-          'The most memorable messages rarely begin with sweeping generalizations. Instead of "You are the best friend ever," anchor your opening sentence in a real moment: the rainy coffee walk, the voice note they sent at midnight, or the laugh you shared last winter.',
-          'Specificity signals attention—and attention is the rarest gift we can give another person.',
-        ],
-        quote: 'People rarely remember the fanciest phrase; they remember the exact moment you noticed who they really are.',
-      },
-      {
-        heading: 'Follow the Three-Beat Keepsake Rhythm',
-        paragraphs: [
-          'First, name what you appreciate about them right now. Second, share a brief wish for the season ahead—something tailored to their actual life, whether that is rest, courage, or joyful celebration. Third, close with warmth that sounds unmistakably like your own speaking voice.',
-        ],
-      },
-    ],
-  },
-  {
-    slug: 'why-just-because-notes-matter-most',
-    title: 'Why "Just Because" Cards Create the Deepest Emotional Impact',
-    category: 'Thoughtful Living',
-    readTime: '3 min read',
-    publishedAt: 'November 10, 2026',
-    excerpt:
-      'Calendar holidays are expected; an unprompted Tuesday card arrives when nobody expects it—and carries twice the magic.',
-    coverMotif: 'cozy-teacup',
-    coverPaletteId: 'soft-blush',
-    recommendedTemplateId: 'cozy-just-because',
-    sections: [
-      {
-        heading: 'The surprise of unscheduled kindness',
-        paragraphs: [
-          'On birthdays and anniversaries, everyone expects their phone to light up. Yet the quietest, hardest weeks of the year rarely have a banner on the calendar.',
-          'Sending a personalized digital card on an ordinary afternoon says something unmistakable: I did not need a reminder to think of you.',
-        ],
-        quote: 'An unprompted note on a Tuesday afternoon can shift the entire weight of someone’s week.',
-      },
-      {
-        heading: 'Keep it effortless and sincere',
-        paragraphs: [
-          'Two or three honest sentences paired with calm ivory typography are more than enough. You do not need an essay to make someone feel seen.',
-        ],
-      },
-    ],
-  },
-  {
-    slug: 'pairing-typography-and-color-to-mood',
-    title: 'How Color & Typography Quietly Shape the Emotion of Your Card',
-    category: 'Design Notes',
-    readTime: '5 min read',
-    publishedAt: 'November 2, 2026',
-    excerpt:
-      'From candlelit plum and champagne gold to airy lavender and handwritten script—choosing stationery finishes that match your sentiment.',
-    coverMotif: 'celestial-moon',
-    coverPaletteId: 'lavender-dusk',
-    recommendedTemplateId: 'moonlit-velvet-love',
-    sections: [
-      {
-        heading: 'Matching paper tone to occasion',
-        paragraphs: [
-          'Warm ivory and soft blush invite intimacy and gentle affection—ideal for mothers, partners, and heartfelt thank-yous. Deep plum paired with champagne gold brings evening elegance to milestone birthdays and anniversaries.',
-          'Meanwhile, lavender dusk creates a dreamy, reflective mood suited to romance and long-distance friendship notes.',
-        ],
-      },
-      {
-        heading: 'When to pick serif vs. handwritten script',
-        paragraphs: [
-          'Use an editorial serif when you want your words to feel timeless and heirloom-like. Reach for handwritten calligraphy when your message reads like an intimate, whispered note.',
-        ],
-      },
-    ],
-  },
-]
+export const BLOG_ARTICLES = SEO_ARTICLES
 
 export const FAQ_ITEMS: FaqItem[] = [
   {
@@ -629,40 +1262,65 @@ export const FAQ_ITEMS: FaqItem[] = [
     category: 'Getting Started',
     question: 'Do I need an account to create and send a digital card?',
     answer:
-      'No sign-up is required. You can choose any card, personalize every word, preview your design, download a high-resolution PNG image, and generate a shareable link immediately in your browser.',
+      'No sign-up is required. You can choose from over 30 original templates, customize layouts, colors, fonts, stickers, and animated effects, download a PNG or JPG image, and generate a shareable link immediately in your browser.',
+  },
+  {
+    id: 'faq-non-monetary',
+    category: 'Cards & Gift Notes',
+    question: 'Are these monetary gift cards with stored cash value?',
+    answer:
+      'No. Vellum & Bloom provides digital greeting cards and personal keepsake stationery—not monetary gift cards, prepaid balances, or payment vouchers. If you add an optional Gift Note (for example, “Coffee on me this Saturday”), it serves solely as a personal gesture between you and your recipient.',
   },
   {
     id: 'faq-share-link',
     category: 'Sharing & Delivery',
     question: 'How does the shareable link work without a backend?',
     answer:
-      'Your personalized card styling, names, and message are securely encoded directly into the shareable link URL. When your recipient opens the link on any device, they see a sealed digital envelope that opens to reveal your exact card.',
+      'Your personalized card styling, names, stickers, and message are securely encoded directly inside your unique shareable URL. Recipients open the link on any device with an animated envelope reveal—nothing private is uploaded to third-party servers.',
   },
   {
     id: 'faq-whatsapp',
     category: 'Sharing & Delivery',
-    question: 'Can I send my card via WhatsApp or download it as an image?',
+    question: 'Can I send my card via WhatsApp or download it as PNG/JPG?',
     answer:
-      'Yes. Once you finish personalizing your card in the studio, you can send the link directly to WhatsApp with a pre-formatted greeting, copy the link to any messaging app, or export a crisp portrait PNG using our HTML5 Canvas renderer.',
+      'Yes. Once you finish personalizing your card in the studio, you can open WhatsApp with a pre-filled greeting message (and confirm sending yourself), copy the link, use your device’s native share sheet, or export crisp Portrait, Landscape, or Square PNG and JPG keepsakes.',
   },
   {
     id: 'faq-drafts',
     category: 'Privacy & Storage',
     question: 'Where are my saved drafts and preferences stored?',
     answer:
-      'Drafts, favorites, and your light/dark theme preference are saved locally in your browser via LocalStorage. Nothing is uploaded to third-party servers.',
+      'Unfinished drafts, favorite templates, reduced-motion preferences, cookie consent choices, and your light/dark theme setting are saved locally in your browser via LocalStorage. Clearing your browser site data removes local drafts.',
   },
   {
-    id: 'faq-part2',
-    category: 'Platform Roadmap',
-    question: 'Are monetary gift balances or scheduled deliveries coming soon?',
+    id: 'faq-privacy-ads',
+    category: 'Privacy & Advertising',
+    question: 'Does Vellum & Bloom show ads inside private greeting cards?',
     answer:
-      'Yes! Part 1 focuses on our tactile digital greeting studio, curated collections, instant sharing, and image exports. Part 2 expands the experience with digital gift vouchers, scheduled delivery, and richer interactive keepsakes.',
+      'Never. Shared greeting card views (/card/*), private messages, and the envelope unsealing experience are kept completely free of advertisements. If optional advertising is enabled on public editorial pages in the future, it will only load where permitted under our Privacy and Cookie Policies.',
+  },
+  {
+    id: 'faq-copyright',
+    category: 'Copyright & Usage',
+    question: 'Can I print or share downloaded card images personally?',
+    answer:
+      'Yes. You may freely share generated card links and download PNG or JPG files for personal greetings, family keepsakes, and non-commercial celebrations. Commercial resale or redistribution of templates is not permitted—see our Copyright Policy for details.',
+  },
+  {
+    id: 'faq-accessibility',
+    category: 'Accessibility & Motion',
+    question: 'Can I turn off envelope and floating particle animations?',
+    answer:
+      'Yes. Vellum & Bloom automatically respects your operating system’s Reduced Motion setting and also provides a dedicated Reduced Motion toggle inside both the studio editor and the recipient card viewer.',
   },
 ]
 
 export function getPaletteById(id: string): CardPalette {
   return CARD_PALETTES.find((p) => p.id === id) ?? CARD_PALETTES[0]
+}
+
+export function getGradientById(id?: string): GradientPreset {
+  return GRADIENT_PRESETS.find((g) => g.id === id) ?? GRADIENT_PRESETS[0]
 }
 
 export function getFontById(id: string): CardFontPreset {
