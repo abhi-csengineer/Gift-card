@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CheckCircle2, ExternalLink, Mail, MapPin, Send, Shield } from 'lucide-react'
-import { SITE_CONFIG } from '../config/siteConfig'
+import { SITE_CONFIG, buildCanonicalUrl } from '../config/siteConfig'
 import { sanitizeTextInput } from '../utils/cardStorage'
 import { Breadcrumbs } from '../components/Breadcrumbs'
 import { SeoHead } from '../components/SeoHead'
@@ -49,12 +49,32 @@ export function ContactPage() {
 
   const mailtoHref = submitted ? buildMailtoHref() : ''
 
+  const contactSchemas = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ContactPage',
+      name: 'Contact Vellum & Bloom Digital Stationery',
+      description:
+        'Get in touch with Vellum & Bloom in Rupaspur, Bihar, India for custom greeting card requests, feedback, privacy inquiries, or copyright notices.',
+      url: buildCanonicalUrl('/contact'),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: buildCanonicalUrl('/') },
+        { '@type': 'ListItem', position: 2, name: 'Contact Us', item: buildCanonicalUrl('/contact') },
+      ],
+    },
+  ]
+
   return (
     <div className="paper-grain py-10 sm:py-16">
       <SeoHead
-        title="Contact Us — Reach the Vellum & Bloom Studio"
+        title="Contact Us — Vellum & Bloom Studio"
         description="Get in touch with Vellum & Bloom in Rupaspur, Bihar, India for custom greeting card requests, feedback, privacy inquiries, or copyright notices."
         canonicalPath="/contact"
+        jsonLd={contactSchemas}
       />
 
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-8">

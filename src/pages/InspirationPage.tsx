@@ -2,12 +2,18 @@ import { useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, BookOpen, Check, Copy, Sparkles } from 'lucide-react'
 import { BLOG_ARTICLES, CATEGORIES, getTemplateById } from '../data/catalog'
-import { buildCanonicalUrl } from '../config/siteConfig'
+import { SITE_CONFIG, buildCanonicalUrl } from '../config/siteConfig'
 import { AdPlacement } from '../components/AdPlacement'
 import { Breadcrumbs } from '../components/Breadcrumbs'
 import { CardArtwork } from '../components/CardArtwork'
 import { GreetingCardPreview } from '../components/GreetingCardPreview'
 import { SeoHead } from '../components/SeoHead'
+
+function toIsoDate(label: string): string | undefined {
+  const parsed = new Date(label)
+  if (Number.isNaN(parsed.getTime())) return undefined
+  return parsed.toISOString().slice(0, 10)
+}
 
 export function InspirationPage() {
   const { slug } = useParams<{ slug?: string }>()
@@ -38,12 +44,44 @@ export function InspirationPage() {
   }
 
   if (slug) {
-    const article = BLOG_ARTICLES.find((a) => a.slug === slug) ?? BLOG_ARTICLES[0]
+    const matchedArticle = BLOG_ARTICLES.find((a) => a.slug === slug)
+    if (!matchedArticle) {
+      return (
+        <div className="paper-grain py-20 px-4 sm:px-6 lg:px-8">
+          <SeoHead
+            title="Article Not Found — Stationery Journal"
+            description="Browse original birthday wishes, anniversary notes, and digital greeting card guides in the Vellum & Bloom Stationery Journal."
+            noIndex
+          />
+          <div className="mx-auto max-w-2xl text-center space-y-6">
+            <p className="text-xs font-semibold tracking-[0.2em] uppercase" style={{ color: 'var(--accent-rose)' }}>
+              The Stationery Journal
+            </p>
+            <h1 className="text-4xl sm:text-5xl font-semibold" style={{ color: 'var(--text-primary)' }}>
+              Journal Guide Not Found
+            </h1>
+            <p className="text-sm sm:text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+              We could not find a stationery guide matching that link. Browse our complete collection of message ideas and writing guides below.
+            </p>
+            <Link
+              to="/inspiration"
+              className="inline-flex items-center gap-2 rounded-full bg-[#472C42] px-6 py-3 text-sm font-semibold text-[#FFF9F3]"
+            >
+              <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+              <span>Return to Stationery Journal</span>
+            </Link>
+          </div>
+        </div>
+      )
+    }
+
+    const article = matchedArticle
     const pairedCard = getTemplateById(article.recommendedTemplateId)
     const relatedCategory = article.occasionSlug
       ? CATEGORIES.find((c) => c.slug === article.occasionSlug)
       : undefined
     const relatedArticles = BLOG_ARTICLES.filter((a) => a.slug !== article.slug).slice(0, 3)
+    const isoPublished = toIsoDate(article.publishedAt)
 
     const articleSchema = [
       {
@@ -52,6 +90,14 @@ export function InspirationPage() {
         headline: article.title,
         description: article.excerpt,
         articleSection: article.category,
+        ...(isoPublished ? { datePublished: isoPublished } : {}),
+        image: buildCanonicalUrl(SITE_CONFIG.socialImagePath),
+        publisher: {
+          '@type': 'Organization',
+          name: SITE_CONFIG.legalBrandLabel,
+          url: buildCanonicalUrl('/'),
+        },
+        mainEntityOfPage: buildCanonicalUrl(`/inspiration/${article.slug}`),
         url: buildCanonicalUrl(`/inspiration/${article.slug}`),
       },
       {
@@ -73,7 +119,7 @@ export function InspirationPage() {
     return (
       <article className="paper-grain py-10 sm:py-16">
         <SeoHead
-          title={article.title}
+          title={article.seoTitle ?? article.title}
           description={article.excerpt}
           canonicalPath={`/inspiration/${article.slug}`}
           ogType="article"
@@ -221,9 +267,9 @@ export function InspirationPage() {
               <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--accent-rose)' }}>
                 Recommended Card Pairing
               </p>
-              <h3 className="text-2xl font-semibold" style={{ color: 'var(--text-primary)' }}>
+              <h2 className="text-2xl font-semibold" style={{ color: 'var(--text-primary)' }}>
                 {pairedCard.title}
-              </h3>
+              </h2>
               <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                 {pairedCard.shortDescription}
               </p>
@@ -277,12 +323,44 @@ export function InspirationPage() {
     )
   }
 
+  const journalSchemas = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'Stationery Journal & Card Guides',
+      description:
+        'Explore original birthday wishes for Mom and Dad, anniversary messages, thank-you writing formulas, and digital greeting card ideas.',
+      url: buildCanonicalUrl('/inspiration'),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Stationery Journal Articles',
+      numberOfItems: BLOG_ARTICLES.length,
+      itemListElement: BLOG_ARTICLES.map((art, idx) => ({
+        '@type': 'ListItem',
+        position: idx + 1,
+        name: art.title,
+        url: buildCanonicalUrl(`/inspiration/${art.slug}`),
+      })),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: buildCanonicalUrl('/') },
+        { '@type': 'ListItem', position: 2, name: 'Stationery Journal', item: buildCanonicalUrl('/inspiration') },
+      ],
+    },
+  ]
+
   return (
     <div className="paper-grain py-10 sm:py-16">
       <SeoHead
-        title="Stationery Journal — Message Guides & Card Ideas"
+        title="Stationery Journal & Card Guides"
         description="Explore original birthday wishes for Mom and Dad, anniversary messages, thank-you writing formulas, and digital greeting card ideas."
         canonicalPath="/inspiration"
+        jsonLd={journalSchemas}
       />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-10">

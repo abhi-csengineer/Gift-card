@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
@@ -41,19 +41,50 @@ import { QuickPreviewDialog } from '../components/QuickPreviewDialog'
 import { SeoHead } from '../components/SeoHead'
 import { TemplateCard } from '../components/TemplateCard'
 
-const HOME_SCHEMA = {
-  '@context': 'https://schema.org',
-  '@type': 'WebApplication',
-  name: SITE_CONFIG.brandName,
-  description: SITE_CONFIG.description,
-  applicationCategory: 'DesignApplication',
-  operatingSystem: 'Web',
-  url: buildCanonicalUrl('/'),
-  offers: {
-    '@type': 'Offer',
-    price: '0',
-    priceCurrency: 'USD',
-  },
+function buildHomeSchemas() {
+  const homeUrl = buildCanonicalUrl('/')
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: SITE_CONFIG.brandName,
+      url: homeUrl,
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: `${buildCanonicalUrl('/explore')}?q={search_term_string}`,
+        'query-input': 'required name=search_term_string',
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: SITE_CONFIG.legalBrandLabel,
+      url: homeUrl,
+      email: SITE_CONFIG.contactEmail,
+      logo: buildCanonicalUrl(SITE_CONFIG.socialImagePath),
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Rupaspur',
+        addressRegion: 'Bihar',
+        postalCode: '801503',
+        addressCountry: 'IN',
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebApplication',
+      name: SITE_CONFIG.brandName,
+      description: SITE_CONFIG.description,
+      applicationCategory: 'DesignApplication',
+      operatingSystem: 'Web',
+      url: homeUrl,
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+      },
+    },
+  ]
 }
 
 function CategoryIcon({ name }: { name: string }) {
@@ -98,15 +129,10 @@ function CategoryIcon({ name }: { name: string }) {
 export function HomePage() {
   const [favorites, setFavorites] = useState<string[]>(() => loadFavorites())
   const [previewId, setPreviewId] = useState<string | null>(null)
-  const [cardsReady, setCardsReady] = useState(false)
-
-  useEffect(() => {
-    const timer = window.setTimeout(() => setCardsReady(true), 220)
-    return () => window.clearTimeout(timer)
-  }, [])
 
   const featuredCards = CARD_TEMPLATES.filter((c) => c.featured).slice(0, 8)
   const featuredArticles = BLOG_ARTICLES.slice(0, 6)
+  const homeSchemas = buildHomeSchemas()
 
   const handleToggleFavorite = (id: string) => {
     setFavorites(toggleFavoriteId(id))
@@ -115,10 +141,10 @@ export function HomePage() {
   return (
     <div className="paper-grain">
       <SeoHead
-        title="Vellum & Bloom — Bespoke Digital Greeting Cards & Keepsakes"
+        title="Vellum & Bloom — Digital Greeting Cards & Keepsakes"
         description={SITE_CONFIG.description}
         canonicalPath="/"
-        jsonLd={HOME_SCHEMA}
+        jsonLd={homeSchemas}
       />
 
       {/* B. HERO SECTION */}
@@ -207,10 +233,10 @@ export function HomePage() {
                 </div>
                 <div>
                   <p className="text-xl sm:text-2xl font-semibold" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
-                    HD PNG
+                    PDF &amp; PNG
                   </p>
                   <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
-                    Keepsake Download
+                    Keepsake Downloads
                   </p>
                 </div>
               </div>
@@ -322,34 +348,17 @@ export function HomePage() {
             </Link>
           </div>
 
-          {!cardsReady ? (
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4" aria-busy="true" aria-label="Loading featured cards">
-              {Array.from({ length: 4 }).map((_, idx) => (
-                <div
-                  key={idx}
-                  className="animate-pulse rounded-3xl border p-4 space-y-4"
-                  style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-subtle)' }}
-                >
-                  <div className="h-64 rounded-2xl" style={{ backgroundColor: 'var(--bg-muted)' }} />
-                  <div className="h-4 w-1/3 rounded" style={{ backgroundColor: 'var(--bg-muted)' }} />
-                  <div className="h-6 w-3/4 rounded" style={{ backgroundColor: 'var(--bg-muted)' }} />
-                  <div className="h-10 rounded-2xl" style={{ backgroundColor: 'var(--bg-muted)' }} />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {featuredCards.map((template) => (
-                <TemplateCard
-                  key={template.id}
-                  template={template}
-                  isFavorite={favorites.includes(template.id)}
-                  onToggleFavorite={handleToggleFavorite}
-                  onQuickPreview={(id) => setPreviewId(id)}
-                />
-              ))}
-            </div>
-          )}
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {featuredCards.map((template) => (
+              <TemplateCard
+                key={template.id}
+                template={template}
+                isFavorite={favorites.includes(template.id)}
+                onToggleFavorite={handleToggleFavorite}
+                onQuickPreview={(id) => setPreviewId(id)}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -391,7 +400,7 @@ export function HomePage() {
                 icon: Send,
                 title: 'Share happiness with someone special.',
                 description:
-                  'Generate an instant envelope-reveal link for WhatsApp, copy it anywhere, or download a high-resolution PNG card.',
+                  'Generate an instant envelope-reveal link for WhatsApp, copy it anywhere, or download a 2-page PDF, PNG, or JPG keepsake.',
                 bg: 'var(--bg-muted)',
               },
             ].map((item) => {

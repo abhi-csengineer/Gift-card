@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ChevronDown, Sparkles } from 'lucide-react'
 import { FAQ_ITEMS } from '../data/catalog'
+import { buildCanonicalUrl } from '../config/siteConfig'
 import { Breadcrumbs } from '../components/Breadcrumbs'
 import { SeoHead } from '../components/SeoHead'
 
@@ -9,26 +10,36 @@ export function FaqPage() {
   const [openId, setOpenId] = useState<string>(FAQ_ITEMS[0].id)
 
   const faqSchema = useMemo(
-    () => ({
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: FAQ_ITEMS.map((item) => ({
-        '@type': 'Question',
-        name: item.question,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: item.answer,
-        },
-      })),
-    }),
+    () => [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: FAQ_ITEMS.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.answer,
+          },
+        })),
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: buildCanonicalUrl('/') },
+          { '@type': 'ListItem', position: 2, name: 'FAQ', item: buildCanonicalUrl('/faq') },
+        ],
+      },
+    ],
     [],
   )
 
   return (
     <div className="paper-grain py-10 sm:py-16">
       <SeoHead
-        title="Frequently Asked Questions — Greeting Cards & Privacy"
-        description="Answers on creating digital greeting cards, WhatsApp link sharing, PNG/JPG downloads, local browser storage, and privacy."
+        title="FAQ — Digital Greeting Cards Help"
+        description="Answers on creating digital greeting cards, Love Calendar milestones, WhatsApp sharing, 2-page PDF and PNG downloads, and browser privacy."
         canonicalPath="/faq"
         jsonLd={faqSchema}
       />
@@ -44,7 +55,7 @@ export function FaqPage() {
             Everything You Need to Know
           </h1>
           <p className="text-base" style={{ color: 'var(--text-secondary)' }}>
-            Answers about personalizing cards, sharing links on WhatsApp, PNG/JPG downloads, privacy, and local draft storage.
+            Answers about personalizing cards, The Love Calendar, sharing links on WhatsApp, 2-page PDF and PNG/JPG downloads, and local browser storage.
           </p>
         </div>
 

@@ -7,6 +7,7 @@ import {
   SPECIAL_COLLECTIONS,
   normalizeCategorySlug,
 } from '../data/catalog'
+import { buildCanonicalUrl } from '../config/siteConfig'
 import { loadFavorites, toggleFavoriteId } from '../utils/cardStorage'
 import { AdPlacement } from '../components/AdPlacement'
 import { Breadcrumbs } from '../components/Breadcrumbs'
@@ -65,12 +66,36 @@ export function ExplorePage() {
     })
   }, [activeCategory, activeCollection, favorites, onlyFavorites, query])
 
+  const exploreSchemas = useMemo(
+    () => [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: `Explore ${CARD_TEMPLATES.length}+ Digital Greeting Cards`,
+        description:
+          'Browse and filter bespoke digital greeting card templates by occasion, aesthetic collection, and mood—then personalize instantly.',
+        url: buildCanonicalUrl('/explore'),
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: buildCanonicalUrl('/') },
+          { '@type': 'ListItem', position: 2, name: 'Explore Cards', item: buildCanonicalUrl('/explore') },
+        ],
+      },
+    ],
+    [],
+  )
+
   return (
     <div className="paper-grain py-10 sm:py-16">
       <SeoHead
-        title={`Explore Cards — ${CARD_TEMPLATES.length} Bespoke Digital Card Templates`}
-        description="Browse and filter digital greeting card designs by relationship, occasion, and style—then customize colors, typography, and messages instantly."
+        title={`Explore ${CARD_TEMPLATES.length}+ Digital Greeting Cards`}
+        description="Browse and filter 120+ digital greeting card templates by occasion, aesthetic, and mood—then customize colors, fonts, and messages."
         canonicalPath="/explore"
+        noIndex={Boolean(urlQuery.trim())}
+        jsonLd={exploreSchemas}
       />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

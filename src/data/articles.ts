@@ -120,6 +120,7 @@ export const SEO_ARTICLES: BlogArticle[] = [
   {
     slug: 'beautiful-messages-to-make-your-girlfriend-smile',
     title: 'Beautiful Messages to Make Your Girlfriend Smile',
+    seoTitle: 'Sweet Messages for Your Girlfriend',
     category: 'Girlfriend / Boyfriend',
     readTime: '5 min read',
     publishedAt: 'November 23, 2026',
@@ -221,7 +222,7 @@ export const SEO_ARTICLES: BlogArticle[] = [
     readTime: '6 min read',
     publishedAt: 'November 20, 2026',
     excerpt:
-      'Romantic, grounded anniversary messages for spouses, partners, and parents celebrating one year or fifty together.',
+      'Romantic, heartfelt anniversary messages for spouses, partners, and parents celebrating one year or fifty years together.',
     coverMotif: 'couple-rings',
     coverPaletteId: 'deep-plum',
     occasionSlug: 'anniversary',
@@ -359,11 +360,12 @@ export const SEO_ARTICLES: BlogArticle[] = [
   {
     slug: 'how-to-create-and-send-a-personalized-digital-card',
     title: 'How to Create and Send a Personalized Digital Card',
+    seoTitle: 'Create & Send Personalized Cards',
     category: 'Studio Guide',
     readTime: '4 min read',
     publishedAt: 'November 15, 2026',
     excerpt:
-      'Step-by-step walkthrough for designing a custom digital greeting card in Vellum & Bloom, adding animated touches, and sharing via WhatsApp or PNG/JPG download.',
+      'Step-by-step guide to designing a custom digital card in Vellum & Bloom, adding animations, and sharing via WhatsApp or PDF.',
     coverMotif: 'ribbon-giftbox',
     coverPaletteId: 'warm-ivory',
     occasionSlug: 'congratulations',
@@ -389,9 +391,9 @@ export const SEO_ARTICLES: BlogArticle[] = [
         ],
       },
       {
-        heading: 'Step 4: Share with an envelope reveal or export as PNG/JPG',
+        heading: 'Step 4: Share with an envelope reveal or export as PDF, PNG, or JPG',
         paragraphs: [
-          'Click Share Card to generate a self-contained link you can copy or open directly in WhatsApp—or download a crisp high-resolution PNG or JPG image for messaging apps and keepsake folders.',
+          'Click Share Card to generate a self-contained link you can copy or open directly in WhatsApp—or download a two-page PDF keepsake, or high-resolution PNG or JPG images for messaging apps and keepsake folders.',
         ],
       },
     ],
@@ -518,6 +520,7 @@ export const SEO_ARTICLES: BlogArticle[] = [
   {
     slug: 'art-of-writing-a-card-they-keep',
     title: 'The Art of Writing a Greeting Card Someone Actually Keeps',
+    seoTitle: 'Writing a Greeting Card They Keep',
     category: 'Writing Craft',
     readTime: '4 min read',
     publishedAt: 'November 18, 2026',
@@ -547,11 +550,12 @@ export const SEO_ARTICLES: BlogArticle[] = [
   {
     slug: 'why-just-because-notes-matter-most',
     title: 'Why "Just Because" Cards Create the Deepest Emotional Impact',
+    seoTitle: 'Why Just Because Cards Matter Most',
     category: 'Thoughtful Living',
     readTime: '3 min read',
     publishedAt: 'November 10, 2026',
     excerpt:
-      'Calendar holidays are expected; an unprompted Tuesday card arrives when nobody expects it—and carries twice the magic.',
+      'Calendar holidays are expected; an unprompted Tuesday card arrives when nobody expects it—and delivers twice the warmth.',
     coverMotif: 'cozy-teacup',
     coverPaletteId: 'soft-blush',
     occasionSlug: 'just-because',
@@ -576,6 +580,7 @@ export const SEO_ARTICLES: BlogArticle[] = [
   {
     slug: 'pairing-typography-and-color-to-mood',
     title: 'How Color & Typography Quietly Shape the Emotion of Your Card',
+    seoTitle: 'Color & Type Moods for Greeting Cards',
     category: 'Design Notes',
     readTime: '5 min read',
     publishedAt: 'November 2, 2026',

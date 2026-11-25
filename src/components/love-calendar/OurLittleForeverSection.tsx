@@ -178,7 +178,7 @@ export function OurLittleForeverSection({
             “Some dates aren’t on the calendar. They’re written in your heart.”
           </p>
           <p className="mt-3 max-w-3xl text-sm sm:text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-            Enter any meaningful relationship date to track days together, upcoming anniversaries, monthly monthsaries, and 50 / 100 / 500 / 1,000-day milestones—and turn any moment into a custom keepsake card.
+            Track your First Meeting, First Date Anniversary, First Kiss Anniversary, monthly monthsaries, Relationship and Wedding Anniversaries, and 50, 100, 500, or 1,000 Days Together—stored privately in your browser and ready to turn into custom keepsake cards.
           </p>
         </div>
 

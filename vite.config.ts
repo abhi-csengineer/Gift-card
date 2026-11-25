@@ -1,10 +1,42 @@
-import { defineConfig } from 'vite'
+import fs from 'node:fs'
+import path from 'node:path'
+import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
+const FALLBACK_PLACEHOLDER_ORIGIN = 'https://ais-dev-jswapgytnrecadehrmu3ff-838459179869.asia-east1.run.app'
+const resolvedSiteOrigin = (process.env.VITE_SITE_URL || process.env.APP_URL || '')
+  .trim()
+  .replace(/\/+$/, '')
+
+function syncDistSeoOrigins(): Plugin {
+  return {
+    name: 'vellum-sync-dist-seo-origins',
+    apply: 'build',
+    writeBundle(options) {
+      if (!resolvedSiteOrigin || resolvedSiteOrigin === FALLBACK_PLACEHOLDER_ORIGIN) return
+      const outDir = options.dir ? path.resolve(options.dir) : path.resolve('dist')
+      for (const filename of ['sitemap.xml', 'robots.txt', 'index.html']) {
+        const target = path.join(outDir, filename)
+        if (fs.existsSync(target)) {
+          const content = fs.readFileSync(target, 'utf8')
+          fs.writeFileSync(
+            target,
+            content.split(FALLBACK_PLACEHOLDER_ORIGIN).join(resolvedSiteOrigin),
+            'utf8',
+          )
+        }
+      }
+    },
+  }
+}
+
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react(), tailwindcss(), syncDistSeoOrigins()],
+  define: {
+    __APP_URL__: JSON.stringify(resolvedSiteOrigin),
+  },
   server: {
     host: '0.0.0.0',
     port: 3000,

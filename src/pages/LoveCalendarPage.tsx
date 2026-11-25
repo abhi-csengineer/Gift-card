@@ -206,14 +206,36 @@ export function LoveCalendarPage() {
     const monthTemplates = activeMonth.featuredTemplateIds.map((id) => getTemplateById(id))
     const bannerBg = resolvedTheme === 'dark' ? activeMonth.softTintDark : activeMonth.softTintLight
 
+    const monthSeoTitle = activeMonth.seoTitle ?? `${activeMonth.name} Love Calendar Cards`
+    const monthSeoDesc =
+      activeMonth.seoDescription ??
+      `${activeMonth.description} Create custom ${activeMonth.name} digital greeting cards.`
+
     const monthJsonLd = [
       {
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
         name: `${activeMonth.name} — ${activeMonth.collectionTitle} | The Love Calendar`,
-        description: activeMonth.description,
+        description: monthSeoDesc,
         url: buildCanonicalUrl(`/love-calendar/${activeMonth.slug}`),
       },
+      ...(monthOccasions.length > 0
+        ? [
+            {
+              '@context': 'https://schema.org',
+              '@type': 'ItemList',
+              name: `${activeMonth.name} Love Calendar Occasions`,
+              numberOfItems: monthOccasions.length,
+              itemListElement: monthOccasions.map((occ, idx) => ({
+                '@type': 'ListItem',
+                position: idx + 1,
+                name: occ.name,
+                description: occ.shortDescription,
+                url: buildCanonicalUrl(`/create/${occ.templateId}`),
+              })),
+            },
+          ]
+        : []),
       {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',
@@ -233,8 +255,8 @@ export function LoveCalendarPage() {
     return (
       <div className="paper-grain pb-20">
         <SeoHead
-          title={`${activeMonth.name} — ${activeMonth.collectionTitle} | The Love Calendar`}
-          description={`${activeMonth.description} Create personalized digital greeting cards for ${activeMonth.name} with Vellum & Bloom.`}
+          title={monthSeoTitle}
+          description={monthSeoDesc}
           canonicalPath={`/love-calendar/${activeMonth.slug}`}
           jsonLd={monthJsonLd}
         />
@@ -299,6 +321,14 @@ export function LoveCalendarPage() {
                     }}
                   >
                     <span>Explore Designs</span>
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                  <Link
+                    to={`/occasions/${activeMonth.exploreCategorySlug}`}
+                    className="inline-flex min-h-11 items-center gap-1.5 px-3 py-2 text-sm font-semibold underline-offset-4 hover:underline"
+                    style={{ color: 'var(--text-primary)' }}
+                  >
+                    <span>Occasion Guide</span>
                     <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
                 </div>
@@ -477,10 +507,22 @@ export function LoveCalendarPage() {
     {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
-      name: 'The Love Calendar — 365 Days of Romantic Card Inspirations',
+      name: 'The Love Calendar — 365 Days of Romance',
       description:
-        'Explore twelve monthly romantic collections, special relationship holidays, and milestone greeting cards on Vellum & Bloom.',
+        'Explore 12 monthly romantic collections, Rose Day to Valentine’s Day cards, First Date Anniversary, and 100 Days Together milestone keepsakes.',
       url: buildCanonicalUrl('/love-calendar'),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'The Love Calendar Monthly Collections',
+      numberOfItems: LOVE_CALENDAR_MONTHS.length,
+      itemListElement: LOVE_CALENDAR_MONTHS.map((m, idx) => ({
+        '@type': 'ListItem',
+        position: idx + 1,
+        name: `${m.name} — ${m.collectionTitle}`,
+        url: buildCanonicalUrl(`/love-calendar/${m.slug}`),
+      })),
     },
     {
       '@context': 'https://schema.org',
@@ -511,8 +553,8 @@ export function LoveCalendarPage() {
   return (
     <div className="paper-grain pb-24">
       <SeoHead
-        title="The Love Calendar — 365 Days of Romantic Celebrations"
-        description="365 days. Countless reasons to celebrate love. Explore twelve monthly collections, special romantic occasions, and relationship milestone cards."
+        title="The Love Calendar — 365 Days of Romance"
+        description="Explore 12 monthly romantic collections, Rose Day to Valentine’s Day cards, First Date Anniversary, and 100 Days Together milestone keepsakes."
         canonicalPath="/love-calendar"
         jsonLd={hubJsonLd}
       />

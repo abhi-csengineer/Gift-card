@@ -3,9 +3,9 @@ import type { CategorySeoGuide, CategorySlug } from '../types/card'
 export const CATEGORY_SEO_GUIDES: Record<CategorySlug, CategorySeoGuide> = {
   'girlfriend-boyfriend': {
     slug: 'girlfriend-boyfriend',
-    seoTitle: 'Romantic Digital Cards for Girlfriend & Boyfriend',
+    seoTitle: 'Girlfriend & Boyfriend Digital Cards',
     metaDescription:
-      'Create heartfelt, playful, and romantic digital greeting cards for your girlfriend or boyfriend with custom messages, blush palettes, and WhatsApp sharing.',
+      'Create heartfelt, playful, and romantic digital greeting cards for your girlfriend or boyfriend with custom notes and WhatsApp sharing.',
     heroHeadline: 'Romantic Cards Made to Make Your Partner Smile',
     introParagraph:
       'Whether you are celebrating a month together, planning a surprise date night, or brightening an ordinary Tuesday, personalizing a digital card lets your favorite person feel treasured in seconds.',
@@ -24,9 +24,9 @@ export const CATEGORY_SEO_GUIDES: Record<CategorySlug, CategorySeoGuide> = {
   },
   mother: {
     slug: 'mother',
-    seoTitle: 'Heartfelt Digital Greeting Cards for Mom',
+    seoTitle: 'Digital Greeting Cards for Mom',
     metaDescription:
-      'Design personalized birthday, Mother’s Day, and thank-you digital cards for Mom with botanical florals, warm typography, and keepsake PNG downloads.',
+      'Design personalized birthday, Mother’s Day, and thank-you digital cards for Mom with botanical florals and 2-page PDF or PNG downloads.',
     heroHeadline: 'Thoughtful Botanical Cards Celebrating Mom',
     introParagraph:
       'Honor your mother’s patience, warmth, and lifelong care with bespoke floral stationery you can tailor in her favorite colors and share across any distance.',
@@ -45,9 +45,9 @@ export const CATEGORY_SEO_GUIDES: Record<CategorySlug, CategorySeoGuide> = {
   },
   father: {
     slug: 'father',
-    seoTitle: 'Meaningful Digital Greeting Cards for Dad',
+    seoTitle: 'Digital Greeting Cards for Dad',
     metaDescription:
-      'Create personalized birthday, Father’s Day, and appreciation digital cards for Dad with timeless indigo & linen stationery and sincere messages.',
+      'Create personalized birthday, Father’s Day, and appreciation digital cards for Dad with timeless indigo stationery and sincere messages.',
     heroHeadline: 'Timeless Stationery & Words of Pride for Dad',
     introParagraph:
       'Fathers often express care through quiet dependability. Say thank you in return with tailored indigo, sage, or linen-letterpress cards built to honor his guidance.',
@@ -66,9 +66,9 @@ export const CATEGORY_SEO_GUIDES: Record<CategorySlug, CategorySeoGuide> = {
   },
   parents: {
     slug: 'parents',
-    seoTitle: 'Digital Greeting Cards for Parents (Mom & Dad)',
+    seoTitle: 'Greeting Cards for Mom & Dad',
     metaDescription:
-      'Send warm digital cards to your parents for anniversaries, family celebrations, or heartfelt thank-yous—customizable in minutes with instant sharing.',
+      'Send warm digital cards to your parents for anniversaries, family celebrations, or heartfelt thank-yous—customizable in minutes.',
     heroHeadline: 'Warm Keepsakes Honoring Mom & Dad Together',
     introParagraph:
       'Celebrate the home, traditions, and encouragement your parents built together with heirloom family-tree artwork and serene botanical palettes.',
@@ -87,7 +87,7 @@ export const CATEGORY_SEO_GUIDES: Record<CategorySlug, CategorySeoGuide> = {
   },
   'husband-wife': {
     slug: 'husband-wife',
-    seoTitle: 'Digital Love & Anniversary Cards for Husband & Wife',
+    seoTitle: 'Love Cards for Husband & Wife',
     metaDescription:
       'Craft intimate digital greeting cards for your spouse with gold-foil arches, heartfelt marriage notes, and animated envelope reveals.',
     heroHeadline: 'Intimate Digital Stationery for Your Spouse',
@@ -108,9 +108,9 @@ export const CATEGORY_SEO_GUIDES: Record<CategorySlug, CategorySeoGuide> = {
   },
   birthday: {
     slug: 'birthday',
-    seoTitle: 'Personalized Digital Birthday Cards & Wishes',
+    seoTitle: 'Personalized Digital Birthday Cards',
     metaDescription:
-      'Create festive, heartfelt digital birthday cards with custom confetti effects, unique shareable links, WhatsApp delivery, and HD PNG downloads.',
+      'Create festive, heartfelt digital birthday cards with custom confetti effects, unique shareable links, WhatsApp delivery, and PDF or PNG exports.',
     heroHeadline: 'Festive & Keepsake Birthday Cards for Everyone You Love',
     introParagraph:
       'From champagne-gold milestone celebrations to playful ribbon confetti designs, craft a birthday card tailored to their exact personality—no store aisle required.',
@@ -129,7 +129,7 @@ export const CATEGORY_SEO_GUIDES: Record<CategorySlug, CategorySeoGuide> = {
   },
   anniversary: {
     slug: 'anniversary',
-    seoTitle: 'Custom Digital Anniversary Greeting Cards',
+    seoTitle: 'Custom Digital Anniversary Cards',
     metaDescription:
       'Celebrate one year or fifty with bespoke digital anniversary cards featuring intertwined gold rings, botanical arches, and personal messages.',
     heroHeadline: 'Heirloom-Style Cards for Every Anniversary Milestone',
@@ -150,7 +150,7 @@ export const CATEGORY_SEO_GUIDES: Record<CategorySlug, CategorySeoGuide> = {
   },
   friendship: {
     slug: 'friendship',
-    seoTitle: 'Digital Friendship & Best Friend Greeting Cards',
+    seoTitle: 'Friendship & Best Friend Cards',
     metaDescription:
       'Surprise your best friend or long-distance buddy with custom digital friendship cards, upbeat illustrations, and cheerful thank-you notes.',
     heroHeadline: 'Celebrate the Friends Who Make Life Lighter',
@@ -171,9 +171,9 @@ export const CATEGORY_SEO_GUIDES: Record<CategorySlug, CategorySeoGuide> = {
   },
   'valentines-day': {
     slug: 'valentines-day',
-    seoTitle: 'Romantic Digital Valentine’s Day Cards',
+    seoTitle: 'Romantic Valentine’s Day Digital Cards',
     metaDescription:
-      'Design romantic digital Valentine’s cards with velvet heart wax seals, blush peonies, floating heart animations, and personalized love notes.',
+      'Design romantic digital Valentine’s cards with velvet heart wax seals, blush peonies, Rose Day & Propose Day inspiration, and love notes.',
     heroHeadline: 'Velvet Seals & Love Notes for Valentine’s Day',
     introParagraph:
       'Say "I adore you" with tactile dusty-rose palettes, floating heart effects, and a memorable envelope-unsealing experience on any device.',
@@ -194,7 +194,7 @@ export const CATEGORY_SEO_GUIDES: Record<CategorySlug, CategorySeoGuide> = {
     slug: 'thank-you',
     seoTitle: 'Personalized Digital Thank-You Cards',
     metaDescription:
-      'Create sincere digital thank-you cards for hosts, mentors, teachers, and friends with pressed-wildflower designs and thoughtful gratitude prompts.',
+      'Create sincere digital thank-you cards for hosts, mentors, teachers, and friends with pressed-wildflower designs and thoughtful prompts.',
     heroHeadline: 'Say Thank You With Grace & Sincerity',
     introParagraph:
       'Turn genuine gratitude into a polished keepsake. Pressed-wildflower and pearl-alabaster cards make thanking friends, hosts, and mentors effortless.',
@@ -213,9 +213,9 @@ export const CATEGORY_SEO_GUIDES: Record<CategorySlug, CategorySeoGuide> = {
   },
   congratulations: {
     slug: 'congratulations',
-    seoTitle: 'Digital Congratulations Cards for Milestones & Wins',
+    seoTitle: 'Digital Congratulations Greeting Cards',
     metaDescription:
-      'Celebrate graduations, promotions, new homes, and big wins with customizable digital congratulations cards, gold laurel motifs, and instant sharing.',
+      'Celebrate graduations, promotions, new homes, and big wins with customizable digital congratulations cards, gold laurels, and instant sharing.',
     heroHeadline: 'Toast Every Proud Milestone & New Beginning',
     introParagraph:
       'From graduations and promotions to creative launches and new homes, honor their hard-won victory with golden laurels and celebratory confetti.',
@@ -234,9 +234,9 @@ export const CATEGORY_SEO_GUIDES: Record<CategorySlug, CategorySeoGuide> = {
   },
   festivals: {
     slug: 'festivals',
-    seoTitle: 'Festive & Seasonal Digital Greeting Cards',
+    seoTitle: 'Festive & Seasonal Digital Cards',
     metaDescription:
-      'Create luminous festive digital cards for Diwali, New Year, holidays, and seasonal gatherings with warm lantern artwork and family wishes.',
+      'Create luminous festive digital cards for Diwali, New Year, holidays, and seasonal gatherings with glowing lantern art and family wishes.',
     heroHeadline: 'Warm Light & Blessings for Every Festive Season',
     introParagraph:
       'Share peaceful seasonal greetings with relatives and friends across the globe using glowing lantern artwork, warm apricot hues, and gold borders.',
@@ -255,9 +255,9 @@ export const CATEGORY_SEO_GUIDES: Record<CategorySlug, CategorySeoGuide> = {
   },
   appreciation: {
     slug: 'appreciation',
-    seoTitle: 'Digital Appreciation & Gratitude Greeting Cards',
+    seoTitle: 'Appreciation & Gratitude Digital Cards',
     metaDescription:
-      'Recognize mentors, colleagues, teachers, caregivers, and loved ones with refined digital appreciation cards and meaningful messages.',
+      'Recognize mentors, colleagues, teachers, caregivers, and loved ones with refined digital appreciation cards and meaningful gratitude notes.',
     heroHeadline: 'Honor Quiet Effort & Everyday Kindness',
     introParagraph:
       'Often the people who give the most quietly get thanked the least. Take two minutes to tell a teacher, mentor, teammate, or relative that their care matters.',
@@ -276,9 +276,9 @@ export const CATEGORY_SEO_GUIDES: Record<CategorySlug, CategorySeoGuide> = {
   },
   'good-morning': {
     slug: 'good-morning',
-    seoTitle: 'Warm Good Morning Digital Greeting Cards',
+    seoTitle: 'Warm Good Morning Digital Cards',
     metaDescription:
-      'Send a cheerful Good Morning digital card to start someone’s day with sunlit artwork, gentle encouragement, and a warm smile.',
+      'Send a cheerful Good Morning digital card to start someone’s day with sunlit artwork, gentle encouragement, and a warm smile via WhatsApp.',
     heroHeadline: 'Start Someone’s Morning With Sunlight & Warmth',
     introParagraph:
       'Before meetings and commutes begin, drop a crisp morning-sunbeam or cozy-teacup card into their chat to wish them calm focus and an unexpectedly good day.',
@@ -297,7 +297,7 @@ export const CATEGORY_SEO_GUIDES: Record<CategorySlug, CategorySeoGuide> = {
   },
   'good-night': {
     slug: 'good-night',
-    seoTitle: 'Peaceful Good Night Digital Greeting Cards',
+    seoTitle: 'Peaceful Good Night Digital Cards',
     metaDescription:
       'Send calming Good Night digital cards with starry indigo skies, crescent moons, and gentle wishes for sweet dreams and restful sleep.',
     heroHeadline: 'Gentle Starlight & Peaceful Good-Night Notes',
@@ -318,7 +318,7 @@ export const CATEGORY_SEO_GUIDES: Record<CategorySlug, CategorySeoGuide> = {
   },
   'just-because': {
     slug: 'just-because',
-    seoTitle: 'Just Because Digital Cards — Send Unexpected Kindness',
+    seoTitle: 'Just Because Digital Greeting Cards',
     metaDescription:
       'No holiday required—create thoughtful Just Because digital cards to encourage a friend, partner, or family member on any ordinary day.',
     heroHeadline: 'Unexpected Warmth for Any Ordinary Day',

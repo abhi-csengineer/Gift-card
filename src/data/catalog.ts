@@ -1262,7 +1262,7 @@ export const FAQ_ITEMS: FaqItem[] = [
     category: 'Getting Started',
     question: 'Do I need an account to create and send a digital card?',
     answer:
-      'No sign-up is required. You can choose from over 30 original templates, customize layouts, colors, fonts, stickers, and animated effects, download a PNG or JPG image, and generate a shareable link immediately in your browser.',
+      'No sign-up is required. You can choose from 120+ original templates across 16 occasion categories and The Love Calendar, customize layouts, colors, fonts, stickers, and animated effects, download a complete 2-page PDF or PNG/JPG images, and generate a shareable link immediately in your browser.',
   },
   {
     id: 'faq-non-monetary',
@@ -1281,16 +1281,23 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     id: 'faq-whatsapp',
     category: 'Sharing & Delivery',
-    question: 'Can I send my card via WhatsApp or download it as PNG/JPG?',
+    question: 'Can I send my card via WhatsApp or download it as PDF, PNG, or JPG?',
     answer:
-      'Yes. Once you finish personalizing your card in the studio, you can open WhatsApp with a pre-filled greeting message (and confirm sending yourself), copy the link, use your device’s native share sheet, or export crisp Portrait, Landscape, or Square PNG and JPG keepsakes.',
+      'Yes. Once you finish personalizing your card in the studio, you can open WhatsApp with a pre-filled greeting message (and confirm sending yourself), copy the link, use your device’s native share sheet, download a complete 2-page PDF (Front Cover + Inside Message), or export Portrait, Landscape, and Square PNG or JPG keepsakes.',
+  },
+  {
+    id: 'faq-love-calendar',
+    category: 'The Love Calendar',
+    question: 'How do The Love Calendar and Our Little Forever milestones work?',
+    answer:
+      'The Love Calendar organizes 44 romantic celebrations across 12 monthly chapters alongside 13 personal relationship milestones—such as First Date Anniversary, 100 Days Together, and Wedding Anniversary. Dates you add in Our Little Forever are calculated and stored privately inside your own browser LocalStorage.',
   },
   {
     id: 'faq-drafts',
     category: 'Privacy & Storage',
-    question: 'Where are my saved drafts and preferences stored?',
+    question: 'Where are my saved drafts, milestones, and preferences stored?',
     answer:
-      'Unfinished drafts, favorite templates, reduced-motion preferences, cookie consent choices, and your light/dark theme setting are saved locally in your browser via LocalStorage. Clearing your browser site data removes local drafts.',
+      'Unfinished drafts, saved relationship milestones, favorite templates, reduced-motion preferences, cookie consent choices, and your light/dark theme setting are saved locally in your browser via LocalStorage. Clearing your browser site data removes local entries.',
   },
   {
     id: 'faq-privacy-ads',
@@ -1302,9 +1309,9 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     id: 'faq-copyright',
     category: 'Copyright & Usage',
-    question: 'Can I print or share downloaded card images personally?',
+    question: 'Can I print or share downloaded card images and PDFs personally?',
     answer:
-      'Yes. You may freely share generated card links and download PNG or JPG files for personal greetings, family keepsakes, and non-commercial celebrations. Commercial resale or redistribution of templates is not permitted—see our Copyright Policy for details.',
+      'Yes. You may freely share generated card links and download 2-page PDF, PNG, or JPG files for personal greetings, family keepsakes, and non-commercial celebrations. Commercial resale or redistribution of templates is not permitted—see our Copyright Policy for details.',
   },
   {
     id: 'faq-accessibility',

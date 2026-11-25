@@ -1,17 +1,37 @@
 import { Link } from 'react-router-dom'
 import { Feather, Heart, MapPin, ShieldCheck, Sparkles } from 'lucide-react'
-import { SITE_CONFIG } from '../config/siteConfig'
+import { SITE_CONFIG, buildCanonicalUrl } from '../config/siteConfig'
 import { Breadcrumbs } from '../components/Breadcrumbs'
 import { GreetingCardPreview } from '../components/GreetingCardPreview'
 import { SeoHead } from '../components/SeoHead'
 
 export function AboutPage() {
+  const aboutSchemas = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'AboutPage',
+      name: 'About Vellum & Bloom Digital Stationery',
+      description:
+        'Discover the editorial craft and local-first privacy philosophy behind Vellum & Bloom, a digital greeting card and keepsake studio.',
+      url: buildCanonicalUrl('/about'),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: buildCanonicalUrl('/') },
+        { '@type': 'ListItem', position: 2, name: 'About Us', item: buildCanonicalUrl('/about') },
+      ],
+    },
+  ]
+
   return (
     <div className="paper-grain py-10 sm:py-16">
       <SeoHead
-        title="About Us — Vellum & Bloom Digital Stationery"
-        description="Discover the craft and local-first privacy philosophy behind Vellum & Bloom, an editorial digital greeting card studio."
+        title="About Vellum & Bloom Stationery"
+        description="Discover the editorial craft and local-first privacy philosophy behind Vellum & Bloom, a digital greeting card and keepsake studio."
         canonicalPath="/about"
+        jsonLd={aboutSchemas}
       />
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 space-y-16">
@@ -87,7 +107,7 @@ export function AboutPage() {
             {
               icon: Heart,
               title: 'Built for Connection',
-              text: 'From WhatsApp envelope reveals to crisp Portrait, Landscape, and Square PNG/JPG downloads, sharing takes seconds.',
+              text: 'From WhatsApp envelope reveals to 2-page PDF keepsakes and crisp Portrait, Landscape, and Square PNG/JPG downloads, sharing takes seconds.',
             },
           ].map((pillar) => {
             const Icon = pillar.icon

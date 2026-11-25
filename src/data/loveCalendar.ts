@@ -66,6 +66,9 @@ export const LOVE_CALENDAR_MONTHS: LoveCalendarMonth[] = [
     shortName: 'Jan',
     collectionTitle: 'Month of New Beginnings',
     seasonLabel: 'Quiet Winter · Fresh Pages',
+    seoTitle: 'January Love Calendar Cards',
+    seoDescription:
+      'Celebrate New Year’s Day, National Hugging Day, St. Dwynwen’s Day, and Spouses Day with custom January romantic greeting cards.',
     description:
       'Clean ivory stationery, midnight New Year fireworks, St. Dwynwen blooms, and warm promises for the year ahead together.',
     poeticLine: 'Every fresh calendar begins with someone worth writing to.',
@@ -87,6 +90,9 @@ export const LOVE_CALENDAR_MONTHS: LoveCalendarMonth[] = [
     shortName: 'Feb',
     collectionTitle: 'Month of Love',
     seasonLabel: 'Velvet Bloom · Valentine Week & Beyond',
+    seoTitle: 'February & Valentine’s Love Calendar',
+    seoDescription:
+      'Explore Rose Day, Propose Day, Chocolate Day, Teddy Day, Promise Day, Hug Day, Kiss Day, and Valentine’s Day digital greeting cards.',
     description:
       'From crimson Rose Day petals, truffles, teddy bears, and promises to playful banter and heartfelt confessions.',
     poeticLine: 'Ink on linen outlasts a thousand fleeting messages.',
@@ -108,6 +114,9 @@ export const LOVE_CALENDAR_MONTHS: LoveCalendarMonth[] = [
     shortName: 'Mar',
     collectionTitle: 'Month of Togetherness',
     seasonLabel: 'Early Spring · Shared Steps',
+    seoTitle: 'March Love Calendar Collections',
+    seoDescription:
+      'Browse International Women’s Day, White Day, Day of Happiness, and National Proposal Day digital greeting cards in our March collection.',
     description:
       'Empowering floral tributes for Women’s Day, ivory White Day elegance, sunlit happiness, and spring proposals.',
     poeticLine: 'Side by side turns ordinary afternoons into landmarks.',
@@ -129,6 +138,9 @@ export const LOVE_CALENDAR_MONTHS: LoveCalendarMonth[] = [
     shortName: 'Apr',
     collectionTitle: 'Month of Romance',
     seasonLabel: 'Spring Petals · Literary & Cultural Love',
+    seoTitle: 'April Love Calendar & Sant Jordi Cards',
+    seoDescription:
+      'Discover April romantic stationery for Black Day, Sant Jordi book-and-rose romance, and Kiss and Make Up Day with custom love notes.',
     description:
       'Korean Black Day monochrome keepsakes, Sant Jordi’s book-and-rose romance, and gentle Kiss & Make Up reconciliation.',
     poeticLine: 'Soft light, lingering words, and blossoms pressed in paper.',
@@ -150,6 +162,9 @@ export const LOVE_CALENDAR_MONTHS: LoveCalendarMonth[] = [
     shortName: 'May',
     collectionTitle: 'Month of Affection',
     seasonLabel: 'Warm Blossom · Tender Gestures',
+    seoTitle: 'May Love Calendar & 520 Day Cards',
+    seoDescription:
+      'Celebrate International Couples Day and 520 Day in May with matching couple horizons, glowing lanterns, and custom romantic greeting cards.',
     description:
       'Matching couple horizons and glowing crimson 520 lanterns expressing affection in timeless symbols.',
     poeticLine: 'Affection lives in the moments nobody asked you to notice.',
@@ -171,6 +186,9 @@ export const LOVE_CALENDAR_MONTHS: LoveCalendarMonth[] = [
     shortName: 'Jun',
     collectionTitle: 'Month of Sweet Memories',
     seasonLabel: 'Early Summer · Samba & Soundtracks',
+    seoTitle: 'June Love Calendar & Namorados Cards',
+    seoDescription:
+      'Send festive Brazilian Dia dos Namorados greeting cards and World Music Day duet keepsakes from our June Love Calendar collection.',
     description:
       'Festive Brazilian Dia dos Namorados blooms and shared summer playlists for World Music Day.',
     poeticLine: 'Some afternoons stay golden long after the sun sets.',
@@ -192,6 +210,9 @@ export const LOVE_CALENDAR_MONTHS: LoveCalendarMonth[] = [
     shortName: 'Jul',
     collectionTitle: 'Month of Passion',
     seasonLabel: 'Midsummer · Moonlit Devotion',
+    seoTitle: 'July Love Calendar & Kissing Day Cards',
+    seoDescription:
+      'Create midsummer digital greeting cards for International Kissing Day and Moon Day celestial love letters in July’s Love Calendar.',
     description:
       'Warm summer silhouettes for International Kissing Day and starry Apollo-era love letters under the Moon Day sky.',
     poeticLine: 'Unfiltered words for the love that moves you most.',
@@ -213,6 +234,9 @@ export const LOVE_CALENDAR_MONTHS: LoveCalendarMonth[] = [
     shortName: 'Aug',
     collectionTitle: 'Month of Appreciation',
     seasonLabel: 'Late Summer · Sunlit Grace',
+    seoTitle: 'August Love Calendar & Girlfriend Day',
+    seoDescription:
+      'Honor National Girlfriend Day and National Couples Day in August with blush tulip cards, personalized notes, and PDF keepsake exports.',
     description:
       'Blush tulip bouquets honoring National Girlfriend Day and warm portraits celebrating National Couples Day.',
     poeticLine: 'A heartfelt thank-you is its own kind of love letter.',
@@ -234,6 +258,9 @@ export const LOVE_CALENDAR_MONTHS: LoveCalendarMonth[] = [
     shortName: 'Sep',
     collectionTitle: 'Month of Commitment',
     seasonLabel: 'Early Autumn · Heirloom Foil',
+    seoTitle: 'September Wife Appreciation Cards',
+    seoDescription:
+      'Celebrate Wife Appreciation Day and World Heart Day with heirloom foil digital greeting cards from September’s Month of Commitment.',
     description:
       'Dynamic third-Sunday tributes for Wife Appreciation Day alongside thoughtful wellness care on World Heart Day.',
     poeticLine: 'Devotion is choosing the same person through every season.',
@@ -255,6 +282,9 @@ export const LOVE_CALENDAR_MONTHS: LoveCalendarMonth[] = [
     shortName: 'Oct',
     collectionTitle: 'Month of Celebrating Him',
     seasonLabel: 'Amber Crisp · Tailored Linen',
+    seoTitle: 'October Boyfriend & Sweetest Day Cards',
+    seoDescription:
+      'Create tailored navy digital greeting cards for National Boyfriend Day and cocoa praline keepsakes for Sweetest Day in October.',
     description:
       'Tailored navy & brass keepsakes for National Boyfriend Day and cocoa pralines for Sweetest Day’s third Saturday.',
     poeticLine: 'Quiet strength and steady love deserve words of their own.',
@@ -276,6 +306,9 @@ export const LOVE_CALENDAR_MONTHS: LoveCalendarMonth[] = [
     shortName: 'Nov',
     collectionTitle: 'Month of Gratitude',
     seasonLabel: 'Warm Hearth · Kindness & Self-Love',
+    seoTitle: 'November Kindness & Love Calendar',
+    seoDescription:
+      'Explore Singles’ Day, World Kindness Day, and International Men’s Day greeting cards in November’s Month of Gratitude collection.',
     description:
       'Playful Singles’ Day independence, pastel World Kindness Day notes, and refined tributes for International Men’s Day.',
     poeticLine: 'Gratitude deepens every bond it touches.',
@@ -297,6 +330,9 @@ export const LOVE_CALENDAR_MONTHS: LoveCalendarMonth[] = [
     shortName: 'Dec',
     collectionTitle: 'Month of Magical Moments',
     seasonLabel: 'Winter Starlight · Festive Gold',
+    seoTitle: 'December Festive & New Year Love Cards',
+    seoDescription:
+      'Send glowing Christmas Eve, Christmas Day, and New Year’s Eve digital greeting cards from December’s Month of Magical Moments.',
     description:
       'Glowing pine trees on Christmas Eve, crimson wreaths on Christmas Day, and champagne fireworks at midnight on New Year’s Eve.',
     poeticLine: 'End the year holding close the one who made it unforgettable.',

@@ -1,16 +1,27 @@
 import { Link } from 'react-router-dom'
 import { BLOG_ARTICLES, CARD_TEMPLATES, CATEGORIES, SPECIAL_COLLECTIONS } from '../data/catalog'
 import { LOVE_CALENDAR_MONTHS } from '../data/loveCalendar'
+import { buildCanonicalUrl } from '../config/siteConfig'
 import { Breadcrumbs } from '../components/Breadcrumbs'
 import { SeoHead } from '../components/SeoHead'
 
 export function SitemapPage() {
+  const sitemapBreadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: buildCanonicalUrl('/') },
+      { '@type': 'ListItem', position: 2, name: 'Sitemap', item: buildCanonicalUrl('/sitemap') },
+    ],
+  }
+
   return (
     <div className="paper-grain py-10 sm:py-16">
       <SeoHead
         title="Sitemap — Complete Site Directory"
-        description="Navigable index of all Vellum & Bloom greeting card occasions, collections, templates, stationery guides, and policy pages."
+        description="Navigable directory of Vellum & Bloom digital greeting card occasions, Love Calendar months, stationery guides, and policy pages."
         canonicalPath="/sitemap"
+        jsonLd={sitemapBreadcrumb}
       />
 
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-10">

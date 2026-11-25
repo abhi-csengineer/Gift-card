@@ -58,9 +58,17 @@ import {
 import { exportCardToImage } from '../utils/canvasExport'
 import { exportCardToPdf } from '../utils/pdfExport'
 import { useReducedMotionPref } from '../utils/reducedMotion'
+import { buildCanonicalUrl } from '../config/siteConfig'
 import { GreetingCardPreview } from '../components/GreetingCardPreview'
 import { SeoHead } from '../components/SeoHead'
 import { Toast, type ToastNotice } from '../components/Toast'
+
+function formatStudioSeoTitle(templateId: string | undefined, title: string): string {
+  if (!templateId) return 'Greeting Card Studio'
+  const candidate = `${title} Studio`
+  if (candidate.length <= 43) return candidate
+  return `${title.slice(0, 35).trimEnd()}… Studio`
+}
 
 const MAX_MESSAGE_CHARS = 420
 const MAX_HEADLINE_CHARS = 70
@@ -1391,12 +1399,48 @@ export function StudioPage() {
     </div>
   )
 
+  const isKnownTemplate = !templateId || CARD_TEMPLATES.some((t) => t.id === templateId)
+  const hasPersonalizedQuery = Boolean(
+    replyTo || replyFrom || milestoneParam || headlineParam || msgParam,
+  )
+  const studioSeoTitle = isKnownTemplate
+    ? formatStudioSeoTitle(templateId, activeTemplate.title)
+    : 'Card Design Not Found'
+  const studioSeoDesc = `Customize ${activeTemplate.title} for ${activeTemplate.occasion} with colors, fonts, and stickers, then share via WhatsApp or export a 2-page PDF or PNG.`
+  const normalizedStudioDesc =
+    studioSeoDesc.length > 160
+      ? 'Personalize this greeting card with custom colors, fonts, stickers, and wishes—then share via WhatsApp or download a 2-page PDF, PNG, or JPG.'
+      : studioSeoDesc.length < 120
+        ? `${studioSeoDesc} Free browser keepsake studio.`
+        : studioSeoDesc
+  const studioCanonical = templateId ? `/create/${activeTemplate.id}` : '/create'
+  const studioBreadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: buildCanonicalUrl('/') },
+      { '@type': 'ListItem', position: 2, name: 'Card Studio', item: buildCanonicalUrl('/create') },
+      ...(templateId && isKnownTemplate
+        ? [
+            {
+              '@type': 'ListItem',
+              position: 3,
+              name: activeTemplate.title,
+              item: buildCanonicalUrl(studioCanonical),
+            },
+          ]
+        : []),
+    ],
+  }
+
   return (
     <div className="paper-grain py-8 sm:py-12">
       <SeoHead
-        title={`Personalize ${activeTemplate.title} — ${activeTemplate.occasion} Card Studio`}
-        description={`Customize ${activeTemplate.title} (${activeTemplate.occasion}) with your own colors, calligraphy font, stickers, and message—then share via WhatsApp or PNG/JPG download.`}
-        canonicalPath={templateId ? `/create/${activeTemplate.id}` : '/create'}
+        title={studioSeoTitle}
+        description={normalizedStudioDesc}
+        canonicalPath={studioCanonical}
+        noIndex={!isKnownTemplate || hasPersonalizedQuery}
+        jsonLd={studioBreadcrumb}
       />
       <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
         {/* Top Studio Toolbar */}

@@ -4,5 +4,5 @@ Allow: /
 # Prevent indexing of private/personalized shared card links
 Disallow: /card/
 
-# Replace https://example.com with your live custom domain before deploying
-Sitemap: https://example.com/sitemap.xml
+# Updated automatically on build when VITE_SITE_URL is configured
+Sitemap: https://ais-dev-jswapgytnrecadehrmu3ff-838459179869.asia-east1.run.app/sitemap.xml

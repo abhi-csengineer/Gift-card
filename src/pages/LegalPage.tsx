@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ExternalLink, ShieldCheck, SlidersHorizontal } from 'lucide-react'
-import { ADSENSE_CONFIG, SITE_CONFIG } from '../config/siteConfig'
+import { ADSENSE_CONFIG, SITE_CONFIG, buildCanonicalUrl } from '../config/siteConfig'
 import { openPrivacySettings } from '../utils/consent'
 import { Breadcrumbs } from '../components/Breadcrumbs'
 import { SeoHead } from '../components/SeoHead'
@@ -38,9 +38,9 @@ function getLegalDocument(): Record<LegalKind, LegalDoc> {
   return {
     privacy: {
       title: 'Privacy Policy',
-      seoTitle: 'Privacy Policy — Local Storage, Sharing & Ad Disclosures',
+      seoTitle: 'Privacy Policy — Storage & Ad Disclosures',
       metaDescription:
-        'Learn how Vellum & Bloom handles local browser storage, URL-encoded greeting cards, optional Google AdSense advertising cookies, and your privacy rights.',
+        'Learn how Vellum & Bloom handles local browser storage, URL-encoded greeting cards, optional Google AdSense cookies, and your privacy rights.',
       canonicalPath: '/privacy',
       updated: SITE_CONFIG.lastPolicyUpdate,
       intro:
@@ -49,13 +49,13 @@ function getLegalDocument(): Record<LegalKind, LegalDoc> {
         {
           heading: '1. Information Processed & Local Browser Storage',
           paragraphs: [
-            'Vellum & Bloom does not require account registration and does not maintain a central user database storing your private greeting cards or personal drafts. When you customize a card, draft data, bookmarked template IDs, your light/dark theme preference, reduced-motion setting, and privacy consent choices are stored locally in your browser via LocalStorage.',
-            'Because drafts live in your browser’s LocalStorage, clearing your browser cache or site data permanently removes saved drafts on that device.',
+            'Vellum & Bloom does not require account registration and does not maintain a central user database storing your private greeting cards, personal milestones, or unpublished drafts. When you customize a card or add dates in Our Little Forever, draft data, milestone dates, bookmarked template IDs, your light/dark theme preference, reduced-motion setting, and privacy consent choices are stored locally in your browser via LocalStorage.',
+            'Because drafts and personal milestone dates live in your browser’s LocalStorage, clearing your browser cache or site data permanently removes them on that device.',
           ],
           bullets: [
-            'LocalStorage only: Card drafts, saved template IDs, theme mode, accessibility motion setting, and privacy consent status.',
-            'No hidden telemetry: We do not capture your keystrokes or upload unpublished card drafts to a backend server.',
-            'Canvas image exports: Downloading a PNG or JPG image renders completely on your own device using the HTML5 Canvas API.',
+            'LocalStorage only: Card drafts, personal milestone dates, saved template IDs, theme mode, accessibility motion setting, and privacy consent status.',
+            'No hidden telemetry: We do not capture your keystrokes or upload unpublished card drafts or personal relationship dates to a backend server.',
+            'Client-side exports: Downloading a 2-page PDF, PNG, or JPG renders completely on your own device in the browser.',
           ],
         },
         {
@@ -114,9 +114,9 @@ function getLegalDocument(): Record<LegalKind, LegalDoc> {
     },
     terms: {
       title: 'Terms and Conditions',
-      seoTitle: 'Terms and Conditions — Usage, Content & Non-Monetary Cards',
+      seoTitle: 'Terms & Conditions — Card Usage Rules',
       metaDescription:
-        'Terms governing acceptable use, user-authored greeting messages, intellectual property, prohibited content, and non-monetary card disclaimers on Vellum & Bloom.',
+        'Terms governing acceptable use, user-authored greeting messages, intellectual property, prohibited content, and non-monetary cards.',
       canonicalPath: '/terms',
       updated: SITE_CONFIG.lastPolicyUpdate,
       intro:
@@ -132,7 +132,7 @@ function getLegalDocument(): Record<LegalKind, LegalDoc> {
         {
           heading: '2. Acceptable Use & Permitted License',
           paragraphs: [
-            'You are granted a limited, non-exclusive, revocable license to customize templates, export PNG or JPG images, and share generated greeting links for personal, family, educational, and non-commercial celebratory communication.',
+            'You are granted a limited, non-exclusive, revocable license to customize templates, export 2-page PDF, PNG, or JPG files, and share generated greeting links for personal, family, educational, and non-commercial celebratory communication.',
           ],
         },
         {
@@ -184,7 +184,7 @@ function getLegalDocument(): Record<LegalKind, LegalDoc> {
     },
     disclaimer: {
       title: 'Disclaimer',
-      seoTitle: 'Disclaimer — Informational & Non-Monetary Keepsake Notice',
+      seoTitle: 'Disclaimer — Informational Card Notice',
       metaDescription:
         'Important disclaimers regarding non-monetary digital greeting cards, local browser storage, editorial writing inspiration, and external links.',
       canonicalPath: '/disclaimer',
@@ -221,7 +221,7 @@ function getLegalDocument(): Record<LegalKind, LegalDoc> {
     },
     cookies: {
       title: 'Cookie Policy',
-      seoTitle: 'Cookie Policy — Essential Storage & Advertising Disclosures',
+      seoTitle: 'Cookie Policy — Storage & Ad Disclosures',
       metaDescription:
         'Understand how Vellum & Bloom uses essential browser LocalStorage and optional Google AdSense advertising cookies when enabled.',
       canonicalPath: '/cookies',
@@ -239,6 +239,7 @@ function getLegalDocument(): Record<LegalKind, LegalDoc> {
             'color-scheme — Remembers whether you selected light or dark mode.',
             'vellum_bloom_reduced_motion_v1 — Stores your accessibility preference to minimize animations.',
             'vellum_bloom_drafts_v1 & vellum_bloom_favorites_v1 — Stores your card drafts and favorite templates locally.',
+            'vellum_bloom_personal_milestones_v1 — Stores personal milestone dates you add in Our Little Forever privately on your device.',
           ],
         },
         {
@@ -264,7 +265,7 @@ function getLegalDocument(): Record<LegalKind, LegalDoc> {
     },
     copyright: {
       title: 'Copyright Policy',
-      seoTitle: 'Copyright Policy — Template Artwork & User Rights',
+      seoTitle: 'Copyright Policy — Template & User Rights',
       metaDescription:
         'Intellectual property, original botanical artwork ownership, personal sharing rights, and copyright takedown procedures for Vellum & Bloom.',
       canonicalPath: '/copyright',
@@ -285,7 +286,7 @@ function getLegalDocument(): Record<LegalKind, LegalDoc> {
           ],
           bullets: [
             'Share unique greeting links with friends, partners, and family via WhatsApp, email, or messaging apps.',
-            'Download PNG or JPG exports for personal digital sharing or personal non-commercial printing.',
+            'Download 2-page PDF, PNG, or JPG exports for personal digital sharing or personal non-commercial printing.',
             'Adapt our sample birthday, thank-you, and anniversary wishes for your own personal greetings.',
           ],
         },
@@ -311,12 +312,22 @@ export function LegalPage({ kind }: LegalPageProps) {
   const docs = getLegalDocument()
   const doc = docs[kind]
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: buildCanonicalUrl('/') },
+      { '@type': 'ListItem', position: 2, name: doc.title, item: buildCanonicalUrl(doc.canonicalPath) },
+    ],
+  }
+
   return (
     <div className="paper-grain py-10 sm:py-16">
       <SeoHead
         title={doc.seoTitle}
         description={doc.metaDescription}
         canonicalPath={doc.canonicalPath}
+        jsonLd={breadcrumbSchema}
       />
 
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 space-y-8">

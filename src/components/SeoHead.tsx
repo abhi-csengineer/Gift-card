@@ -7,6 +7,8 @@ export interface SeoHeadProps {
   description: string
   canonicalPath?: string
   ogType?: 'website' | 'article'
+  ogImagePath?: string
+  ogImageAlt?: string
   noIndex?: boolean
   jsonLd?: Record<string, unknown> | Record<string, unknown>[]
 }
@@ -36,12 +38,15 @@ export function SeoHead({
   description,
   canonicalPath,
   ogType = 'website',
+  ogImagePath = SITE_CONFIG.socialImagePath,
+  ogImageAlt = 'Vellum & Bloom cream stationery envelope with wax seal and blush peony petals',
   noIndex = false,
   jsonLd,
 }: SeoHeadProps) {
   const { pathname } = useLocation()
   const resolvedPath = canonicalPath ?? pathname
   const canonicalUrl = buildCanonicalUrl(resolvedPath)
+  const resolvedImageUrl = buildCanonicalUrl(ogImagePath)
   const fullTitle = title.includes(SITE_CONFIG.brandName)
     ? title
     : `${title} | ${SITE_CONFIG.brandName}`
@@ -65,10 +70,14 @@ export function SeoHead({
     upsertMeta('meta[property="og:title"]', { property: 'og:title' }, fullTitle)
     upsertMeta('meta[property="og:description"]', { property: 'og:description' }, description)
     upsertMeta('meta[property="og:url"]', { property: 'og:url' }, canonicalUrl)
+    upsertMeta('meta[property="og:image"]', { property: 'og:image' }, resolvedImageUrl)
+    upsertMeta('meta[property="og:image:alt"]', { property: 'og:image:alt' }, ogImageAlt)
 
-    upsertMeta('meta[name="twitter:card"]', { name: 'twitter:card' }, 'summary')
+    upsertMeta('meta[name="twitter:card"]', { name: 'twitter:card' }, 'summary_large_image')
     upsertMeta('meta[name="twitter:title"]', { name: 'twitter:title' }, fullTitle)
     upsertMeta('meta[name="twitter:description"]', { name: 'twitter:description' }, description)
+    upsertMeta('meta[name="twitter:image"]', { name: 'twitter:image' }, resolvedImageUrl)
+    upsertMeta('meta[name="twitter:image:alt"]', { name: 'twitter:image:alt' }, ogImageAlt)
 
     // Remove previous route JSON-LD scripts cleanly
     document.head.querySelectorAll('script[data-seo-ld="true"]').forEach((node) => node.remove())
@@ -88,7 +97,7 @@ export function SeoHead({
     return () => {
       document.head.querySelectorAll('script[data-seo-ld="true"]').forEach((node) => node.remove())
     }
-  }, [canonicalUrl, description, fullTitle, noIndex, ogType, serializedLd])
+  }, [canonicalUrl, description, fullTitle, noIndex, ogImageAlt, ogType, resolvedImageUrl, serializedLd])
 
   return null
 }

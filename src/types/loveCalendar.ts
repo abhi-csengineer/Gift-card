@@ -64,6 +64,8 @@ export interface LoveCalendarMonth {
   collectionTitle: string
   seasonLabel: string
   description: string
+  seoTitle?: string
+  seoDescription?: string
   poeticLine: string
   accentColor: string
   softTintLight: string

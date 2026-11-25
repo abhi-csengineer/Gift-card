@@ -21,12 +21,18 @@ const resolvedContactEmail = isValidEmail(rawContactEmail)
 
 const resolvedLocation = rawLocation || DEFAULT_LOCATION_LABEL
 
+declare const __APP_URL__: string | undefined
+
+const runtimeDefaultOrigin =
+  typeof __APP_URL__ === 'string' ? __APP_URL__.trim().replace(/\/+$/, '') : ''
+
 export const SITE_CONFIG = {
   brandName: 'Vellum & Bloom',
   legalBrandLabel: 'Vellum & Bloom Digital Stationery',
-  tagline: 'Bespoke Digital Greeting Cards & Editorial Stationery',
+  tagline: 'Digital Greeting Cards & Editorial Stationery',
   description:
-    'Create, personalize, and share heartfelt digital greeting cards with original botanical artwork, refined typography, and instant envelope reveals.',
+    'Create, personalize, and share heartfelt digital greeting cards with original artwork, typography, envelope reveals, and PDF or PNG downloads.',
+  socialImagePath: '/og-card.jpg',
   lastPolicyUpdate: 'November 25, 2026',
   configuredOrigin: rawSiteUrl,
   hasConfiguredOrigin: Boolean(rawSiteUrl),
@@ -47,12 +53,13 @@ export function getCanonicalOrigin(): string {
   if (typeof window !== 'undefined' && window.location?.origin) {
     return window.location.origin
   }
-  return 'https://example.com'
+  return runtimeDefaultOrigin
 }
 
 export function buildCanonicalUrl(pathname: string): string {
   const cleanPath = pathname.startsWith('/') ? pathname : `/${pathname}`
-  return `${getCanonicalOrigin()}${cleanPath}`
+  const origin = getCanonicalOrigin()
+  return origin ? `${origin}${cleanPath}` : cleanPath
 }
 
 export const ADSENSE_CONFIG = {

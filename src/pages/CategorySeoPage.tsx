@@ -20,8 +20,8 @@ import { TemplateCard } from '../components/TemplateCard'
 export function CategorySeoPage() {
   const { categorySlug } = useParams<{ categorySlug?: string }>()
   const normalized = normalizeCategorySlug(categorySlug ?? null)
-  const category =
-    CATEGORIES.find((c) => c.slug === normalized) ?? CATEGORIES[0]
+  const matchedCategory = CATEGORIES.find((c) => c.slug === normalized)
+  const category = matchedCategory ?? CATEGORIES[0]
   const guide = CATEGORY_SEO_GUIDES[category.slug]
 
   const matchingTemplates = useMemo(
@@ -89,6 +89,54 @@ export function CategorySeoPage() {
     [category.name, category.slug, guide.metaDescription, guide.seoTitle],
   )
 
+  if (!matchedCategory) {
+    return (
+      <div className="paper-grain py-20 px-4 sm:px-6 lg:px-8">
+        <SeoHead
+          title="Occasion Guide Not Found"
+          description="Browse all sixteen digital greeting card occasion guides on Vellum & Bloom, from Birthdays and Anniversaries to Mother, Father, and Love."
+          noIndex
+        />
+        <div className="mx-auto max-w-2xl text-center space-y-6">
+          <p className="text-xs font-semibold tracking-[0.2em] uppercase" style={{ color: 'var(--accent-rose)' }}>
+            Occasions Directory
+          </p>
+          <h1 className="text-4xl sm:text-5xl font-semibold" style={{ color: 'var(--text-primary)' }}>
+            Occasion Guide Not Found
+          </h1>
+          <p className="text-sm sm:text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+            We could not find an occasion guide matching that address. Choose one of our 16 curated occasion collections below.
+          </p>
+          <div className="flex flex-wrap justify-center gap-2 pt-2">
+            {CATEGORIES.map((c) => (
+              <Link
+                key={c.slug}
+                to={`/occasions/${c.slug}`}
+                className="rounded-full border px-4 py-2 text-sm font-medium transition-colors hover:opacity-85"
+                style={{
+                  backgroundColor: 'var(--bg-surface)',
+                  borderColor: 'var(--border-subtle)',
+                  color: 'var(--text-primary)',
+                }}
+              >
+                {c.name}
+              </Link>
+            ))}
+          </div>
+          <div className="pt-2">
+            <Link
+              to="/occasions"
+              className="inline-flex items-center gap-2 rounded-full bg-[#472C42] px-6 py-3 text-sm font-semibold text-[#FFF9F3]"
+            >
+              <span>Browse All Occasions</span>
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="paper-grain py-10 sm:py-16">
       <SeoHead
@@ -131,6 +179,19 @@ export function CategorySeoPage() {
               <span>Filter in Gallery</span>
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
+            {(category.slug === 'valentines-day' ||
+              category.slug === 'girlfriend-boyfriend' ||
+              category.slug === 'husband-wife' ||
+              category.slug === 'anniversary') && (
+              <Link
+                to={category.slug === 'valentines-day' ? '/love-calendar/february' : '/love-calendar'}
+                className="inline-flex min-h-11 items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-semibold"
+                style={{ borderColor: 'var(--border-subtle)', color: 'var(--accent-rose)' }}
+              >
+                <span>Explore The Love Calendar</span>
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            )}
           </div>
         </div>
 

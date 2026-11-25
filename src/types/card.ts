@@ -233,6 +233,7 @@ export interface PersonalizedCard {
 export interface BlogArticle {
   slug: string
   title: string
+  seoTitle?: string
   category: string
   readTime: string
   publishedAt: string

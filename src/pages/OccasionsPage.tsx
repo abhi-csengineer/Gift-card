@@ -1,17 +1,50 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, Sparkles } from 'lucide-react'
 import { CARD_TEMPLATES, CATEGORIES, SPECIAL_COLLECTIONS } from '../data/catalog'
+import { buildCanonicalUrl } from '../config/siteConfig'
 import { Breadcrumbs } from '../components/Breadcrumbs'
 import { GreetingCardPreview } from '../components/GreetingCardPreview'
 import { SeoHead } from '../components/SeoHead'
 
 export function OccasionsPage() {
+  const occasionsSchemas = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'Occasions Directory — 16 Digital Greeting Card Categories',
+      description:
+        'Browse all 16 greeting card categories from Mom, Dad, Birthdays, and Anniversaries to Thank You, Festivals, Good Morning, and Just Because.',
+      url: buildCanonicalUrl('/occasions'),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Greeting Card Occasion Categories',
+      numberOfItems: CATEGORIES.length,
+      itemListElement: CATEGORIES.map((cat, idx) => ({
+        '@type': 'ListItem',
+        position: idx + 1,
+        name: cat.name,
+        url: buildCanonicalUrl(`/occasions/${cat.slug}`),
+      })),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: buildCanonicalUrl('/') },
+        { '@type': 'ListItem', position: 2, name: 'Occasions', item: buildCanonicalUrl('/occasions') },
+      ],
+    },
+  ]
+
   return (
     <div className="paper-grain py-10 sm:py-16">
       <SeoHead
-        title="Occasions Directory — Digital Cards for Every Moment"
+        title="Occasions Directory — 16 Card Themes"
         description="Browse all 16 greeting card categories from Mom, Dad, Birthdays, and Anniversaries to Thank You, Festivals, Good Morning, and Just Because."
         canonicalPath="/occasions"
+        jsonLd={occasionsSchemas}
       />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-16">
