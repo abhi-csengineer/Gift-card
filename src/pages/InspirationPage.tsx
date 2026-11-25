@@ -50,7 +50,7 @@ export function InspirationPage() {
         <div className="paper-grain py-20 px-4 sm:px-6 lg:px-8">
           <SeoHead
             title="Article Not Found — Stationery Journal"
-            description="Browse original birthday wishes, anniversary notes, and digital greeting card guides in the Vellum & Bloom Stationery Journal."
+            description="Browse original birthday wishes, anniversary notes, and digital greeting card guides in the Cardelle Stationery Journal."
             noIndex
           />
           <div className="mx-auto max-w-2xl text-center space-y-6">

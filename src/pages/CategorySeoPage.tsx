@@ -94,7 +94,7 @@ export function CategorySeoPage() {
       <div className="paper-grain py-20 px-4 sm:px-6 lg:px-8">
         <SeoHead
           title="Occasion Guide Not Found"
-          description="Browse all sixteen digital greeting card occasion guides on Vellum & Bloom, from Birthdays and Anniversaries to Mother, Father, and Love."
+          description="Browse all sixteen digital greeting card occasion guides on Cardelle, from Birthdays and Anniversaries to Mother, Father, and Love."
           noIndex
         />
         <div className="mx-auto max-w-2xl text-center space-y-6">

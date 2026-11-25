@@ -35,7 +35,7 @@ export function buildPdfFilename(card: PersonalizedCard): string {
     .replace(/['’]/g, '')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '')
-  return `vellum-and-bloom-${occasionSlug || 'greeting'}-card.pdf`
+  return `cardelle-${occasionSlug || 'greeting'}-card.pdf`
 }
 
 export function validateCardForPdf(card: PersonalizedCard | null | undefined): PersonalizedCard {
@@ -82,7 +82,7 @@ export async function buildCardPdfDocument(card: PersonalizedCard) {
   doc.setProperties({
     title: `${validCard.headline?.trim() || template.defaultHeadline} — For ${recipient}`,
     subject: `${template.occasion} Digital Greeting Card`,
-    creator: 'Vellum & Bloom',
+    creator: 'Cardelle',
   })
 
   const pageWidth = doc.internal.pageSize.getWidth()

@@ -365,7 +365,7 @@ export const SEO_ARTICLES: BlogArticle[] = [
     readTime: '4 min read',
     publishedAt: 'November 15, 2026',
     excerpt:
-      'Step-by-step guide to designing a custom digital card in Vellum & Bloom, adding animations, and sharing via WhatsApp or PDF.',
+      'Step-by-step guide to designing a custom digital card on Cardelle, adding animations, and sharing via WhatsApp or 2-page PDF.',
     coverMotif: 'ribbon-giftbox',
     coverPaletteId: 'warm-ivory',
     occasionSlug: 'congratulations',

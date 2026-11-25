@@ -749,14 +749,14 @@ export async function renderCardSideToCanvas(
     ctx.fillText(`For ${displayRecipient}`, anchorX, cursorY + 18 * unit, contentWidth)
     ctx.restore()
 
-    // 4. Bottom Vellum & Bloom ornament
+    // 4. Bottom Cardelle ornament
     ctx.save()
     ctx.fillStyle = textColor
     ctx.globalAlpha = 0.75
     ctx.font = `600 ${Math.round(18 * unit)}px "Plus Jakarta Sans", sans-serif`
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
-    const brandText = 'VELLUM & BLOOM'
+    const brandText = 'CARDELLE'
     const brandW = ctx.measureText(brandText).width
     ctx.fillText(brandText, width / 2, bottomFooterY)
     ctx.strokeStyle = palette.foil
@@ -1132,7 +1132,7 @@ export async function exportCardToImage(
   ctx.font = '600 24px "Cormorant Garamond", Georgia, serif'
   ctx.textBaseline = 'middle'
   ctx.fillText(
-    (card.sealText || template.sealInitial || 'V').slice(0, 2).toUpperCase(),
+    (card.sealText || template.sealInitial || 'C').slice(0, 2).toUpperCase(),
     width / 2,
     height - 95,
   )
@@ -1147,7 +1147,7 @@ export async function exportCardToImage(
   const dataUrl = canvas.toDataURL(mime, format === 'jpeg' ? 0.95 : undefined)
 
   const link = document.createElement('a')
-  link.download = `vellum-bloom-card-${slug || 'keepsake'}.${ext}`
+  link.download = `cardelle-card-${slug || 'keepsake'}.${ext}`
   link.href = dataUrl
   document.body.appendChild(link)
   link.click()

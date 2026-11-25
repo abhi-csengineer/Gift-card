@@ -109,9 +109,10 @@ export function Navbar() {
               }}
             >
               <svg viewBox="0 0 32 32" className="h-5 w-5" fill="none" aria-hidden="true">
-                <rect x="4" y="7" width="24" height="18" rx="3" stroke="#FFF9F3" strokeWidth="1.6" />
-                <path d="M5 9L16 17.5L27 9" stroke="#D9B77E" strokeWidth="1.6" strokeLinecap="round" />
-                <circle cx="16" cy="17.5" r="3.2" fill="#E9A6B5" />
+                <rect x="4" y="6.5" width="24" height="19" rx="3.2" stroke="#FFF9F3" strokeWidth="1.6" />
+                <path d="M5 9L16 17.2L27 9" stroke="#D9B77E" strokeWidth="1.6" strokeLinecap="round" />
+                <circle cx="16" cy="18" r="4" fill="#C86A80" stroke="#D9B77E" strokeWidth="1" />
+                <path d="M17.4 16.6C17 16.2 16.5 16 15.9 16C14.8 16 14 16.9 14 18C14 19.1 14.8 20 15.9 20C16.5 20 17 19.8 17.4 19.4" stroke="#FFF9F3" strokeWidth="1.15" strokeLinecap="round" />
               </svg>
             </span>
             <span className="flex flex-col leading-none">
@@ -119,10 +120,13 @@ export function Navbar() {
                 className="text-xl font-semibold tracking-tight sm:text-2xl"
                 style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}
               >
-                Vellum &amp; Bloom
+                Cardelle
               </span>
-              <span className="text-[0.65rem] font-medium tracking-[0.18em] uppercase" style={{ color: 'var(--accent-gold)' }}>
-                Digital Atelier
+              <span className="hidden sm:block text-[0.62rem] font-medium tracking-[0.14em] uppercase" style={{ color: 'var(--accent-gold)' }}>
+                Every Feeling Deserves a Card
+              </span>
+              <span className="sm:hidden text-[0.6rem] font-medium tracking-[0.16em] uppercase" style={{ color: 'var(--accent-gold)' }}>
+                Greeting Atelier
               </span>
             </span>
           </Link>

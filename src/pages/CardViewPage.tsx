@@ -65,7 +65,7 @@ export function CardViewPage() {
         id: 'sample',
         templateId: fallback.id,
         recipientName: 'Someone Wonderful',
-        senderName: 'Vellum & Bloom',
+        senderName: 'Cardelle',
         relationship: 'Dear Friend',
         headline: fallback.defaultHeadline,
         message: fallback.defaultMessage,
@@ -204,7 +204,7 @@ export function CardViewPage() {
     <div className="paper-grain py-12 sm:py-18">
       <SeoHead
         title="A Keepsake Card for You"
-        description="Open your personalized digital greeting card on Vellum & Bloom."
+        description="Open your personalized digital greeting card on Cardelle."
         noIndex
       />
       <div className="mx-auto max-w-3xl px-4 sm:px-6 text-center space-y-8">

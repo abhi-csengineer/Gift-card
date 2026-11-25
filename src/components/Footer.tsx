@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Heart, Mail, MapPin, SlidersHorizontal, Sparkles } from 'lucide-react'
+import { Heart, Mail, MapPin, SlidersHorizontal } from 'lucide-react'
 import { SITE_CONFIG } from '../config/siteConfig'
 import { openPrivacySettings } from '../utils/consent'
 
@@ -28,14 +28,24 @@ export function Footer() {
                   border: '1px solid rgba(217, 183, 126, 0.55)',
                 }}
               >
-                <Sparkles className="h-4 w-4 text-[#D9B77E]" aria-hidden="true" />
+                <svg viewBox="0 0 32 32" className="h-5 w-5" fill="none" aria-hidden="true">
+                  <rect x="4" y="6.5" width="24" height="19" rx="3.2" stroke="#FFF9F3" strokeWidth="1.6" />
+                  <path d="M5 9L16 17.2L27 9" stroke="#D9B77E" strokeWidth="1.6" strokeLinecap="round" />
+                  <circle cx="16" cy="18" r="4" fill="#C86A80" stroke="#D9B77E" strokeWidth="1" />
+                  <path d="M17.4 16.6C17 16.2 16.5 16 15.9 16C14.8 16 14 16.9 14 18C14 19.1 14.8 20 15.9 20C16.5 20 17 19.8 17.4 19.4" stroke="#FFF9F3" strokeWidth="1.15" strokeLinecap="round" />
+                </svg>
               </span>
-              <span className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
-                Vellum &amp; Bloom
+              <span className="flex flex-col leading-none">
+                <span className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
+                  Cardelle
+                </span>
+                <span className="text-[0.65rem] font-medium tracking-[0.14em] uppercase" style={{ color: 'var(--accent-gold)' }}>
+                  {SITE_CONFIG.tagline}
+                </span>
               </span>
             </Link>
             <p className="max-w-md text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-              An editorial digital stationery studio built for slow, thoughtful words. Craft bespoke digital greeting cards, seal them with warmth, and share keepsakes across any distance.
+              An international digital greeting-card studio built for thoughtful words. Craft bespoke keepsake cards, seal them with warmth, and share them seamlessly across borders.
             </p>
             <p className="max-w-md text-xs leading-relaxed" style={{ color: 'var(--text-muted)' }}>
               Digital greeting cards only—no monetary gift vouchers or stored cash value. Drafts stay locally in your browser.
@@ -55,7 +65,7 @@ export function Footer() {
             <div className="flex flex-wrap items-center gap-2.5 pt-1">
               <Link
                 to="/contact"
-                aria-label="Contact Vellum & Bloom"
+                aria-label="Contact Cardelle"
                 className="inline-flex h-10 items-center gap-2 rounded-full border px-4 text-xs font-medium transition-colors hover:opacity-85"
                 style={{ borderColor: 'var(--border-subtle)', color: 'var(--text-secondary)' }}
               >
@@ -120,7 +130,7 @@ export function Footer() {
           className="mt-12 flex flex-col items-center justify-between gap-4 border-t pt-6 text-xs sm:flex-row"
           style={{ borderColor: 'var(--border-subtle)', color: 'var(--text-muted)' }}
         >
-          <p>© {currentYear} Vellum &amp; Bloom Digital Stationery. All rights reserved.</p>
+          <p>© {currentYear} {SITE_CONFIG.legalBrandLabel}. All rights reserved.</p>
           <p className="inline-flex items-center gap-1.5">
             <span>Crafted with</span>
             <Heart className="h-3.5 w-3.5 text-[#E9A6B5] fill-[#E9A6B5]" aria-hidden="true" />

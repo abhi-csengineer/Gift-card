@@ -351,7 +351,7 @@ export function GreetingCardPreview({
           {!compact && (
             <div className="relative z-10 mt-2 flex items-center gap-2 self-center text-[0.68rem] tracking-[0.18em] uppercase opacity-75">
               <span className="inline-block h-px w-5" style={{ backgroundColor: palette.foil }} />
-              <span>Vellum &amp; Bloom</span>
+              <span>Cardelle</span>
               <span className="inline-block h-px w-5" style={{ backgroundColor: palette.foil }} />
             </div>
           )}

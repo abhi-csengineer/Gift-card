@@ -63,7 +63,7 @@ export function ConsentBanner() {
                 </p>
               </div>
               <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                Vellum &amp; Bloom stores your card drafts, favorites, and theme locally in your browser. Advertising cookies are{' '}
+                Cardelle stores your card drafts, favorites, and theme locally in your browser. Advertising cookies are{' '}
                 {ADSENSE_CONFIG.enabled ? 'optional and disabled unless you consent' : 'currently disabled on this site'}. Read our{' '}
                 <Link to="/privacy" className="underline font-medium" style={{ color: 'var(--text-primary)' }}>
                   Privacy Policy

@@ -1,8 +1,8 @@
-# Vellum & Bloom
+# Cardelle
 
-**Digital Greeting Cards, The Love Calendar & Editorial Keepsakes**
+**Every Feeling Deserves a Card.**
 
-Vellum & Bloom is a local-first editorial digital greeting card studio built with React, TypeScript, Vite, and Tailwind CSS. Users can browse original stationery templates, customize front covers and inside notes, celebrate romantic dates in **The Love Calendar**, track personal relationship milestones in **Our Little Forever**, export high-resolution **2-page PDF**, **PNG**, and **JPG** keepsakes, or share an interactive envelope-reveal link.
+Cardelle (`https://cardelle.online`) is a local-first editorial digital greeting-card platform built with React, TypeScript, Vite, and Tailwind CSS. Users can browse original stationery templates, customize front covers and inside notes, celebrate romantic dates in **The Love Calendar**, track personal relationship milestones in **Our Little Forever**, export high-resolution **2-page PDF**, **PNG**, and **JPG** keepsakes, or share an interactive envelope-reveal link.
 
 ---
 
@@ -64,11 +64,12 @@ Vellum & Bloom is a local-first editorial digital greeting card studio built wit
 ## Local-First Architecture & Privacy
 
 - **Zero Backend Account Database**: Card drafts, favorite templates, personal milestone dates, theme mode, reduced-motion preference, and consent choices are stored only in browser `LocalStorage`:
-  - `vellum_bloom_drafts_v1`
-  - `vellum_bloom_favorites_v1`
-  - `vellum_bloom_personal_milestones_v1`
-  - `vellum_bloom_consent_v1`
-  - `vellum_bloom_reduced_motion_v1`
+  - `cardelle_drafts_v1`
+  - `cardelle_favorites_v1`
+  - `cardelle_shared_v1`
+  - `cardelle_personal_milestones_v1`
+  - `cardelle_consent_v1`
+  - `cardelle_reduced_motion_v1`
   - `color-scheme`
 - **URL-Encoded Sharing**: Shareable greeting links encode card state inside the URL query string (`?d=...`). `/card/*` routes emit `noindex, nofollow` and are disallowed in `public/robots.txt`.
 - **Client-Side Exports**: PDF, PNG, and JPG files are generated entirely on the user’s device without uploading private text or images to a server.
@@ -82,7 +83,7 @@ Vellum & Bloom is a local-first editorial digital greeting card studio built wit
 ├── vite.config.ts              # Vite build config + runtime origin sync for sitemap/robots/index.html
 ├── .env.example                # Public VITE_* environment variable template
 ├── public/
-│   ├── favicon.svg             # Brand favicon
+│   ├── favicon.svg             # Cardelle wax-seal envelope monogram favicon
 │   ├── og-card.jpg             # Social OpenGraph/Twitter card image
 │   ├── robots.txt              # Crawler directives (disallows /card/)
 │   └── sitemap.xml             # Static XML sitemap (56 curated public URLs)
@@ -138,8 +139,8 @@ The development server runs at `http://localhost:3000` (configured on `0.0.0.0:3
 Copy `.env.example` to `.env` if overriding public configuration (never place secrets in `VITE_*` variables):
 
 ```env
-# Canonical production origin without trailing slash (e.g., https://yourdomain.com)
-VITE_SITE_URL=
+# Canonical production origin without trailing slash
+VITE_SITE_URL=https://cardelle.online
 
 # Public studio/support contact details displayed on Contact, Footer & Legal pages
 VITE_CONTACT_EMAIL=abhi.ytcreator01@gmail.com
@@ -153,11 +154,12 @@ VITE_ADSENSE_SLOT_EXPLORE=
 VITE_ADSENSE_SLOT_ARTICLE=
 ```
 
-When `VITE_SITE_URL` is provided at build time, `vite.config.ts` automatically rewrites canonical/sitemap origins in `dist/sitemap.xml`, `dist/robots.txt`, and `dist/index.html`.
+When `VITE_SITE_URL` is overridden at build time, `vite.config.ts` automatically rewrites canonical/sitemap origins in `dist/sitemap.xml`, `dist/robots.txt`, and `dist/index.html`.
 
 ---
 
 ## Contact
 
+- **Website**: `https://cardelle.online`
 - **Email**: `abhi.ytcreator01@gmail.com`
 - **Location**: Rupaspur, Bihar 801503, India

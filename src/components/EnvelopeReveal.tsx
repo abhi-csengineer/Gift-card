@@ -116,7 +116,7 @@ export function EnvelopeReveal({
                   fontFamily: 'var(--font-display)',
                 }}
               >
-                {(card.sealText || 'V').slice(0, 2).toUpperCase()}
+                {(card.sealText || 'C').slice(0, 2).toUpperCase()}
               </motion.div>
 
               <div className="space-y-1.5 text-[#FFF9F3]">

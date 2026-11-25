@@ -1,3 +1,4 @@
+const DEFAULT_SITE_URL = 'https://cardelle.online'
 const DEFAULT_CONTACT_EMAIL = 'abhi.ytcreator01@gmail.com'
 const DEFAULT_LOCATION_LABEL = 'Rupaspur, Bihar 801503, India'
 
@@ -24,14 +25,16 @@ const resolvedLocation = rawLocation || DEFAULT_LOCATION_LABEL
 declare const __APP_URL__: string | undefined
 
 const runtimeDefaultOrigin =
-  typeof __APP_URL__ === 'string' ? __APP_URL__.trim().replace(/\/+$/, '') : ''
+  typeof __APP_URL__ === 'string' && __APP_URL__.trim()
+    ? __APP_URL__.trim().replace(/\/+$/, '')
+    : DEFAULT_SITE_URL
 
 export const SITE_CONFIG = {
-  brandName: 'Vellum & Bloom',
-  legalBrandLabel: 'Vellum & Bloom Digital Stationery',
-  tagline: 'Digital Greeting Cards & Editorial Stationery',
+  brandName: 'Cardelle',
+  legalBrandLabel: 'Cardelle Digital Stationery',
+  tagline: 'Every Feeling Deserves a Card.',
   description:
-    'Create, personalize, and share heartfelt digital greeting cards with original artwork, typography, envelope reveals, and PDF or PNG downloads.',
+    'Every feeling deserves a card. Create, personalize, and share elegant digital greeting cards with envelope reveals, 2-page PDF, and PNG exports.',
   socialImagePath: '/og-card.jpg',
   lastPolicyUpdate: 'November 25, 2026',
   configuredOrigin: rawSiteUrl,
@@ -49,9 +52,6 @@ export const SITE_CONFIG = {
 export function getCanonicalOrigin(): string {
   if (SITE_CONFIG.configuredOrigin) {
     return SITE_CONFIG.configuredOrigin
-  }
-  if (typeof window !== 'undefined' && window.location?.origin) {
-    return window.location.origin
   }
   return runtimeDefaultOrigin
 }

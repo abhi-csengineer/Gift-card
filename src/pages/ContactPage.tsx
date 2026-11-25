@@ -20,7 +20,7 @@ export function ContactPage() {
     const cleanName = sanitizeTextInput(name.trim(), 80)
     const cleanEmail = sanitizeTextInput(email.trim(), 120)
     const cleanMessage = sanitizeTextInput(message.trim(), 1200)
-    const subject = `[Vellum & Bloom] ${topic} from ${cleanName}`
+    const subject = `[Cardelle] ${topic} from ${cleanName}`
     const body = `Name: ${cleanName}\nReply Email: ${cleanEmail}\nTopic: ${topic}\n\n${cleanMessage}`
     return `mailto:${SITE_CONFIG.contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
   }
@@ -53,9 +53,9 @@ export function ContactPage() {
     {
       '@context': 'https://schema.org',
       '@type': 'ContactPage',
-      name: 'Contact Vellum & Bloom Digital Stationery',
+      name: 'Contact Cardelle Digital Stationery',
       description:
-        'Get in touch with Vellum & Bloom in Rupaspur, Bihar, India for custom greeting card requests, feedback, privacy inquiries, or copyright notices.',
+        'Get in touch with Cardelle in Rupaspur, Bihar, India for custom greeting card requests, feedback, privacy inquiries, or copyright notices.',
       url: buildCanonicalUrl('/contact'),
     },
     {
@@ -71,8 +71,8 @@ export function ContactPage() {
   return (
     <div className="paper-grain py-10 sm:py-16">
       <SeoHead
-        title="Contact Us — Vellum & Bloom Studio"
-        description="Get in touch with Vellum & Bloom in Rupaspur, Bihar, India for custom greeting card requests, feedback, privacy inquiries, or copyright notices."
+        title="Contact Cardelle — Support & Requests"
+        description="Get in touch with Cardelle in Rupaspur, Bihar, India for custom greeting card requests, feedback, privacy inquiries, or copyright notices."
         canonicalPath="/contact"
         jsonLd={contactSchemas}
       />
@@ -125,7 +125,7 @@ export function ContactPage() {
                   Thank You, {name.trim()}
                 </h2>
                 <p className="mx-auto max-w-md text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                  Your “{topic}” email draft for {SITE_CONFIG.contactEmail} is ready. Because Vellum &amp; Bloom runs in your browser without storing messages on a mail server, click “Open in Email App” below to send it directly.
+                  Your “{topic}” email draft for {SITE_CONFIG.contactEmail} is ready. Because Cardelle runs in your browser without storing messages on a mail server, click “Open in Email App” below to send it directly.
                 </p>
                 <div className="flex flex-wrap justify-center gap-3 pt-2">
                   <a

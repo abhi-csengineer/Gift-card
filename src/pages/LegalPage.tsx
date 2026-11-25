@@ -40,16 +40,16 @@ function getLegalDocument(): Record<LegalKind, LegalDoc> {
       title: 'Privacy Policy',
       seoTitle: 'Privacy Policy — Storage & Ad Disclosures',
       metaDescription:
-        'Learn how Vellum & Bloom handles local browser storage, URL-encoded greeting cards, optional Google AdSense cookies, and your privacy rights.',
+        'Learn how Cardelle handles local browser storage, URL-encoded greeting cards, optional Google AdSense cookies, and your privacy rights.',
       canonicalPath: '/privacy',
       updated: SITE_CONFIG.lastPolicyUpdate,
       intro:
-        'Vellum & Bloom is built with a transparent, local-first architecture. This Privacy Policy explains accurately what happens inside your browser, how shared greeting links work, and how optional third-party advertising services behave if enabled.',
+        'Cardelle is built with a transparent, local-first architecture. This Privacy Policy explains accurately what happens inside your browser, how shared greeting links work, and how optional third-party advertising services behave if enabled.',
       sections: [
         {
           heading: '1. Information Processed & Local Browser Storage',
           paragraphs: [
-            'Vellum & Bloom does not require account registration and does not maintain a central user database storing your private greeting cards, personal milestones, or unpublished drafts. When you customize a card or add dates in Our Little Forever, draft data, milestone dates, bookmarked template IDs, your light/dark theme preference, reduced-motion setting, and privacy consent choices are stored locally in your browser via LocalStorage.',
+            'Cardelle does not require account registration and does not maintain a central user database storing your private greeting cards, personal milestones, or unpublished drafts. When you customize a card or add dates in Our Little Forever, draft data, milestone dates, bookmarked template IDs, your light/dark theme preference, reduced-motion setting, and privacy consent choices are stored locally in your browser via LocalStorage.',
             'Because drafts and personal milestone dates live in your browser’s LocalStorage, clearing your browser cache or site data permanently removes them on that device.',
           ],
           bullets: [
@@ -100,14 +100,14 @@ function getLegalDocument(): Record<LegalKind, LegalDoc> {
         {
           heading: '7. Children’s Privacy & Policy Updates',
           paragraphs: [
-            'Vellum & Bloom is intended for a general audience and does not knowingly collect personal information from children under 13 (or applicable regional age thresholds). We may update this Privacy Policy as features evolve; any updates will reflect a revised “Last updated” date at the top of this page.',
+            'Cardelle is intended for a general audience and does not knowingly collect personal information from children under 13 (or applicable regional age thresholds). We may update this Privacy Policy as features evolve; any updates will reflect a revised “Last updated” date at the top of this page.',
           ],
         },
         {
           heading: '8. Contact Details & Professional Review Notice',
           paragraphs: [
             contactText,
-            'Notice: This template policy accurately describes the technical architecture of Vellum & Bloom, but neither it nor any banner alone guarantees legal compliance in every jurisdiction. Have a qualified legal professional review your final contact, business, and regional disclosures prior to commercial launch.',
+            'Notice: This template policy accurately describes the technical architecture of Cardelle, but neither it nor any banner alone guarantees legal compliance in every jurisdiction. Have a qualified legal professional review your final contact, business, and regional disclosures prior to commercial launch.',
           ],
         },
       ],
@@ -120,12 +120,12 @@ function getLegalDocument(): Record<LegalKind, LegalDoc> {
       canonicalPath: '/terms',
       updated: SITE_CONFIG.lastPolicyUpdate,
       intro:
-        'By accessing or using Vellum & Bloom, you agree to these Terms and Conditions. Please read them carefully before creating, downloading, or sharing digital greeting cards.',
+        'By accessing or using Cardelle, you agree to these Terms and Conditions. Please read them carefully before creating, downloading, or sharing digital greeting cards.',
       sections: [
         {
           heading: '1. Digital Greeting Cards Only (Not Monetary Gift Cards)',
           paragraphs: [
-            'Vellum & Bloom provides bespoke digital greeting cards, celebratory stationery templates, and personal keepsake notes. Unless a verified, regulated payment-based voucher service is explicitly added and disclosed in the future, cards created on this platform carry zero monetary value, are not prepaid cash cards, and cannot be redeemed as financial gift vouchers.',
+            'Cardelle provides bespoke digital greeting cards, celebratory stationery templates, and personal keepsake notes. Unless a verified, regulated payment-based voucher service is explicitly added and disclosed in the future, cards created on this platform carry zero monetary value, are not prepaid cash cards, and cannot be redeemed as financial gift vouchers.',
             'Optional “Gift Note” text entered by a sender represents solely an informal personal gesture between sender and recipient.',
           ],
         },
@@ -138,13 +138,13 @@ function getLegalDocument(): Record<LegalKind, LegalDoc> {
         {
           heading: '3. User-Generated Content & Sender Responsibility',
           paragraphs: [
-            'You are solely responsible for the names, headlines, messages, stickers, and notes you enter into any card or share with recipients. Because shareable card payloads are encoded directly in your link and rendered on the recipient’s device, Vellum & Bloom does not pre-screen or moderate private greeting text.',
+            'You are solely responsible for the names, headlines, messages, stickers, and notes you enter into any card or share with recipients. Because shareable card payloads are encoded directly in your link and rendered on the recipient’s device, Cardelle does not pre-screen or moderate private greeting text.',
           ],
         },
         {
           heading: '4. Prohibited Content & Abuse Prevention',
           paragraphs: [
-            'You agree not to use Vellum & Bloom to compose, encode, download, or distribute:',
+            'You agree not to use Cardelle to compose, encode, download, or distribute:',
           ],
           bullets: [
             'Harassing, threatening, defamatory, hateful, obscene, or abusive messages.',
@@ -156,20 +156,20 @@ function getLegalDocument(): Record<LegalKind, LegalDoc> {
         {
           heading: '5. Intellectual Property Rights',
           paragraphs: [
-            'All original botanical illustrations, SVG motifs, border patterns, layout compositions, editorial articles, and brand marks on Vellum & Bloom remain the intellectual property of the site owner and are protected under applicable copyright laws. You may not resell, redistribute, or package our templates as your own competing card platform or template marketplace product.',
+            'All original botanical illustrations, SVG motifs, border patterns, layout compositions, editorial articles, and brand marks on Cardelle remain the intellectual property of the site owner and are protected under applicable copyright laws. You may not resell, redistribute, or package our templates as your own competing card platform or template marketplace product.',
           ],
         },
         {
           heading: '6. External Links & Third-Party Services',
           paragraphs: [
-            'Links to third-party platforms (such as WhatsApp sharing handoffs or external privacy opt-out pages) are provided for convenience. Vellum & Bloom does not control and is not responsible for the content, availability, or privacy practices of third-party websites.',
+            'Links to third-party platforms (such as WhatsApp sharing handoffs or external privacy opt-out pages) are provided for convenience. Cardelle does not control and is not responsible for the content, availability, or privacy practices of third-party websites.',
           ],
         },
         {
           heading: '7. Service Availability & Limitation of Liability',
           paragraphs: [
-            'Vellum & Bloom is provided on an “as is” and “as available” basis without warranties of uninterrupted availability or permanent draft retention. Because drafts rely on browser LocalStorage and links rely on intact URL parameters, we are not liable for lost drafts or truncated messaging-app URLs.',
-            'To the maximum extent permitted by applicable law, Vellum & Bloom and its operators shall not be liable for any indirect, incidental, consequential, or special damages arising from your use of the site or user-generated card links.',
+            'Cardelle is provided on an “as is” and “as available” basis without warranties of uninterrupted availability or permanent draft retention. Because drafts rely on browser LocalStorage and links rely on intact URL parameters, we are not liable for lost drafts or truncated messaging-app URLs.',
+            'To the maximum extent permitted by applicable law, Cardelle and its operators shall not be liable for any indirect, incidental, consequential, or special damages arising from your use of the site or user-generated card links.',
           ],
         },
         {
@@ -190,12 +190,12 @@ function getLegalDocument(): Record<LegalKind, LegalDoc> {
       canonicalPath: '/disclaimer',
       updated: SITE_CONFIG.lastPolicyUpdate,
       intro:
-        'This Disclaimer clarifies the scope, technical limits, and editorial intent of Vellum & Bloom.',
+        'This Disclaimer clarifies the scope, technical limits, and editorial intent of Cardelle.',
       sections: [
         {
           heading: '1. No Monetary Value or Financial Guarantee',
           paragraphs: [
-            'All cards designed on Vellum & Bloom are strictly non-monetary digital greeting cards. Even where a user enters an optional “Gift Note” (for example, promising dinner or coffee), Vellum & Bloom does not process payments, verify promises, hold funds, or issue redeemable financial gift cards.',
+            'All cards designed on Cardelle are strictly non-monetary digital greeting cards. Even where a user enters an optional “Gift Note” (for example, promising dinner or coffee), Cardelle does not process payments, verify promises, hold funds, or issue redeemable financial gift cards.',
           ],
         },
         {
@@ -213,7 +213,7 @@ function getLegalDocument(): Record<LegalKind, LegalDoc> {
         {
           heading: '4. External Links & Advertising Notice',
           paragraphs: [
-            'Outbound links to external services or advertising settings are offered as helpful references. If Google AdSense is enabled by the site owner on eligible content pages, advertisements are served automatically by third-party ad networks and do not constitute an endorsement by Vellum & Bloom.',
+            'Outbound links to external services or advertising settings are offered as helpful references. If Google AdSense is enabled by the site owner on eligible content pages, advertisements are served automatically by third-party ad networks and do not constitute an endorsement by Cardelle.',
             'Nothing on this website constitutes legal advice, and no guarantee of regulatory compliance or third-party program approval is implied.',
           ],
         },
@@ -223,23 +223,23 @@ function getLegalDocument(): Record<LegalKind, LegalDoc> {
       title: 'Cookie Policy',
       seoTitle: 'Cookie Policy — Storage & Ad Disclosures',
       metaDescription:
-        'Understand how Vellum & Bloom uses essential browser LocalStorage and optional Google AdSense advertising cookies when enabled.',
+        'Understand how Cardelle uses essential browser LocalStorage and optional Google AdSense advertising cookies when enabled.',
       canonicalPath: '/cookies',
       updated: SITE_CONFIG.lastPolicyUpdate,
       intro:
-        'This Cookie Policy explains how Vellum & Bloom uses browser storage technologies and how advertising cookies apply if monetization is enabled.',
+        'This Cookie Policy explains how Cardelle uses browser storage technologies and how advertising cookies apply if monetization is enabled.',
       sections: [
         {
           heading: '1. Essential & Preference LocalStorage Used Today',
           paragraphs: [
-            'Unlike traditional websites that set invasive tracking cookies, Vellum & Bloom relies on browser LocalStorage for core interactive features. These entries remain on your device and are not sent to our servers:',
+            'Unlike traditional websites that set invasive tracking cookies, Cardelle relies on browser LocalStorage for core interactive features. These entries remain on your device and are not sent to our servers:',
           ],
           bullets: [
-            'vellum_bloom_consent_v1 — Records your privacy banner choice and granular storage preferences.',
+            'cardelle_consent_v1 — Records your privacy banner choice and granular storage preferences.',
             'color-scheme — Remembers whether you selected light or dark mode.',
-            'vellum_bloom_reduced_motion_v1 — Stores your accessibility preference to minimize animations.',
-            'vellum_bloom_drafts_v1 & vellum_bloom_favorites_v1 — Stores your card drafts and favorite templates locally.',
-            'vellum_bloom_personal_milestones_v1 — Stores personal milestone dates you add in Our Little Forever privately on your device.',
+            'cardelle_reduced_motion_v1 — Stores your accessibility preference to minimize animations.',
+            'cardelle_drafts_v1 & cardelle_favorites_v1 — Stores your card drafts and favorite templates locally.',
+            'cardelle_personal_milestones_v1 — Stores personal milestone dates you add in Our Little Forever privately on your device.',
           ],
         },
         {
@@ -267,22 +267,22 @@ function getLegalDocument(): Record<LegalKind, LegalDoc> {
       title: 'Copyright Policy',
       seoTitle: 'Copyright Policy — Template & User Rights',
       metaDescription:
-        'Intellectual property, original botanical artwork ownership, personal sharing rights, and copyright takedown procedures for Vellum & Bloom.',
+        'Intellectual property, original botanical artwork ownership, personal sharing rights, and copyright takedown procedures for Cardelle.',
       canonicalPath: '/copyright',
       updated: SITE_CONFIG.lastPolicyUpdate,
       intro:
-        'Vellum & Bloom respects original creative craft—both our own bespoke stationery illustrations and the rights of creators everywhere.',
+        'Cardelle respects original creative craft—both our own bespoke stationery illustrations and the rights of creators everywhere.',
       sections: [
         {
           heading: '1. Original Templates, Artwork & Editorial Content',
           paragraphs: [
-            'All card templates, vector botanical motifs, decorative frames, color palettes, site design, and written Stationery Journal articles published on Vellum & Bloom are original works owned by Vellum & Bloom and protected under copyright law.',
+            'All card templates, vector botanical motifs, decorative frames, color palettes, site design, and written Stationery Journal articles published on Cardelle are original works owned by Cardelle and protected under copyright law.',
           ],
         },
         {
           heading: '2. Permitted Personal Use by Senders & Recipients',
           paragraphs: [
-            'When you personalize a card on Vellum & Bloom, you are welcome to:',
+            'When you personalize a card on Cardelle, you are welcome to:',
           ],
           bullets: [
             'Share unique greeting links with friends, partners, and family via WhatsApp, email, or messaging apps.',
@@ -293,13 +293,13 @@ function getLegalDocument(): Record<LegalKind, LegalDoc> {
         {
           heading: '3. Commercial & Redistribution Restrictions',
           paragraphs: [
-            'You may not scrape, bulk-download, repackage, resell, sublicense, or redistribute Vellum & Bloom card designs, SVG illustrations, or written articles as standalone stock graphics, printable packs for sale, or competing greeting card templates without explicit written permission.',
+            'You may not scrape, bulk-download, repackage, resell, sublicense, or redistribute Cardelle card designs, SVG illustrations, or written articles as standalone stock graphics, printable packs for sale, or competing greeting card templates without explicit written permission.',
           ],
         },
         {
           heading: '4. User-Entered Content & Takedown Inquiries',
           paragraphs: [
-            'Users remain responsible for ensuring that custom text they compose and share does not infringe third-party copyrights or trademarks. Because shared card payloads reside inside user-distributed URLs rather than a public server gallery, Vellum & Bloom does not host a searchable repository of user cards.',
+            'Users remain responsible for ensuring that custom text they compose and share does not infringe third-party copyrights or trademarks. Because shared card payloads reside inside user-distributed URLs rather than a public server gallery, Cardelle does not host a searchable repository of user cards.',
             `If you believe any site-authored asset or article on this domain raises an intellectual property concern, please send a detailed notice identifying the specific URL and ownership claim: ${contactText}`,
           ],
         },

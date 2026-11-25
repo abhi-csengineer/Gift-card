@@ -18,8 +18,8 @@ export function SitemapPage() {
   return (
     <div className="paper-grain py-10 sm:py-16">
       <SeoHead
-        title="Sitemap — Complete Site Directory"
-        description="Navigable directory of Vellum & Bloom digital greeting card occasions, Love Calendar months, stationery guides, and policy pages."
+        title="HTML Sitemap — Cardelle Directory"
+        description="Navigable directory of Cardelle digital greeting card occasions, Love Calendar months, stationery guides, and policy pages."
         canonicalPath="/sitemap"
         jsonLd={sitemapBreadcrumb}
       />
@@ -34,7 +34,7 @@ export function SitemapPage() {
             Sitemap
           </h1>
           <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-            Complete navigable index of Vellum &amp; Bloom pages, occasion guides, collections, card templates, and stationery articles.
+            Complete navigable index of Cardelle pages, occasion guides, collections, card templates, and stationery articles.
           </p>
         </div>
 

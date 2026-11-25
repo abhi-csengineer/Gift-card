@@ -39,7 +39,7 @@ export function SeoHead({
   canonicalPath,
   ogType = 'website',
   ogImagePath = SITE_CONFIG.socialImagePath,
-  ogImageAlt = 'Vellum & Bloom cream stationery envelope with wax seal and blush peony petals',
+  ogImageAlt = 'Cardelle cream stationery envelope with wax seal and blush peony petals',
   noIndex = false,
   jsonLd,
 }: SeoHeadProps) {

@@ -6,7 +6,8 @@ import type {
 } from '../types/loveCalendar'
 import { sanitizeTextInput } from '../utils/cardStorage'
 
-const PERSONAL_MILESTONES_STORAGE_KEY = 'vellum_bloom_personal_milestones_v1'
+const PERSONAL_MILESTONES_STORAGE_KEY = 'cardelle_personal_milestones_v1'
+const LEGACY_PERSONAL_MILESTONES_STORAGE_KEY = 'vellum_bloom_personal_milestones_v1'
 const MS_PER_DAY = 86_400_000
 
 const FULL_MONTH_NAMES = [
@@ -757,7 +758,9 @@ const VALID_MILESTONE_TYPE_SET = new Set<string>(PERSONAL_MILESTONE_TYPES.map((t
 
 export function loadPersonalMilestones(): SavedPersonalMilestone[] {
   try {
-    const raw = localStorage.getItem(PERSONAL_MILESTONES_STORAGE_KEY)
+    const raw =
+      localStorage.getItem(PERSONAL_MILESTONES_STORAGE_KEY) ??
+      localStorage.getItem(LEGACY_PERSONAL_MILESTONES_STORAGE_KEY)
     if (!raw) return []
     const parsed = JSON.parse(raw)
     if (!Array.isArray(parsed)) return []

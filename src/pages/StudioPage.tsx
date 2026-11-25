@@ -66,8 +66,12 @@ import { Toast, type ToastNotice } from '../components/Toast'
 function formatStudioSeoTitle(templateId: string | undefined, title: string): string {
   if (!templateId) return 'Greeting Card Studio'
   const candidate = `${title} Studio`
-  if (candidate.length <= 43) return candidate
-  return `${title.slice(0, 35).trimEnd()}… Studio`
+  if (candidate.length < 19) {
+    const expanded = `Customize ${title} Card`
+    if (expanded.length <= 49) return expanded
+  }
+  if (candidate.length <= 49) return candidate
+  return `${title.slice(0, 41).trimEnd()}… Studio`
 }
 
 const MAX_MESSAGE_CHARS = 420
@@ -332,7 +336,7 @@ export function StudioPage() {
     if (!shareMeta?.url || !('share' in navigator)) return
     try {
       await navigator.share({
-        title: `A card for ${card.recipientName || 'you'} from Vellum & Bloom`,
+        title: `A card for ${card.recipientName || 'you'} from Cardelle`,
         text: "I've created something special for you! Open your card here:",
         url: shareMeta.url,
       })

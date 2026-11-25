@@ -141,7 +141,7 @@ export function HomePage() {
   return (
     <div className="paper-grain">
       <SeoHead
-        title="Vellum & Bloom — Digital Greeting Cards & Keepsakes"
+        title="Cardelle — Every Feeling Deserves a Card"
         description={SITE_CONFIG.description}
         canonicalPath="/"
         jsonLd={homeSchemas}
@@ -167,7 +167,7 @@ export function HomePage() {
                 }}
               >
                 <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
-                <span>Curated Digital Greeting Atelier</span>
+                <span>Cardelle · Every Feeling Deserves a Card</span>
               </div>
 
               <h1
@@ -184,7 +184,7 @@ export function HomePage() {
                 className="max-w-xl text-base sm:text-lg leading-relaxed"
                 style={{ color: 'var(--text-secondary)' }}
               >
-                Turn your feelings into beautiful digital cards. Create, personalize and send a little happiness to someone you love.
+                Every feeling deserves a card. Personalize editorial digital greeting cards and send a warm keepsake to someone you love—anywhere in the world.
               </p>
 
               <div className="flex flex-wrap items-center gap-3.5 pt-2">
@@ -589,7 +589,7 @@ export function HomePage() {
                     “To be remembered gently, in your own handwriting of thought, is one of life’s quietest luxuries.”
                   </blockquote>
                   <p className="text-xs tracking-[0.18em] uppercase text-[#D9B77E]">
-                    Vellum &amp; Bloom Manifesto
+                    The Cardelle Manifesto
                   </p>
                 </div>
               </div>

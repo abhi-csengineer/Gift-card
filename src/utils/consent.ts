@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { ADSENSE_CONFIG } from '../config/siteConfig'
 
-const CONSENT_STORAGE_KEY = 'vellum_bloom_consent_v1'
-const CONSENT_CHANGE_EVENT = 'vb:consent-changed'
-const CONSENT_MODAL_EVENT = 'vb:open-privacy-settings'
+const CONSENT_STORAGE_KEY = 'cardelle_consent_v1'
+const LEGACY_CONSENT_STORAGE_KEY = 'vellum_bloom_consent_v1'
+const CONSENT_CHANGE_EVENT = 'cardelle:consent-changed'
+const CONSENT_MODAL_EVENT = 'cardelle:open-privacy-settings'
 
 export interface ConsentState {
   decided: boolean
@@ -24,7 +25,9 @@ const DEFAULT_CONSENT: ConsentState = {
 export function loadConsent(): ConsentState {
   if (typeof window === 'undefined') return DEFAULT_CONSENT
   try {
-    const raw = window.localStorage.getItem(CONSENT_STORAGE_KEY)
+    const raw =
+      window.localStorage.getItem(CONSENT_STORAGE_KEY) ??
+      window.localStorage.getItem(LEGACY_CONSENT_STORAGE_KEY)
     if (!raw) return DEFAULT_CONSENT
     const parsed = JSON.parse(raw) as Partial<ConsentState>
     return {

@@ -19,9 +19,12 @@ import type {
   StickerId,
 } from '../types/card'
 
-const DRAFTS_KEY = 'vellum_bloom_drafts_v1'
-const FAVORITES_KEY = 'vellum_bloom_favorites_v1'
-const SHARED_CARDS_KEY = 'vellum_bloom_shared_v1'
+const DRAFTS_KEY = 'cardelle_drafts_v1'
+const FAVORITES_KEY = 'cardelle_favorites_v1'
+const SHARED_CARDS_KEY = 'cardelle_shared_v1'
+const LEGACY_DRAFTS_KEY = 'vellum_bloom_drafts_v1'
+const LEGACY_FAVORITES_KEY = 'vellum_bloom_favorites_v1'
+const LEGACY_SHARED_CARDS_KEY = 'vellum_bloom_shared_v1'
 
 export const MAX_SAFE_URL_LENGTH = 1900
 export const MAX_ENCODED_PAYLOAD_LENGTH = 8192
@@ -64,7 +67,7 @@ export function isSafeHttpUrl(url: string): boolean {
 
 export function loadDrafts(): PersonalizedCard[] {
   try {
-    const raw = localStorage.getItem(DRAFTS_KEY)
+    const raw = localStorage.getItem(DRAFTS_KEY) ?? localStorage.getItem(LEGACY_DRAFTS_KEY)
     if (!raw) return []
     const parsed = JSON.parse(raw)
     return Array.isArray(parsed) ? (parsed as PersonalizedCard[]) : []
@@ -96,7 +99,7 @@ export function deleteDraft(id: string): PersonalizedCard[] {
 
 export function saveSharedCardLocally(shortId: string, card: PersonalizedCard): void {
   try {
-    const raw = localStorage.getItem(SHARED_CARDS_KEY)
+    const raw = localStorage.getItem(SHARED_CARDS_KEY) ?? localStorage.getItem(LEGACY_SHARED_CARDS_KEY)
     const map: Record<string, PersonalizedCard> = raw ? JSON.parse(raw) : {}
     map[shortId] = { ...card, updatedAt: new Date().toISOString() }
     const keys = Object.keys(map)
@@ -111,14 +114,14 @@ export function saveSharedCardLocally(shortId: string, card: PersonalizedCard): 
 
 export function findLocalCardById(cardId: string): PersonalizedCard | null {
   try {
-    if (!/^vb-[a-z0-9]{4,12}$/.test(cardId) && !/^draft-\d+$/.test(cardId)) {
+    if (!/^(?:cd|vb)-[a-z0-9]{4,12}$/.test(cardId) && !/^draft-\d+$/.test(cardId)) {
       return null
     }
     const drafts = loadDrafts()
     const draftMatch = drafts.find((d) => d.id === cardId)
     if (draftMatch) return draftMatch
 
-    const raw = localStorage.getItem(SHARED_CARDS_KEY)
+    const raw = localStorage.getItem(SHARED_CARDS_KEY) ?? localStorage.getItem(LEGACY_SHARED_CARDS_KEY)
     if (!raw) return null
     const map = JSON.parse(raw) as Record<string, PersonalizedCard>
     return map[cardId] ?? null
@@ -129,7 +132,7 @@ export function findLocalCardById(cardId: string): PersonalizedCard | null {
 
 export function loadFavorites(): string[] {
   try {
-    const raw = localStorage.getItem(FAVORITES_KEY)
+    const raw = localStorage.getItem(FAVORITES_KEY) ?? localStorage.getItem(LEGACY_FAVORITES_KEY)
     if (!raw) return []
     const parsed = JSON.parse(raw)
     return Array.isArray(parsed) ? (parsed as string[]) : []
@@ -179,7 +182,7 @@ export function generateShortCardId(card: PersonalizedCard): string {
     hash = Math.imul(hash, 16777619)
   }
   const code = (hash >>> 0).toString(36).padStart(6, '0').slice(0, 7)
-  return `vb-${code}`
+  return `cd-${code}`
 }
 
 export function encodeCardPayload(card: PersonalizedCard): string {
@@ -350,8 +353,8 @@ export function buildWhatsAppShareUrl(card: PersonalizedCard, shareUrl: string):
   const recipient = sanitizeTextInput(card.recipientName, 60).trim()
   const sender = sanitizeTextInput(card.senderName, 60).trim()
   const greeting = recipient
-    ? `I've created something special for you, ${recipient}! Open your card here: ${shareUrl}`
-    : `I've created something special for you! Open your card here: ${shareUrl}`
+    ? `I made a Cardelle card for you, ${recipient}! Open it here: ${shareUrl}`
+    : `I made a Cardelle card for you! Open it here: ${shareUrl}`
   const text = sender ? `${greeting}\n\n— ${sender}` : greeting
   return `https://wa.me/?text=${encodeURIComponent(text)}`
 }

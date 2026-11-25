@@ -75,7 +75,7 @@ function NotFoundPage() {
     <div className="paper-grain py-24 text-center px-4">
       <SeoHead
         title="Page Not Found"
-        description="The page you requested could not be found on Vellum & Bloom."
+        description="The page you requested could not be found on Cardelle."
         noIndex
       />
       <div className="mx-auto max-w-md space-y-5">

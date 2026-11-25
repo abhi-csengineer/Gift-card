@@ -156,7 +156,7 @@ export function LoveCalendarPage() {
       <div className="paper-grain py-20 px-4 sm:px-6 lg:px-8">
         <SeoHead
           title="Month Not Found — The Love Calendar"
-          description="Explore all twelve monthly romantic collections in The Love Calendar on Vellum & Bloom."
+          description="Explore all twelve monthly romantic collections in The Love Calendar on Cardelle."
           noIndex
         />
         <div className="mx-auto max-w-2xl text-center space-y-6">
@@ -582,7 +582,7 @@ export function LoveCalendarPage() {
                 className="text-xs font-semibold tracking-[0.22em] uppercase"
                 style={{ color: 'var(--accent-rose)' }}
               >
-                Vellum &amp; Bloom · Seasonal Anthology
+                Cardelle · Seasonal Anthology
               </p>
 
               <h1

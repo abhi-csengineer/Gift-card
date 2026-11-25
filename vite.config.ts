@@ -4,17 +4,17 @@ import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
-const FALLBACK_PLACEHOLDER_ORIGIN = 'https://ais-dev-jswapgytnrecadehrmu3ff-838459179869.asia-east1.run.app'
-const resolvedSiteOrigin = (process.env.VITE_SITE_URL || process.env.APP_URL || '')
+const DEFAULT_SITE_ORIGIN = 'https://cardelle.online'
+const resolvedSiteOrigin = (process.env.VITE_SITE_URL || '')
   .trim()
   .replace(/\/+$/, '')
 
 function syncDistSeoOrigins(): Plugin {
   return {
-    name: 'vellum-sync-dist-seo-origins',
+    name: 'cardelle-sync-dist-seo-origins',
     apply: 'build',
     writeBundle(options) {
-      if (!resolvedSiteOrigin || resolvedSiteOrigin === FALLBACK_PLACEHOLDER_ORIGIN) return
+      if (!resolvedSiteOrigin || resolvedSiteOrigin === DEFAULT_SITE_ORIGIN) return
       const outDir = options.dir ? path.resolve(options.dir) : path.resolve('dist')
       for (const filename of ['sitemap.xml', 'robots.txt', 'index.html']) {
         const target = path.join(outDir, filename)
@@ -22,7 +22,7 @@ function syncDistSeoOrigins(): Plugin {
           const content = fs.readFileSync(target, 'utf8')
           fs.writeFileSync(
             target,
-            content.split(FALLBACK_PLACEHOLDER_ORIGIN).join(resolvedSiteOrigin),
+            content.split(DEFAULT_SITE_ORIGIN).join(resolvedSiteOrigin),
             'utf8',
           )
         }
@@ -35,7 +35,7 @@ function syncDistSeoOrigins(): Plugin {
 export default defineConfig({
   plugins: [react(), tailwindcss(), syncDistSeoOrigins()],
   define: {
-    __APP_URL__: JSON.stringify(resolvedSiteOrigin),
+    __APP_URL__: JSON.stringify(resolvedSiteOrigin || DEFAULT_SITE_ORIGIN),
   },
   server: {
     host: '0.0.0.0',

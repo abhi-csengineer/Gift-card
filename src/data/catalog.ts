@@ -1269,7 +1269,7 @@ export const FAQ_ITEMS: FaqItem[] = [
     category: 'Cards & Gift Notes',
     question: 'Are these monetary gift cards with stored cash value?',
     answer:
-      'No. Vellum & Bloom provides digital greeting cards and personal keepsake stationery—not monetary gift cards, prepaid balances, or payment vouchers. If you add an optional Gift Note (for example, “Coffee on me this Saturday”), it serves solely as a personal gesture between you and your recipient.',
+      'No. Cardelle provides digital greeting cards and personal keepsake stationery—not monetary gift cards, prepaid balances, or payment vouchers. If you add an optional Gift Note (for example, “Coffee on me this Saturday”), it serves solely as a personal gesture between you and your recipient.',
   },
   {
     id: 'faq-share-link',
@@ -1302,7 +1302,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     id: 'faq-privacy-ads',
     category: 'Privacy & Advertising',
-    question: 'Does Vellum & Bloom show ads inside private greeting cards?',
+    question: 'Does Cardelle show ads inside private greeting cards?',
     answer:
       'Never. Shared greeting card views (/card/*), private messages, and the envelope unsealing experience are kept completely free of advertisements. If optional advertising is enabled on public editorial pages in the future, it will only load where permitted under our Privacy and Cookie Policies.',
   },
@@ -1318,7 +1318,7 @@ export const FAQ_ITEMS: FaqItem[] = [
     category: 'Accessibility & Motion',
     question: 'Can I turn off envelope and floating particle animations?',
     answer:
-      'Yes. Vellum & Bloom automatically respects your operating system’s Reduced Motion setting and also provides a dedicated Reduced Motion toggle inside both the studio editor and the recipient card viewer.',
+      'Yes. Cardelle automatically respects your operating system’s Reduced Motion setting and also provides a dedicated Reduced Motion toggle inside both the studio editor and the recipient card viewer.',
   },
 ]
 

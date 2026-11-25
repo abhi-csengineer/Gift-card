@@ -10,9 +10,9 @@ export function AboutPage() {
     {
       '@context': 'https://schema.org',
       '@type': 'AboutPage',
-      name: 'About Vellum & Bloom Digital Stationery',
+      name: 'About Cardelle Digital Stationery',
       description:
-        'Discover the editorial craft and local-first privacy philosophy behind Vellum & Bloom, a digital greeting card and keepsake studio.',
+        'Discover the editorial craft and local-first privacy philosophy behind Cardelle, an international digital greeting-card studio.',
       url: buildCanonicalUrl('/about'),
     },
     {
@@ -28,8 +28,8 @@ export function AboutPage() {
   return (
     <div className="paper-grain py-10 sm:py-16">
       <SeoHead
-        title="About Vellum & Bloom Stationery"
-        description="Discover the editorial craft and local-first privacy philosophy behind Vellum & Bloom, a digital greeting card and keepsake studio."
+        title="About Cardelle — Digital Greeting Studio"
+        description="Discover the editorial craft and local-first privacy philosophy behind Cardelle, an international digital greeting-card studio."
         canonicalPath="/about"
         jsonLd={aboutSchemas}
       />
@@ -41,16 +41,16 @@ export function AboutPage() {
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12">
             <div className="lg:col-span-7 space-y-5">
               <p className="text-xs font-semibold tracking-[0.18em] uppercase" style={{ color: 'var(--accent-rose)' }}>
-                About Vellum &amp; Bloom
+                About Cardelle
               </p>
               <h1 className="text-4xl sm:text-5xl font-semibold leading-tight" style={{ color: 'var(--text-primary)' }}>
-                Digital Stationery Designed With the Soul of Print.
+                Every Feeling Deserves a Card—Crafted With the Soul of Print.
               </h1>
               <p className="text-base sm:text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                Vellum &amp; Bloom began with a simple observation: hurried text messages rarely feel as treasured as a thoughtful note tucked inside heavy paper. We built an editorial digital card studio where tactile palettes, serif typography, and heartfelt words travel instantaneously across any distance.
+                Cardelle began with a simple belief: hurried text messages rarely feel as treasured as a thoughtful note tucked inside fine stationery. We built a modern, globally welcoming digital card studio where tactile palettes, refined typography, and heartfelt words travel instantaneously across any distance.
               </p>
               <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                Every template on Vellum &amp; Bloom is designed strictly for personal digital greetings and celebratory keepsakes (we do not issue monetary gift cards or store private messages on remote servers).
+                Every template on Cardelle is designed strictly for personal digital greetings and celebratory keepsakes (we do not issue monetary gift cards or store private messages on remote servers).
               </p>
               <p className="inline-flex items-center gap-2 text-xs font-medium" style={{ color: 'var(--text-secondary)' }}>
                 <MapPin className="h-3.5 w-3.5 text-[#D9B77E] shrink-0" aria-hidden="true" />
@@ -85,7 +85,7 @@ export function AboutPage() {
               <GreetingCardPreview
                 templateId="pressed-wildflower-thanks"
                 recipientName="Every Thoughtful Sender"
-                senderName="The Vellum & Bloom Atelier"
+                senderName="The Cardelle Atelier"
                 side="front"
               />
             </div>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
-const REDUCED_MOTION_KEY = 'vellum_bloom_reduced_motion_v1'
+const REDUCED_MOTION_KEY = 'cardelle_reduced_motion_v1'
+const LEGACY_REDUCED_MOTION_KEY = 'vellum_bloom_reduced_motion_v1'
 
 function getOsReducedMotion(): boolean {
   if (typeof window === 'undefined') return false
@@ -9,7 +10,7 @@ function getOsReducedMotion(): boolean {
 
 function getStoredPref(): boolean | null {
   try {
-    const val = localStorage.getItem(REDUCED_MOTION_KEY)
+    const val = localStorage.getItem(REDUCED_MOTION_KEY) ?? localStorage.getItem(LEGACY_REDUCED_MOTION_KEY)
     if (val === 'true') return true
     if (val === 'false') return false
     return null
