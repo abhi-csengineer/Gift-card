@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-serif-card: "Lora", Georgia, serif;
+  --font-script: "Dancing Script", cursive;
+  --font-handwriting: "Caveat", cursive;
+}
+
+:root {
+  /* Raw brand palette tokens */
+  --ivory: #FFF9F3;
+  --ivory-soft: #FDF3EA;
+  --blush: #F8DDE4;
+  --rose: #E9A6B5;
+  --rose-deep: #B5546D;
+  --plum: #472C42;
+  --plum-ink: #2A1726;
+  --lavender: #E8E2F7;
+  --gold: #D9B77E;
+  --gold-deep: #9B7436;
+
+  /* Adaptive semantic tokens (fallback for browsers without light-dark) */
+  --bg-canvas: #FFF9F3;
+  --bg-surface: #FFFFFF;
+  --bg-elevated: #FFFDFB;
+  --bg-muted: #F7EDE6;
+  --bg-blush: #F8DDE4;
+  --bg-lavender: #E8E2F7;
+  --bg-plum: #472C42;
+  --text-primary: #2A1726;
+  --text-secondary: #5B4256;
+  --text-muted: #755C70;
+  --text-on-plum: #FFF9F3;
+  --accent-rose: #C86A80;
+  --accent-gold: #A98040;
+  --accent-gold-soft: #D9B77E;
+  --border-subtle: rgba(71, 44, 66, 0.11);
+  --border-strong: rgba(71, 44, 66, 0.22);
+  --shadow-card: 0 18px 44px -16px rgba(71, 44, 66, 0.14), 0 4px 14px -4px rgba(71, 44, 66, 0.06);
+  --shadow-soft: 0 8px 26px -10px rgba(71, 44, 66, 0.12);
+  --glass-bg: rgba(255, 249, 243, 0.82);
+
+  --scrollbar-track: #F5ECE4;
+  --scrollbar-thumb: #B69EB1;
+
+  /* Mandatory root color-scheme */
+  color-scheme: light dark;
+  accent-color: var(--accent-rose);
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-canvas: #160D15;
+    --bg-surface: #211520;
+    --bg-elevated: #2A1B29;
+    --bg-muted: #261925;
+    --bg-blush: #3E2233;
+    --bg-lavender: #2C2540;
+    --bg-plum: #472C42;
+    --text-primary: #FAF2EC;
+    --text-secondary: #DFCDD8;
+    --text-muted: #B89FAE;
+    --text-on-plum: #FFF9F3;
+    --accent-rose: #E9A6B5;
+    --accent-gold: #D9B77E;
+    --accent-gold-soft: #D9B77E;
+    --border-subtle: rgba(248, 221, 228, 0.12);
+    --border-strong: rgba(248, 221, 228, 0.24);
+    --shadow-card: 0 22px 52px -18px rgba(0, 0, 0, 0.55), 0 6px 18px -6px rgba(0, 0, 0, 0.35);
+    --shadow-soft: 0 10px 28px -10px rgba(0, 0, 0, 0.45);
+    --glass-bg: rgba(22, 13, 21, 0.84);
+    --scrollbar-track: #1C111B;
+    --scrollbar-thumb: #6E5068;
+  }
+}
+
+:root:has(> head > meta[name="color-scheme"][content="dark"]) {
+  color-scheme: dark;
+}
+
+:root:has(> head > meta[name="color-scheme"][content="light"]) {
+  color-scheme: light;
+}
+
+@supports (color: light-dark(white, black)) {
+  :root {
+    --bg-canvas: light-dark(#FFF9F3, #160D15);
+    --bg-surface: light-dark(#FFFFFF, #211520);
+    --bg-elevated: light-dark(#FFFDFB, #2A1B29);
+    --bg-muted: light-dark(#F7EDE6, #261925);
+    --bg-blush: light-dark(#F8DDE4, #3E2233);
+    --bg-lavender: light-dark(#E8E2F7, #2C2540);
+    --bg-plum: light-dark(#472C42, #53334D);
+    --text-primary: light-dark(#2A1726, #FAF2EC);
+    --text-secondary: light-dark(#5B4256, #DFCDD8);
+    --text-muted: light-dark(#755C70, #B89FAE);
+    --accent-rose: light-dark(#C86A80, #E9A6B5);
+    --accent-gold: light-dark(#9B7436, #D9B77E);
+    --accent-gold-soft: light-dark(#D9B77E, #D9B77E);
+    --border-subtle: light-dark(rgba(71, 44, 66, 0.11), rgba(248, 221, 228, 0.12));
+    --border-strong: light-dark(rgba(71, 44, 66, 0.22), rgba(248, 221, 228, 0.24));
+    --shadow-card: light-dark(
+      0 18px 44px -16px rgba(71, 44, 66, 0.14),
+      0 22px 52px -18px rgba(0, 0, 0, 0.55)
+    );
+    --shadow-soft: light-dark(
+      0 8px 26px -10px rgba(71, 44, 66, 0.12),
+      0 10px 28px -10px rgba(0, 0, 0, 0.45)
+    );
+    --glass-bg: light-dark(rgba(255, 249, 243, 0.82), rgba(22, 13, 21, 0.84));
+    --scrollbar-track: light-dark(#F5ECE4, #1C111B);
+    --scrollbar-thumb: light-dark(#B69EB1, #6E5068);
+  }
+}
+
+html {
+  font-family: var(--font-sans);
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  min-block-size: 100dvh;
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+/* Typography discipline */
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* Focus indicators */
+:focus-visible {
+  outline: 2px solid var(--accent-rose);
+  outline-offset: 3px;
+}
+
+/* Native modal dialog scroll containment (per dialog guide) */
+dialog:modal {
+  overscroll-behavior: contain;
+  margin: auto;
+  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-card);
+}
+
+dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+  background: rgba(24, 12, 22, 0.62);
+  backdrop-filter: blur(6px);
+}
+
+/* Subtle paper grain overlay utility */
+.paper-grain {
+  background-image: radial-gradient(rgba(71, 44, 66, 0.045) 0.75px, transparent 0.75px);
+  background-size: 18px 18px;
+}
+
+/* Copy button status tip */
+.copy-status-tip {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  transform: translateY(4px);
+}
+
+[data-copied] + .copy-status-tip,
+[data-failed] + .copy-status-tip,
+.copy-status-tip[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
