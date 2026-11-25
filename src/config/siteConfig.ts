@@ -5,6 +5,8 @@ const DEFAULT_LOCATION_LABEL = 'Rupaspur, Bihar 801503, India'
 const rawSiteUrl = (import.meta.env.VITE_SITE_URL ?? '').trim().replace(/\/+$/, '')
 const rawContactEmail = (import.meta.env.VITE_CONTACT_EMAIL ?? '').trim()
 const rawLocation = (import.meta.env.VITE_CONTACT_LOCATION ?? '').trim()
+const DEFAULT_GA_MEASUREMENT_ID = 'G-GC7C4QMFCR'
+const rawGaMeasurementId = (import.meta.env.VITE_GA_MEASUREMENT_ID ?? '').trim()
 const rawAdsenseClient = (import.meta.env.VITE_ADSENSE_CLIENT_ID ?? '').trim()
 const rawAdsenseEnabled = (import.meta.env.VITE_ADSENSE_ENABLED ?? '').trim().toLowerCase()
 
@@ -14,6 +16,10 @@ function isValidEmail(value: string): boolean {
 
 function isValidAdsenseClientId(value: string): boolean {
   return /^ca-pub-\d{10,20}$/.test(value)
+}
+
+function isValidGaMeasurementId(value: string): boolean {
+  return /^G-[A-Z0-9]{6,16}$/i.test(value)
 }
 
 const resolvedContactEmail = isValidEmail(rawContactEmail)
@@ -61,6 +67,15 @@ export function buildCanonicalUrl(pathname: string): string {
   const origin = getCanonicalOrigin()
   return origin ? `${origin}${cleanPath}` : cleanPath
 }
+
+const resolvedGaMeasurementId = isValidGaMeasurementId(rawGaMeasurementId)
+  ? rawGaMeasurementId
+  : DEFAULT_GA_MEASUREMENT_ID
+
+export const ANALYTICS_CONFIG = {
+  enabled: isValidGaMeasurementId(resolvedGaMeasurementId),
+  measurementId: resolvedGaMeasurementId,
+} as const
 
 export const ADSENSE_CONFIG = {
   // Advertising stays strictly disabled unless explicitly enabled AND paired with a real publisher ID

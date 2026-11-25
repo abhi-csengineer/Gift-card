@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ADSENSE_CONFIG } from '../config/siteConfig'
+import { ADSENSE_CONFIG, ANALYTICS_CONFIG } from '../config/siteConfig'
 
 const CONSENT_STORAGE_KEY = 'cardelle_consent_v1'
 const LEGACY_CONSENT_STORAGE_KEY = 'vellum_bloom_consent_v1'
@@ -10,6 +10,7 @@ export interface ConsentState {
   decided: boolean
   essential: true
   preferences: boolean
+  analytics: boolean
   personalizedAds: boolean
   updatedAt: string | null
 }
@@ -18,6 +19,7 @@ const DEFAULT_CONSENT: ConsentState = {
   decided: false,
   essential: true,
   preferences: true,
+  analytics: false,
   personalizedAds: false,
   updatedAt: null,
 }
@@ -34,6 +36,7 @@ export function loadConsent(): ConsentState {
       decided: Boolean(parsed.decided),
       essential: true,
       preferences: parsed.preferences !== false,
+      analytics: parsed.analytics === true,
       personalizedAds: Boolean(parsed.personalizedAds),
       updatedAt: typeof parsed.updatedAt === 'string' ? parsed.updatedAt : null,
     }
@@ -47,6 +50,7 @@ export function saveConsent(next: Omit<ConsentState, 'essential' | 'updatedAt'>)
     decided: next.decided,
     essential: true,
     preferences: next.preferences,
+    analytics: next.analytics,
     personalizedAds: next.personalizedAds,
     updatedAt: new Date().toISOString(),
   }
@@ -66,8 +70,22 @@ export function openPrivacySettings(): void {
   window.dispatchEvent(new CustomEvent(CONSENT_MODAL_EVENT))
 }
 
+export function canLoadAnalytics(consent: ConsentState): boolean {
+  return Boolean(
+    ANALYTICS_CONFIG.enabled &&
+      ANALYTICS_CONFIG.measurementId &&
+      consent.decided &&
+      consent.analytics,
+  )
+}
+
 export function canLoadAdSense(consent: ConsentState): boolean {
-  return Boolean(ADSENSE_CONFIG.enabled && ADSENSE_CONFIG.clientId && consent.decided && consent.personalizedAds)
+  return Boolean(
+    ADSENSE_CONFIG.enabled &&
+      ADSENSE_CONFIG.clientId &&
+      consent.decided &&
+      consent.personalizedAds,
+  )
 }
 
 export function useConsent() {
@@ -79,7 +97,7 @@ export function useConsent() {
       setConsent(custom.detail ?? loadConsent())
     }
     const onStorage = (event: StorageEvent) => {
-      if (event.key === CONSENT_STORAGE_KEY) {
+      if (event.key === CONSENT_STORAGE_KEY || event.key === LEGACY_CONSENT_STORAGE_KEY) {
         setConsent(loadConsent())
       }
     }
@@ -97,18 +115,21 @@ export function useConsent() {
       saveConsent({
         decided: true,
         preferences: true,
+        analytics: true,
         personalizedAds: true,
       }),
     acceptEssentialOnly: () =>
       saveConsent({
         decided: true,
         preferences: false,
+        analytics: false,
         personalizedAds: false,
       }),
-    updatePreferences: (preferences: boolean, personalizedAds: boolean) =>
+    updatePreferences: (preferences: boolean, analytics: boolean, personalizedAds: boolean) =>
       saveConsent({
         decided: true,
         preferences,
+        analytics,
         personalizedAds,
       }),
   }

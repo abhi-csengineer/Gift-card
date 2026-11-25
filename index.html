@@ -14,6 +14,28 @@
         }
       } catch {}
     </script>
+    <!-- Google Analytics 4 (G-GC7C4QMFCR) — Consent-gated head loader -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){window.dataLayer.push(arguments);}
+      (function() {
+        try {
+          var raw = localStorage.getItem('cardelle_consent_v1') || localStorage.getItem('vellum_bloom_consent_v1');
+          var parsed = raw ? JSON.parse(raw) : null;
+          if (parsed && parsed.decided === true && parsed.analytics === true) {
+            var gaScript = document.createElement('script');
+            gaScript.async = true;
+            gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-GC7C4QMFCR';
+            gaScript.setAttribute('data-cardelle-ga4', 'G-GC7C4QMFCR');
+            document.head.appendChild(gaScript);
+            gtag('consent', 'default', { analytics_storage: 'granted' });
+            gtag('js', new Date());
+            gtag('config', 'G-GC7C4QMFCR', { send_page_view: false });
+            window.__cardelleGaConfigured = true;
+          }
+        } catch {}
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href="https://cardelle.online/" />
     <title>Cardelle — Every Feeling Deserves a Card</title>

@@ -3,6 +3,7 @@ import { BrowserRouter, Link, Route, Routes, useLocation } from 'react-router-do
 import { MotionConfig } from 'framer-motion'
 import { ConsentBanner } from './components/ConsentBanner'
 import { Footer } from './components/Footer'
+import { GoogleAnalytics } from './components/GoogleAnalytics'
 import { Navbar } from './components/Navbar'
 import { SeoHead } from './components/SeoHead'
 
@@ -110,6 +111,7 @@ export function App() {
     <MotionConfig reducedMotion="user">
       <BrowserRouter>
         <ScrollToTop />
+        <GoogleAnalytics />
         <div className="flex min-h-dvh flex-col">
           <a
             href="#main-content"

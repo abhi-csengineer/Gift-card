@@ -7,11 +7,13 @@ import { CONSENT_MODAL_EVENT, useConsent } from '../utils/consent'
 export function ConsentBanner() {
   const { consent, acceptAll, acceptEssentialOnly, updatePreferences } = useConsent()
   const [preferencesPref, setPreferencesPref] = useState(consent.preferences)
+  const [analyticsPref, setAnalyticsPref] = useState(consent.analytics)
   const [adsPref, setAdsPref] = useState(consent.personalizedAds)
   const dialogRef = useRef<HTMLDialogElement>(null)
 
   const openModal = () => {
     setPreferencesPref(consent.preferences)
+    setAnalyticsPref(consent.analytics)
     setAdsPref(consent.personalizedAds)
     const dialog = dialogRef.current
     if (dialog && !dialog.open) {
@@ -26,6 +28,7 @@ export function ConsentBanner() {
   useEffect(() => {
     const handleOpenEvent = () => {
       setPreferencesPref(consent.preferences)
+      setAnalyticsPref(consent.analytics)
       setAdsPref(consent.personalizedAds)
       const dialog = dialogRef.current
       if (dialog && !dialog.open) {
@@ -34,11 +37,11 @@ export function ConsentBanner() {
     }
     window.addEventListener(CONSENT_MODAL_EVENT, handleOpenEvent)
     return () => window.removeEventListener(CONSENT_MODAL_EVENT, handleOpenEvent)
-  }, [consent.personalizedAds, consent.preferences])
+  }, [consent.analytics, consent.personalizedAds, consent.preferences])
 
   const handleSaveCustom = (e: React.FormEvent) => {
     e.preventDefault()
-    updatePreferences(preferencesPref, ADSENSE_CONFIG.enabled ? adsPref : false)
+    updatePreferences(preferencesPref, analyticsPref, ADSENSE_CONFIG.enabled ? adsPref : false)
     closeModal()
   }
 
@@ -63,7 +66,7 @@ export function ConsentBanner() {
                 </p>
               </div>
               <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                Cardelle stores your card drafts, favorites, and theme locally in your browser. Advertising cookies are{' '}
+                Cardelle stores your card drafts, favorites, and theme locally in your browser. Analytics cookies stay disabled unless you consent, and advertising cookies are{' '}
                 {ADSENSE_CONFIG.enabled ? 'optional and disabled unless you consent' : 'currently disabled on this site'}. Read our{' '}
                 <Link to="/privacy" className="underline font-medium" style={{ color: 'var(--text-primary)' }}>
                   Privacy Policy
@@ -178,6 +181,29 @@ export function ConsentBanner() {
                 type="checkbox"
                 checked={preferencesPref}
                 onChange={(e) => setPreferencesPref(e.target.checked)}
+                className="mt-1 h-4 w-4 accent-[#472C42]"
+              />
+            </label>
+
+            {/* Analytics */}
+            <label
+              htmlFor="consent-analytics-toggle"
+              className="flex items-start justify-between gap-4 rounded-2xl border p-4 cursor-pointer"
+              style={{ borderColor: 'var(--border-subtle)', backgroundColor: 'var(--bg-canvas)' }}
+            >
+              <div>
+                <span className="block text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
+                  Analytics &amp; Performance (Google Analytics 4)
+                </span>
+                <span className="mt-1 block text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                  Helps us understand which occasions and templates visitors enjoy most via page view metrics. Private card messages in shared links are excluded and never tracked.
+                </span>
+              </div>
+              <input
+                id="consent-analytics-toggle"
+                type="checkbox"
+                checked={analyticsPref}
+                onChange={(e) => setAnalyticsPref(e.target.checked)}
                 className="mt-1 h-4 w-4 accent-[#472C42]"
               />
             </label>

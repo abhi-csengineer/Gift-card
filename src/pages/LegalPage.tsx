@@ -72,9 +72,10 @@ function getLegalDocument(): Record<LegalKind, LegalDoc> {
           ],
         },
         {
-          heading: '4. Third-Party Services & External Links',
+          heading: '4. Third-Party Services, Analytics & External Links',
           paragraphs: [
-            'To display editorial typography, this site loads web fonts from Google Fonts (which receives standard browser request headers such as your IP address when fetching font files). If you click “Share on WhatsApp”, your browser hands off the pre-filled greeting text directly to WhatsApp (https://wa.me/) under Meta/WhatsApp’s own privacy terms.',
+            'To display editorial typography, this site loads web fonts from Google Fonts (which receives standard browser request headers such as your IP address when fetching font files). If you explicitly opt in to Analytics in our privacy banner or Privacy Settings, Cardelle loads Google Analytics 4 (G-GC7C4QMFCR) to measure aggregate page views across public routes; private card messages encoded in shared card links (?d=...) are stripped from analytics paths and analytics remains disabled unless consented.',
+            'If you click “Share on WhatsApp”, your browser hands off the pre-filled greeting text directly to WhatsApp (https://wa.me/) under Meta/WhatsApp’s own privacy terms.',
           ],
         },
         {
@@ -243,7 +244,13 @@ function getLegalDocument(): Record<LegalKind, LegalDoc> {
           ],
         },
         {
-          heading: '2. Optional Advertising Cookies (Google AdSense)',
+          heading: '2. Optional Analytics Cookies (Google Analytics 4)',
+          paragraphs: [
+            'With your explicit analytics consent, Cardelle loads Google Analytics 4 (Measurement ID G-GC7C4QMFCR) to understand aggregate route visits and improve card collections. Google Analytics scripts are not loaded and page_view events are not sent unless you grant analytics consent, and you can withdraw consent at any time via Privacy Settings.',
+          ],
+        },
+        {
+          heading: '3. Optional Advertising Cookies (Google AdSense)',
           paragraphs: [
             adsStatusSentence,
             'When Google AdSense is active, Google and its advertising partners may place and read cookies or use web beacons in your browser to deliver relevant ads, measure performance, and cap repetitive impressions. Users in regions such as the EEA, UK, and Switzerland are presented with explicit consent options before personalized advertising cookies are activated.',
@@ -255,7 +262,7 @@ function getLegalDocument(): Record<LegalKind, LegalDoc> {
           ],
         },
         {
-          heading: '3. Managing Your Preferences Anytime',
+          heading: '4. Managing Your Preferences Anytime',
           paragraphs: [
             'You can update your consent preferences at any time using the button below or the “Privacy Settings” link in the site footer, or clear LocalStorage and cookies directly in your browser settings.',
             contactText,
