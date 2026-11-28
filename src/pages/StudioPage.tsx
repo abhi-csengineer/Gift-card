@@ -36,6 +36,7 @@ import {
   MESSAGE_PROMPTS,
   RELATIONSHIP_PRESETS,
   STICKER_OPTIONS,
+  getPaletteById,
   getTemplateById,
 } from '../data/catalog'
 import { getLoveCalendarOccasionById, resolveOccasionDate } from '../data/loveCalendar'
@@ -56,6 +57,7 @@ import {
   saveDraft,
 } from '../utils/cardStorage'
 import { exportCardToImage } from '../utils/canvasExport'
+import { triggerCardCompletionConfetti } from '../utils/confettiCelebration'
 import { exportCardToPdf } from '../utils/pdfExport'
 import { useReducedMotionPref } from '../utils/reducedMotion'
 import { buildCanonicalUrl } from '../config/siteConfig'
@@ -164,6 +166,30 @@ export function StudioPage() {
   const lastAnnouncementRef = useRef('')
   const shareDialogRef = useRef<HTMLDialogElement>(null)
   const draftsDialogRef = useRef<HTMLDialogElement>(null)
+  const dialogConfettiCanvasRef = useRef<HTMLCanvasElement>(null)
+  const confettiCleanupRef = useRef<(() => void) | null>(null)
+
+  useEffect(() => {
+    return () => {
+      confettiCleanupRef.current?.()
+    }
+  }, [])
+
+  const launchCompletionConfetti = (
+    variant: 'share' | 'export',
+    canvas: HTMLCanvasElement | null,
+  ) => {
+    confettiCleanupRef.current?.()
+    confettiCleanupRef.current = triggerCardCompletionConfetti({
+      palette: getPaletteById(card.paletteId),
+      customBgColor: card.backgroundMode === 'solid' ? card.customBgColor : undefined,
+      customGradientFrom: card.backgroundMode === 'gradient' ? card.customGradientFrom : undefined,
+      customGradientTo: card.backgroundMode === 'gradient' ? card.customGradientTo : undefined,
+      reducedMotion,
+      canvas,
+      variant,
+    })
+  }
 
   const showToast = (type: 'success' | 'error', message: string) => {
     setToast({ type, message })
@@ -294,6 +320,9 @@ export function StudioPage() {
     setCopyState('idle')
     setStatusMessage('')
     shareDialogRef.current?.showModal()
+    window.requestAnimationFrame(() => {
+      launchCompletionConfetti('share', dialogConfettiCanvasRef.current)
+    })
   }
 
   const handleCopyLink = async () => {
@@ -358,6 +387,10 @@ export function StudioPage() {
         await exportCardToImage(card, format)
         showToast('success', `Downloaded ${format.toUpperCase()} keepsake image.`)
       }
+      launchCompletionConfetti(
+        'export',
+        shareDialogRef.current?.open ? dialogConfettiCanvasRef.current : null,
+      )
     } catch (err) {
       const msg =
         err instanceof Error && err.message
@@ -1662,10 +1695,11 @@ export function StudioPage() {
       <dialog
         ref={shareDialogRef}
         aria-labelledby="share-dialog-title"
+        onClose={() => confettiCleanupRef.current?.()}
         {...({ closedby: 'any' } as Record<string, string>)}
         className="w-[min(94vw,38rem)] rounded-3xl p-0"
       >
-        <div className="p-6 sm:p-7 space-y-5">
+        <div className="relative z-10 p-6 sm:p-7 space-y-5">
           <div className="flex items-start justify-between gap-3 border-b pb-4" style={{ borderColor: 'var(--border-subtle)' }}>
             <div>
               <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--accent-gold)' }}>
@@ -1848,6 +1882,12 @@ export function StudioPage() {
             )}
           </div>
         </div>
+        <canvas
+          ref={dialogConfettiCanvasRef}
+          aria-hidden="true"
+          data-testid="studio-confetti-canvas"
+          className="pointer-events-none fixed inset-0 z-50 h-dvh w-screen"
+        />
       </dialog>
 
       {/* Saved Drafts Modal with Delete Confirmation */}
