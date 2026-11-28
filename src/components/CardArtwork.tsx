@@ -1008,6 +1008,342 @@ export function CardArtwork({ motif, accent, foil, text, className = 'w-full h-f
         </svg>
       )
 
+    case 'mixtape-voice-note':
+      return (
+        <svg viewBox="0 0 240 190" fill="none" className={className} aria-hidden="true">
+          <ArtworkDefs token={token} accent={accent} foil={foil} />
+          {/* Dark matte keepsake plaque */}
+          <rect x="44" y="14" width="152" height="162" rx="14" fill="#171215" stroke={foil} strokeWidth="1.2" strokeOpacity="0.45" />
+          {/* Cream masking tape at top */}
+          <rect x="108" y="8" width="26" height="12" rx="1.5" transform="rotate(-3 108 8)" fill="#EFE3CE" fillOpacity="0.92" />
+          {/* Delicate baby's-breath botanical sprig top right */}
+          <path d="M168 62C168 46 173 36 181 26M168 48L158 34M172 41L183 36" stroke={foil} strokeWidth="1.1" strokeLinecap="round" />
+          <circle cx="156" cy="33" r="2.2" fill="#FFF7E2" />
+          <circle cx="163" cy="27" r="1.8" fill="#FFF7E2" />
+          <circle cx="174" cy="24" r="2.1" fill="#FFF7E2" />
+          <circle cx="182" cy="30" r="2.2" fill="#FFF7E2" />
+          <circle cx="185" cy="38" r="1.8" fill="#FFF7E2" />
+          <circle cx="166" cy="35" r="1.7" fill="#FFF7E2" />
+          {/* Script header & mini quote lines */}
+          <text x="58" y="39" fill="#FAF3EE" fontSize="14" fontStyle="italic" fontFamily="Georgia, serif" fontWeight="600">
+            For You ♡
+          </text>
+          <path d="M58 50H128M58 59H116M58 68H132M58 77H108" stroke="#FAF3EE" strokeOpacity="0.65" strokeWidth="1.4" strokeLinecap="round" />
+          {/* Blush paper heart cutout on right */}
+          <path
+            d="M178 86C178 86 164 76 164 67.5C164 63 167.5 60 171.5 60C174.5 60 176.8 61.7 178 63.8C179.2 61.7 181.5 60 184.5 60C188.5 60 192 63 192 67.5C192 76 178 86 178 86Z"
+            fill="#DF8B99"
+          />
+          {/* Headphone cord heart + earbuds + music notes */}
+          <path
+            d="M153 102C146 92 135 84 141 74C146 66 155 71 157 77C159 71 168 67 172 75C176 83 166 93 158 102C155 106 164 112 174 107"
+            stroke="#FFF8F3"
+            strokeWidth="1.4"
+            strokeLinecap="round"
+          />
+          <circle cx="177" cy="103" r="3.5" fill="#FFF8F3" />
+          <circle cx="144" cy="107" r="3.5" fill="#FFF8F3" />
+          <text x="176" y="72" fill="#FFF8F3" fontSize="9">♪</text>
+          {/* Audio scrubber bar + timestamps */}
+          <line x1="60" y1="115" x2="180" y2="115" stroke="#DF8B99" strokeWidth="1.5" strokeLinecap="round" />
+          <circle cx="76" cy="115" r="3" fill="#DF8B99" />
+          <text x="60" y="125" fill="#DF8B99" fontSize="6.5" fontFamily="monospace">00:00</text>
+          <text x="163" y="125" fill="#DF8B99" fontSize="7" fontFamily="monospace">∞:∞</text>
+          {/* Audio waveform */}
+          <path
+            d="M66 135V131M72 137V129M78 139V127M84 136V130M90 140V126M96 138V128M102 141V125M108 137V129M114 142V124M120 141V125M126 138V128M132 141V125M138 137V129M144 139V127M150 136V130M156 138V128M162 136V130M168 135V131"
+            stroke="#E38E9C"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+          />
+          {/* Play / pause control button */}
+          <polygon points="91,148 91,155 85,151.5" fill="#FFF8F3" />
+          <circle cx="120" cy="151.5" r="8" fill="#D98492" />
+          <rect x="117.5" y="148" width="2" height="7" rx="0.8" fill="#FFF8F3" />
+          <rect x="121" y="148" width="2" height="7" rx="0.8" fill="#FFF8F3" />
+          <polygon points="149,148 149,155 155,151.5" fill="#FFF8F3" />
+          {/* Torn pink paper note bottom strip */}
+          <path d="M58 164L182 162L180 175L59 175Z" fill="#DE8896" />
+          <text x="120" y="171" textAnchor="middle" fill="#231219" fontSize="7.2" fontFamily="Georgia, serif" fontStyle="italic">
+            My heart is right here with you ♡
+          </text>
+        </svg>
+      )
+
+    case 'crimson-kisses-letter':
+      return (
+        <svg viewBox="0 0 240 190" fill="none" className={className} aria-hidden="true">
+          <ArtworkDefs token={token} accent={accent} foil={foil} />
+          {/* Textured deckle handmade cream paper */}
+          <path
+            d="M42 15L196 14L198 175L44 176Z"
+            fill="#F6EFE6"
+            stroke="#D9CEBF"
+            strokeWidth="1.4"
+          />
+          {/* Soft crimson lipstick kiss prints along perimeter */}
+          {[
+            { x: 64, y: 36, r: -14 },
+            { x: 112, y: 27, r: 8 },
+            { x: 58, y: 80, r: -8 },
+            { x: 180, y: 82, r: 14 },
+            { x: 62, y: 128, r: -12 },
+            { x: 178, y: 132, r: 10 },
+            { x: 68, y: 162, r: 6 },
+            { x: 152, y: 162, r: -10 },
+          ].map((k, idx) => (
+            <g key={idx} transform={`translate(${k.x} ${k.y}) rotate(${k.r}) scale(0.75)`}>
+              <path
+                d="M-18 0C-11 -9 -4 -10 0 -5C4 -10 11 -9 18 0C10 3 4 2 0 1C-4 2 -10 3 -18 0Z"
+                fill="#A41E30"
+                fillOpacity="0.82"
+              />
+              <path
+                d="M-16 2C-8 10 8 10 16 2C9 4 4 3 0 3C-4 3 -9 4 -16 2Z"
+                fill="#8E1626"
+                fillOpacity="0.88"
+              />
+            </g>
+          ))}
+          {/* Coquette ribbon bow top right */}
+          <g transform="translate(174 34) rotate(-8)">
+            <path d="M0 0C-14 -12 -20 4 -4 3M0 0C14 -12 20 4 4 3" stroke="#9C1D2F" strokeWidth="2.2" fill="#C93B4E" fillOpacity="0.5" />
+            <path d="M-2 3C-6 12 -10 18 -13 22M2 3C6 12 10 18 13 22" stroke="#9C1D2F" strokeWidth="2" strokeLinecap="round" />
+            <circle cx="0" cy="1" r="3" fill="#9C1D2F" />
+          </g>
+          {/* Poetic stacked lines with crimson underlines */}
+          <text x="120" y="60" textAnchor="middle" fill="#2A1D20" fontSize="9.5" fontStyle="italic" fontFamily="Georgia, serif">
+            for every day ♥
+          </text>
+          <line x1="84" y1="64" x2="154" y2="64" stroke="#B32436" strokeWidth="1" />
+          <text x="120" y="79" textAnchor="middle" fill="#2A1D20" fontSize="10" fontFamily="Georgia, serif">
+            I miss you
+          </text>
+          <line x1="86" y1="83" x2="152" y2="83" stroke="#B32436" strokeWidth="1" />
+          <text x="120" y="98" textAnchor="middle" fill="#2A1D20" fontSize="9.5" fontStyle="italic" fontFamily="Georgia, serif">
+            for every hour ♥
+          </text>
+          <line x1="84" y1="102" x2="154" y2="102" stroke="#B32436" strokeWidth="1" />
+          <text x="120" y="117" textAnchor="middle" fill="#2A1D20" fontSize="10" fontFamily="Georgia, serif">
+            I need you
+          </text>
+          <line x1="86" y1="121" x2="152" y2="121" stroke="#B32436" strokeWidth="1" />
+          <text x="120" y="138" textAnchor="middle" fill="#9E1F32" fontSize="12" fontWeight="700" fontStyle="italic" fontFamily="Georgia, serif">
+            I love you ♥
+          </text>
+          <line x1="82" y1="142" x2="158" y2="142" stroke="#9E1F32" strokeWidth="1.2" />
+        </svg>
+      )
+
+    case 'calligraphic-heart-swirl':
+      return (
+        <svg viewBox="0 0 240 190" fill="none" className={className} aria-hidden="true">
+          <ArtworkDefs token={token} accent={accent} foil={foil} />
+          <rect x="38" y="16" width="164" height="158" rx="10" fill="#FBF8F4" stroke={foil} strokeOpacity="0.45" strokeWidth="1.2" />
+          {/* Crimson sweeping calligraphic heart flourishes */}
+          <path
+            d="M64 78C56 54 78 44 92 64C102 40 132 32 152 46C166 56 156 76 138 82"
+            stroke="#C92C56"
+            strokeWidth="1.7"
+            strokeLinecap="round"
+          />
+          <path
+            d="M72 110C60 92 84 82 96 100C112 78 148 76 164 94C178 110 158 134 128 136C106 138 92 154 78 142C68 134 78 120 96 124C116 128 122 146 130 152"
+            stroke="#C92C56"
+            strokeWidth="1.7"
+            strokeLinecap="round"
+          />
+          {/* Expressive promise lines */}
+          <text x="115" y="69" textAnchor="middle" fill="#231A1D" fontSize="10.5" fontStyle="italic" fontFamily="Georgia, serif">
+            I know our journey is hard
+          </text>
+          <text x="115" y="90" textAnchor="middle" fill="#231A1D" fontSize="10.5" fontStyle="italic" fontFamily="Georgia, serif">
+            but I promise ♥
+          </text>
+          <text x="118" y="114" textAnchor="middle" fill="#231A1D" fontSize="10.5" fontStyle="italic" fontFamily="Georgia, serif">
+            I will stay with you
+          </text>
+          <text x="118" y="133" textAnchor="middle" fill="#9E1F40" fontSize="11" fontWeight="600" fontStyle="italic" fontFamily="Georgia, serif">
+            in every situation...
+          </text>
+          {/* Floating 3D crimson & rose hearts */}
+          <path d="M74 36C74 36 68 31 68 27.5C68 25.5 69.5 24 71.5 24C72.8 24 73.6 24.8 74 25.6C74.4 24.8 75.2 24 76.5 24C78.5 24 80 25.5 80 27.5C80 31 74 36 74 36Z" fill="#D9325A" />
+          <path d="M132 165C132 165 122 157.5 122 152C122 148.8 124.5 146.5 127.5 146.5C129.6 146.5 131.2 147.8 132 149.4C132.8 147.8 134.4 146.5 136.5 146.5C139.5 146.5 142 148.8 142 152C142 157.5 132 165 132 165Z" fill="#E14B70" />
+          {/* Fountain pen metallic nib & crimson barrel */}
+          <g transform="translate(174 138) rotate(-25)">
+            <path d="M0 0L14 -4L20 0L14 4Z" fill="#D8D2CA" stroke="#474143" strokeWidth="0.9" />
+            <circle cx="10" cy="0" r="1.2" fill="#2A1726" />
+            <rect x="20" y="-4.5" width="28" height="9" rx="2" fill="#9E1D35" />
+          </g>
+        </svg>
+      )
+
+    case 'berry-vine-sketch-heart':
+      return (
+        <svg viewBox="0 0 240 190" fill="none" className={className} aria-hidden="true">
+          <ArtworkDefs token={token} accent={accent} foil={foil} />
+          <rect x="38" y="14" width="164" height="162" rx="10" fill="#FCFBF8" stroke={foil} strokeOpacity="0.35" strokeWidth="1.2" />
+          {/* Botanical hand-inked berry vine oval wreath */}
+          <path
+            d="M54 68C44 106 58 146 102 156M186 68C196 106 182 146 138 156"
+            stroke="#242024"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+          />
+          {/* Leaves along wreath */}
+          {[
+            [49, 86, -40],
+            [51, 114, -22],
+            [64, 138, 12],
+            [86, 152, 26],
+            [191, 86, 40],
+            [189, 114, 22],
+            [176, 138, -12],
+            [154, 152, -26],
+          ].map(([lx, ly, rot], i) => (
+            <ellipse
+              key={i}
+              cx={lx}
+              cy={ly}
+              rx="6.5"
+              ry="2.6"
+              transform={`rotate(${rot} ${lx} ${ly})`}
+              stroke="#242024"
+              strokeWidth="1"
+              fill={i % 2 === 0 ? '#E8ECE6' : '#FFFFFF'}
+            />
+          ))}
+          {/* Scattered red berry buds */}
+          {[
+            [58, 72],
+            [47, 102],
+            [72, 148],
+            [182, 72],
+            [193, 102],
+            [168, 148],
+          ].map(([bx, by], i) => (
+            <circle key={i} cx={bx} cy={by} r="2.6" fill="#D62828" stroke="#242024" strokeWidth="0.6" />
+          ))}
+          {/* Twin small sketched hearts at top right */}
+          <path d="M148 34C148 34 142 29.5 142 26C142 24 143.6 22.5 145.5 22.5C146.8 22.5 147.6 23.3 148 24.2C148.4 23.3 149.2 22.5 150.5 22.5C152.4 22.5 154 24 154 26C154 29.5 148 34 148 34Z" fill="#D62828" stroke="#242024" strokeWidth="0.8" />
+          {/* Handwritten reminder text */}
+          <text x="120" y="56" textAnchor="middle" fill="#1E1D20" fontSize="11.5" fontStyle="italic" fontFamily="Georgia, serif">
+            Just a reminder
+          </text>
+          <text x="120" y="76" textAnchor="middle" fill="#1E1D20" fontSize="12" fontWeight="600" fontFamily="Georgia, serif">
+            I love you
+          </text>
+          <text x="120" y="96" textAnchor="middle" fill="#1E1D20" fontSize="10" fontStyle="italic" fontFamily="Georgia, serif">
+            I&apos;m not going anywhere
+          </text>
+          <text x="120" y="114" textAnchor="middle" fill="#1E1D20" fontSize="10.5" fontStyle="italic" fontFamily="Georgia, serif">
+            I&apos;m here always...
+          </text>
+          {/* Radiant red focal heart at bottom center with ink hatch lines */}
+          <path
+            d="M120 163C120 163 105 152.5 105 144C105 139.2 108.8 135.5 113.5 135.5C116.5 135.5 118.8 137.3 120 139.5C121.2 137.3 123.5 135.5 126.5 135.5C131.2 135.5 135 139.2 135 144C135 152.5 120 163 120 163Z"
+            fill="#E03131"
+            stroke="#242024"
+            strokeWidth="1.2"
+          />
+          <path d="M120 130V125M104 134L100 130M136 134L140 130M98 148L93 149M142 148L147 149" stroke="#242024" strokeWidth="1.2" strokeLinecap="round" />
+        </svg>
+      )
+
+    case 'quilled-butterfly-milestone':
+      return (
+        <svg viewBox="0 0 240 190" fill="none" className={className} aria-hidden="true">
+          <ArtworkDefs token={token} accent={accent} foil={foil} />
+          {/* Layered crimson & kraft cardstock borders */}
+          <rect x="40" y="14" width="160" height="162" rx="8" fill="#5D473A" />
+          <rect x="46" y="20" width="148" height="150" rx="6" fill="#B51D31" />
+          <rect x="52" y="26" width="136" height="138" rx="5" fill="#FBF7F2" />
+          {/* Diagonal kraft banner top-left */}
+          <g transform="translate(50 56) rotate(-32)">
+            <rect x="-8" y="-12" width="76" height="19" rx="2" fill="#C9A87C" stroke="#8C6D46" strokeWidth="0.9" />
+            <text x="30" y="1" textAnchor="middle" fill="#2F1B12" fontSize="10.5" fontStyle="italic" fontWeight="600" fontFamily="Georgia, serif">
+              Happy
+            </text>
+          </g>
+          {/* Diagonal kraft banner bottom-right */}
+          <g transform="translate(154 138) rotate(-32)">
+            <rect x="-42" y="-10" width="84" height="19" rx="2" fill="#C9A87C" stroke="#8C6D46" strokeWidth="0.9" />
+            <text x="0" y="3" textAnchor="middle" fill="#2F1B12" fontSize="9.2" fontStyle="italic" fontWeight="600" fontFamily="Georgia, serif">
+              Anniversary
+            </text>
+          </g>
+          {/* Central floral milestone emblem */}
+          <circle cx="120" cy="94" r="34" fill="#FDE8EC" stroke="#B51D31" strokeWidth="2" />
+          <circle cx="120" cy="94" r="28" fill="#FFFDF9" stroke="#C9A87C" strokeWidth="1.4" strokeDasharray="3 3" />
+          <text x="120" y="102" textAnchor="middle" fill="#9E1929" fontSize="24" fontWeight="700" fontFamily="Georgia, serif">
+            ♥
+          </text>
+          {/* Dimensional paper butterflies (top & bottom) */}
+          {[
+            { x: 96, y: 46, c: '#F28B94', rot: -15, s: 1 },
+            { x: 120, y: 42, c: '#C41E3A', rot: 12, s: 0.9 },
+            { x: 162, y: 78, c: '#F28B94', rot: 18, s: 0.85 },
+            { x: 138, y: 136, c: '#F28B94', rot: -18, s: 0.95 },
+            { x: 76, y: 106, c: '#C41E3A', rot: -10, s: 0.8 },
+          ].map((b, i) => (
+            <g key={i} transform={`translate(${b.x} ${b.y}) rotate(${b.rot}) scale(${b.s})`}>
+              <ellipse cx="-6" cy="-4" rx="7" ry="5" fill={b.c} />
+              <ellipse cx="6" cy="-4" rx="7" ry="5" fill={b.c} />
+              <ellipse cx="-5" cy="4" rx="5.5" ry="4" fill={b.c} fillOpacity="0.88" />
+              <ellipse cx="5" cy="4" rx="5.5" ry="4" fill={b.c} fillOpacity="0.88" />
+              <rect x="-1" y="-6" width="2" height="12" rx="1" fill="#472C42" />
+            </g>
+          ))}
+          {/* Rolled paper quilled rosettes */}
+          <circle cx="105" cy="58" r="4.5" fill="#DF5C6E" stroke="#9A2034" strokeWidth="1" />
+          <circle cx="152" cy="152" r="4.5" fill="#2A7B5B" stroke="#184D37" strokeWidth="1" />
+          <circle cx="162" cy="146" r="4" fill="#F28B94" stroke="#B51D31" strokeWidth="1" />
+        </svg>
+      )
+
+    case 'milestone-time-counter':
+      return (
+        <svg viewBox="0 0 240 190" fill="none" className={className} aria-hidden="true">
+          <ArtworkDefs token={token} accent={accent} foil={foil} />
+          {/* Artist gallery canvas frame */}
+          <rect x="42" y="14" width="156" height="162" rx="8" fill="#FCFBF8" stroke="#E5DDD3" strokeWidth="2" />
+          {/* Cascading red hearts along right margin */}
+          {[
+            [168, 36, 1],
+            [178, 60, 0.92],
+            [166, 86, 0.88],
+            [178, 112, 0.95],
+          ].map(([hx, hy, sc], idx) => (
+            <g key={idx} transform={`translate(${hx} ${hy}) scale(${sc})`}>
+              <path
+                d="M0 9C0 9 -9 2.5 -9 -2.5C-9 -5.5 -6.6 -7.8 -3.8 -7.8C-2 -7.8 -0.6 -6.7 0 -5.4C0.6 -6.7 2 -7.8 3.8 -7.8C6.6 -7.8 9 -5.5 9 -2.5C9 2.5 0 9 0 9Z"
+                fill="#D92B4B"
+              />
+            </g>
+          ))}
+          {/* Time breakdown stacked stats in cherry red & charcoal brush */}
+          {[
+            { num: '10', unit: 'years', y: 38 },
+            { num: '120', unit: 'months', y: 55 },
+            { num: '521', unit: 'weeks', y: 72 },
+            { num: '3,652', unit: 'days', y: 89 },
+            { num: '87,648', unit: 'hours', y: 106 },
+            { num: '5,258,880', unit: 'minutes', y: 123 },
+          ].map((row) => (
+            <text key={row.unit} x="54" y={row.y} fontSize="10.5" fontFamily="Georgia, serif" fontWeight="700">
+              <tspan fill="#D92B4B">{row.num} </tspan>
+              <tspan fill="#29262A" fontWeight="500">{row.unit}</tspan>
+            </text>
+          ))}
+          <text x="120" y="144" textAnchor="middle" fill="#5D555E" fontSize="9" fontStyle="italic" fontFamily="Georgia, serif">
+            ..... and counting
+          </text>
+          <text x="120" y="164" textAnchor="middle" fill="#29262A" fontSize="14" fontWeight="700" fontFamily="Georgia, serif">
+            ALWAYS ♥ YOURS
+          </text>
+        </svg>
+      )
+
     case 'cozy-teacup':
     default:
       return (

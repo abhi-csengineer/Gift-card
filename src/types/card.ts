@@ -75,6 +75,12 @@ export type ArtworkMotif =
   | 'tailored-gift-watch'
   | 'christmas-eve-tree'
   | 'christmas-holiday-hearth'
+  | 'mixtape-voice-note'
+  | 'crimson-kisses-letter'
+  | 'calligraphic-heart-swirl'
+  | 'berry-vine-sketch-heart'
+  | 'quilled-butterfly-milestone'
+  | 'milestone-time-counter'
 
 export type BackgroundPattern =
   | 'vellum'

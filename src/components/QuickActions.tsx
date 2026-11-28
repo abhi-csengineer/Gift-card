@@ -26,20 +26,23 @@ export function QuickActions() {
     <section
       aria-labelledby="heading-quick-actions"
       className="py-12 sm:py-16 border-t"
-      style={{ backgroundColor: 'var(--bg-muted)', borderColor: 'var(--border-subtle)' }}
+      style={{
+        background: 'linear-gradient(135deg, var(--bg-blush) 0%, var(--bg-sunny) 48%, var(--bg-lavender) 100%)',
+        borderColor: 'var(--border-subtle)',
+      }}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between mb-8">
           <div>
             <p
-              className="text-xs font-semibold tracking-[0.18em] uppercase"
-              style={{ color: 'var(--accent-rose)' }}
+              className="inline-block rounded-full px-3 py-1 text-xs font-semibold tracking-[0.16em] uppercase"
+              style={{ backgroundColor: 'var(--bg-surface)', color: 'var(--accent-rose)' }}
             >
               Quick Actions
             </p>
             <h2
               id="heading-quick-actions"
-              className="mt-1.5 text-3xl sm:text-4xl font-semibold"
+              className="mt-2 text-3xl sm:text-4xl font-semibold"
               style={{ color: 'var(--text-primary)' }}
             >
               Start With a Popular Category or Upcoming Moment
@@ -47,8 +50,8 @@ export function QuickActions() {
           </div>
           <Link
             to="/create"
-            className="inline-flex min-h-10 items-center gap-1.5 text-sm font-semibold hover:underline"
-            style={{ color: 'var(--text-primary)' }}
+            className="inline-flex min-h-10 items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold text-white shadow-sm transition-transform hover:-translate-y-0.5"
+            style={{ background: 'var(--gradient-cta)' }}
           >
             <span>Open blank studio</span>
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -66,7 +69,7 @@ export function QuickActions() {
                 >
                   Popular Card Categories
                 </h3>
-                <p className="mt-0.5 text-xs sm:text-sm" style={{ color: 'var(--text-muted)' }}>
+                <p className="mt-0.5 text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
                   Jump straight into our most-sent greeting collections
                 </p>
               </div>
@@ -87,13 +90,13 @@ export function QuickActions() {
                   className="group flex min-h-16 items-center justify-between gap-3 rounded-2xl border px-4 py-3.5 transition-all duration-200 hover:-translate-y-0.5"
                   style={{
                     backgroundColor: 'var(--bg-surface)',
-                    borderColor: 'var(--border-subtle)',
+                    borderColor: `${category.accentBg}`,
                     boxShadow: 'var(--shadow-soft)',
                   }}
                 >
                   <div className="flex min-w-0 items-center gap-3.5">
                     <span
-                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105 shadow-xs"
                       style={{ backgroundColor: category.accentBg }}
                     >
                       <CategoryIcon name={category.iconName} />
@@ -115,7 +118,7 @@ export function QuickActions() {
                   </div>
                   <ArrowRight
                     className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5"
-                    style={{ color: 'var(--text-muted)' }}
+                    style={{ color: 'var(--accent-rose)' }}
                     aria-hidden="true"
                   />
                 </Link>
@@ -133,14 +136,14 @@ export function QuickActions() {
                 >
                   Upcoming Love Calendar Events
                 </h3>
-                <p className="mt-0.5 text-xs sm:text-sm" style={{ color: 'var(--text-muted)' }}>
+                <p className="mt-0.5 text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
                   Next romantic dates &amp; seasonal celebrations
                 </p>
               </div>
               <Link
                 to={`/love-calendar/${currentLoveMonth.slug}`}
                 className="shrink-0 text-xs sm:text-sm font-semibold hover:underline"
-                style={{ color: currentLoveMonth.accentColor }}
+                style={{ color: 'var(--accent-violet)' }}
               >
                 {currentLoveMonth.name} guide →
               </Link>
@@ -163,11 +166,17 @@ export function QuickActions() {
                     style={{ borderColor: 'var(--border-subtle)' }}
                   >
                     <div className="min-w-0 space-y-1">
-                      <p
-                        className="text-xs font-semibold tracking-[0.12em] uppercase"
-                        style={{ color: occasion.accentColor }}
-                      >
-                        {formattedDate} · {formatCountdownLabel(daysRemaining)}
+                      <p className="flex flex-wrap items-center gap-2 text-xs font-semibold tracking-[0.1em] uppercase">
+                        <span style={{ color: occasion.accentColor }}>{formattedDate}</span>
+                        <span
+                          className="rounded-full px-2 py-0.5 text-[0.65rem]"
+                          style={{
+                            backgroundColor: `${occasion.accentColor}20`,
+                            color: occasion.accentColor,
+                          }}
+                        >
+                          {formatCountdownLabel(daysRemaining)}
+                        </span>
                       </p>
                       <p
                         className="font-display text-xl font-semibold leading-snug group-hover:underline"
@@ -194,7 +203,7 @@ export function QuickActions() {
               <div
                 className="flex flex-wrap items-center justify-between gap-3 border-t px-5 py-3.5"
                 style={{
-                  backgroundColor: 'var(--bg-canvas)',
+                  backgroundColor: 'var(--bg-muted)',
                   borderColor: 'var(--border-subtle)',
                 }}
               >
@@ -211,7 +220,7 @@ export function QuickActions() {
                 <Link
                   to="/love-calendar"
                   className="text-xs font-semibold hover:underline"
-                  style={{ color: 'var(--text-muted)' }}
+                  style={{ color: 'var(--accent-violet)' }}
                 >
                   All 12 months →
                 </Link>

@@ -12,16 +12,16 @@ const HERO_DECK = [
     label: 'Birthday · Cake, Candles & Balloons',
   },
   {
-    id: 'rose-arch-anniversary',
-    recipient: 'Elena',
-    sender: 'Julian',
-    label: 'Anniversary · Rose Arch',
+    id: 'mixtape-love-note',
+    recipient: 'Liam',
+    sender: 'Aria',
+    label: 'Love Note · Our Forever Song Mixtape',
   },
   {
-    id: 'moonlit-velvet-love',
-    recipient: 'Noah',
-    sender: 'Claire',
-    label: 'Love & Romance · Moonlit Letter',
+    id: 'crimson-kisses-note',
+    recipient: 'Elena',
+    sender: 'Julian',
+    label: "Valentine's · Every Second Crimson Kisses",
   },
 ]
 
@@ -33,14 +33,18 @@ export function HeroCardDeck() {
 
   return (
     <div className="relative mx-auto w-full max-w-[460px] pt-4 pb-8 sm:py-6">
-      {/* Ambient pastel backdrop aura */}
+      {/* Multi-color luminous pastel backdrop aura */}
       <div
-        className="pointer-events-none absolute -top-6 -left-6 h-56 w-56 rounded-full blur-3xl opacity-60"
-        style={{ backgroundColor: 'var(--bg-blush)' }}
+        className="pointer-events-none absolute -top-8 -left-8 h-60 w-60 rounded-full blur-3xl opacity-75"
+        style={{ backgroundColor: '#FFB3CA' }}
       />
       <div
-        className="pointer-events-none absolute -right-4 bottom-2 h-60 w-60 rounded-full blur-3xl opacity-65"
-        style={{ backgroundColor: 'var(--bg-lavender)' }}
+        className="pointer-events-none absolute top-1/3 -right-10 h-56 w-56 rounded-full blur-3xl opacity-70"
+        style={{ backgroundColor: '#FFD98E' }}
+      />
+      <div
+        className="pointer-events-none absolute -bottom-4 left-6 h-60 w-60 rounded-full blur-3xl opacity-70"
+        style={{ backgroundColor: '#C6B7FF' }}
       />
 
       {/* Frosted Studio Card Controls */}
@@ -51,22 +55,20 @@ export function HeroCardDeck() {
         className="relative z-30 mb-5 flex items-center justify-between gap-2 rounded-2xl border px-4 py-2.5 backdrop-blur-md"
         style={{
           backgroundColor: 'var(--glass-bg)',
-          borderColor: 'var(--border-subtle)',
+          borderColor: 'var(--border-strong)',
           boxShadow: 'var(--shadow-soft)',
         }}
       >
-        <div className="min-w-0 flex items-center gap-2 text-xs font-medium" style={{ color: 'var(--text-secondary)' }}>
-          <Sparkles className="h-3.5 w-3.5 shrink-0 text-[var(--accent-gold)]" aria-hidden="true" />
+        <div className="min-w-0 flex items-center gap-2 text-xs font-medium" style={{ color: 'var(--text-primary)' }}>
+          <Sparkles className="h-3.5 w-3.5 shrink-0 text-[#E88B1F]" aria-hidden="true" />
           <span className="truncate">{activeCard.label}</span>
         </div>
         <button
           type="button"
           onClick={() => setShowInside((prev) => !prev)}
-          className="inline-flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold transition-colors hover:opacity-85 cursor-pointer"
+          className="inline-flex shrink-0 items-center gap-1.5 rounded-full px-3.5 py-1 text-xs font-semibold text-white shadow-xs transition-transform hover:scale-105 cursor-pointer"
           style={{
-            backgroundColor: 'var(--bg-blush)',
-            borderColor: 'var(--border-subtle)',
-            color: 'var(--text-primary)',
+            background: 'var(--gradient-cta)',
           }}
         >
           <RotateCw className="h-3 w-3" aria-hidden="true" />

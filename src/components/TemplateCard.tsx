@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Eye, Heart, Sparkles } from 'lucide-react'
+import { getPaletteById } from '../data/catalog'
 import type { CardTemplate } from '../types/card'
 import { GreetingCardPreview } from './GreetingCardPreview'
 
@@ -19,6 +20,7 @@ export function TemplateCard({
 }: TemplateCardProps) {
   const cardRef = useRef<HTMLElement>(null)
   const [visible, setVisible] = useState(() => typeof IntersectionObserver === 'undefined')
+  const palette = getPaletteById(template.defaultPaletteId)
 
   useEffect(() => {
     const el = cardRef.current
@@ -46,16 +48,17 @@ export function TemplateCard({
         boxShadow: 'var(--shadow-soft)',
       }}
     >
-      {/* Atelier Mat Gallery Stage */}
+      {/* Palette-Synced Atelier Mat Stage */}
       <div
         className="relative overflow-hidden rounded-[1.35rem] p-4 sm:p-5"
         style={{
-          background: 'linear-gradient(155deg, var(--bg-muted) 0%, var(--bg-blush) 100%)',
+          background: `linear-gradient(150deg, ${palette.bgSecondary} 0%, ${palette.accent}38 55%, ${palette.foil}34 100%)`,
+          border: `1px solid ${palette.accent}28`,
         }}
       >
         {/* Soft specular sheen sweep on hover */}
         <div
-          className="pointer-events-none absolute inset-0 z-20 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full"
+          className="pointer-events-none absolute inset-0 z-20 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full"
           aria-hidden="true"
         />
 
@@ -68,9 +71,9 @@ export function TemplateCard({
                 onClick={() => onQuickPreview(template.id)}
                 className="flex h-8 w-8 items-center justify-center rounded-full backdrop-blur-md transition-transform hover:scale-105 cursor-pointer"
                 style={{
-                  backgroundColor: 'rgba(255, 249, 243, 0.9)',
+                  backgroundColor: 'rgba(255, 249, 253, 0.92)',
                   color: '#472C42',
-                  border: '1px solid rgba(71, 44, 66, 0.14)',
+                  border: '1px solid rgba(131, 56, 236, 0.16)',
                 }}
                 aria-label={`Quick preview ${template.title}`}
                 title="Quick preview"
@@ -84,14 +87,14 @@ export function TemplateCard({
                 onClick={() => onToggleFavorite(template.id)}
                 className="flex h-8 w-8 items-center justify-center rounded-full backdrop-blur-md transition-transform hover:scale-105 cursor-pointer"
                 style={{
-                  backgroundColor: 'rgba(255, 249, 243, 0.9)',
-                  color: isFavorite ? '#B5546D' : '#472C42',
-                  border: '1px solid rgba(71, 44, 66, 0.14)',
+                  backgroundColor: 'rgba(255, 249, 253, 0.92)',
+                  color: isFavorite ? '#D93B6B' : '#472C42',
+                  border: '1px solid rgba(217, 59, 107, 0.2)',
                 }}
                 aria-label={isFavorite ? `Remove ${template.title} from favorites` : `Save ${template.title} to favorites`}
                 aria-pressed={isFavorite}
               >
-                <Heart className={`h-3.5 w-3.5 ${isFavorite ? 'fill-[#B5546D]' : ''}`} aria-hidden="true" />
+                <Heart className={`h-3.5 w-3.5 ${isFavorite ? 'fill-[#D93B6B]' : ''}`} aria-hidden="true" />
               </button>
             )}
           </div>
@@ -101,7 +104,7 @@ export function TemplateCard({
           to={`/create/${template.id}`}
           className="relative z-10 mx-auto block max-w-[235px] transition-transform duration-500 ease-out group-hover:scale-[1.035] group-hover:-rotate-[0.75deg]"
           style={{
-            filter: 'drop-shadow(0 16px 26px rgba(42, 23, 38, 0.22))',
+            filter: 'drop-shadow(0 16px 26px rgba(42, 23, 38, 0.24))',
           }}
         >
           {visible ? (
@@ -118,11 +121,29 @@ export function TemplateCard({
       {/* Metadata & CTA */}
       <div className="flex flex-1 flex-col justify-between px-1.5 pt-4 pb-1">
         <div>
-          <p className="text-[0.7rem] font-semibold tracking-[0.14em] uppercase" style={{ color: 'var(--accent-rose)' }}>
-            {template.occasion}
-            {template.badge ? ` · ${template.badge}` : ''}
-          </p>
-          <h3 className="mt-1 font-display text-[1.45rem] font-semibold leading-snug" style={{ color: 'var(--text-primary)' }}>
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span
+              className="inline-block rounded-full px-2.5 py-0.5 text-[0.66rem] font-semibold tracking-[0.12em] uppercase"
+              style={{
+                backgroundColor: `${palette.accent}20`,
+                color: 'var(--text-primary)',
+              }}
+            >
+              {template.occasion}
+            </span>
+            {template.badge && (
+              <span
+                className="inline-block rounded-full px-2.5 py-0.5 text-[0.65rem] font-semibold tracking-[0.08em] uppercase"
+                style={{
+                  backgroundColor: 'var(--bg-sunny)',
+                  color: '#6B3D08',
+                }}
+              >
+                {template.badge}
+              </span>
+            )}
+          </div>
+          <h3 className="mt-1.5 font-display text-[1.45rem] font-semibold leading-snug" style={{ color: 'var(--text-primary)' }}>
             <Link to={`/create/${template.id}`} className="hover:underline">
               {template.title}
             </Link>
@@ -135,13 +156,13 @@ export function TemplateCard({
         <div className="mt-4 pt-2">
           <Link
             to={`/create/${template.id}`}
-            className="inline-flex w-full min-h-10 items-center justify-center gap-2 rounded-2xl border px-4 py-2.5 text-sm font-semibold transition-all duration-200 group-hover:border-transparent group-hover:bg-[#472C42] group-hover:text-[#FFF9F3]"
+            className="inline-flex w-full min-h-10 items-center justify-center gap-2 rounded-2xl border px-4 py-2.5 text-sm font-semibold transition-all duration-200 group-hover:border-transparent group-hover:bg-gradient-to-r group-hover:from-[#D93B6B] group-hover:to-[#8338EC] group-hover:text-white group-hover:shadow-md"
             style={{
               borderColor: 'var(--border-strong)',
               color: 'var(--text-primary)',
             }}
           >
-            <Sparkles className="h-3.5 w-3.5 text-[#D9B77E]" aria-hidden="true" />
+            <Sparkles className="h-3.5 w-3.5 text-[#F0B43A]" aria-hidden="true" />
             <span>Personalize Card</span>
             <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true" />
           </Link>

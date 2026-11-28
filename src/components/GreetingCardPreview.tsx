@@ -644,7 +644,7 @@ export function GreetingCardPreview({
           <div className="flex flex-col items-center gap-2 self-center text-center">
             <BrushStrokeBanner
               text={`With love, ${displaySender}`}
-              bgColor={isDarkText ? '#2A1726' : palette.accent}
+              bgColor={isDarkText ? '#2A1726' : '#582854'}
               textColor="#FFF9F3"
               heartColor="#F9C95A"
             />

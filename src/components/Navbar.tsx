@@ -94,6 +94,12 @@ export function Navbar() {
           borderColor: 'var(--border-subtle)',
         }}
       >
+        {/* Rainbow pastel accent strip along top of navigation */}
+        <div
+          className="h-[3px] w-full"
+          style={{ background: 'var(--gradient-rainbow)' }}
+          aria-hidden="true"
+        />
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3.5 sm:px-6 lg:px-8">
           {/* Brand Logo */}
           <Link
@@ -104,14 +110,14 @@ export function Navbar() {
             <span
               className="flex h-10 w-10 items-center justify-center rounded-2xl shadow-sm transition-transform duration-300 group-hover:scale-105"
               style={{
-                background: 'linear-gradient(135deg, #472C42 0%, #6B4063 100%)',
-                border: '1px solid rgba(217, 183, 126, 0.55)',
+                background: 'var(--gradient-brand)',
+                border: '1px solid rgba(255, 255, 255, 0.45)',
               }}
             >
               <svg viewBox="0 0 32 32" className="h-5 w-5" fill="none" aria-hidden="true">
                 <rect x="4" y="6.5" width="24" height="19" rx="3.2" stroke="#FFF9F3" strokeWidth="1.6" />
-                <path d="M5 9L16 17.2L27 9" stroke="#D9B77E" strokeWidth="1.6" strokeLinecap="round" />
-                <circle cx="16" cy="18" r="4" fill="#C86A80" stroke="#D9B77E" strokeWidth="1" />
+                <path d="M5 9L16 17.2L27 9" stroke="#FFE599" strokeWidth="1.6" strokeLinecap="round" />
+                <circle cx="16" cy="18" r="4" fill="#FF5E8A" stroke="#FFE599" strokeWidth="1" />
                 <path d="M17.4 16.6C17 16.2 16.5 16 15.9 16C14.8 16 14 16.9 14 18C14 19.1 14.8 20 15.9 20C16.5 20 17 19.8 17.4 19.4" stroke="#FFF9F3" strokeWidth="1.15" strokeLinecap="round" />
               </svg>
             </span>
@@ -132,20 +138,20 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav aria-label="Primary" className="hidden lg:flex lg:items-center lg:gap-0.5">
+          <nav aria-label="Primary" className="hidden lg:flex lg:items-center lg:gap-1">
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
                 end={item.end}
                 className={({ isActive }) =>
-                  `relative whitespace-nowrap shrink-0 rounded-full px-3 py-2 text-sm font-medium transition-all ${
-                    isActive ? 'font-semibold' : 'hover:opacity-80'
+                  `relative whitespace-nowrap shrink-0 rounded-full px-3.5 py-2 text-sm font-medium transition-all ${
+                    isActive ? 'font-semibold shadow-xs' : 'hover:opacity-80'
                   }`
                 }
                 style={({ isActive }) => ({
-                  color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)',
-                  backgroundColor: isActive ? 'var(--bg-blush)' : 'transparent',
+                  color: isActive ? '#FFFFFF' : 'var(--text-secondary)',
+                  background: isActive ? 'var(--gradient-cta)' : 'transparent',
                 })}
               >
                 {item.label}
@@ -193,10 +199,10 @@ export function Navbar() {
               to="/create"
               className="hidden sm:inline-flex min-h-10 items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold text-[#FFF9F3] shadow-sm transition-transform hover:-translate-y-0.5"
               style={{
-                background: 'linear-gradient(135deg, #472C42 0%, #633B5C 100%)',
+                background: 'var(--gradient-cta)',
               }}
             >
-              <Sparkles className="h-3.5 w-3.5 text-[#D9B77E]" aria-hidden="true" />
+              <Sparkles className="h-3.5 w-3.5 text-[#FFE599]" aria-hidden="true" />
               <span>Start Creating</span>
             </Link>
 

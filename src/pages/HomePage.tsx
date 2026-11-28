@@ -78,11 +78,22 @@ export function HomePage() {
   const [favorites, setFavorites] = useState<string[]>(() => loadFavorites())
   const [previewId, setPreviewId] = useState<string | null>(null)
 
+  const priorityIds = [
+    'confetti-birthday-spark',
+    'mixtape-love-note',
+    'crimson-kisses-note',
+    'ink-promise-flourish',
+    'berry-vine-reminder',
+    'butterfly-quilled-anniversary',
+    'counting-moments-canvas',
+    'rose-arch-anniversary',
+  ]
   const featuredPool = CARD_TEMPLATES.filter((c) => c.featured)
-  const featuredCards = [
-    ...featuredPool.filter((c) => c.id === 'confetti-birthday-spark'),
-    ...featuredPool.filter((c) => c.id !== 'confetti-birthday-spark'),
-  ].slice(0, 8)
+  const prioritized = priorityIds
+    .map((id) => featuredPool.find((c) => c.id === id))
+    .filter((c): c is NonNullable<typeof c> => Boolean(c))
+  const remaining = featuredPool.filter((c) => !priorityIds.includes(c.id))
+  const featuredCards = [...prioritized, ...remaining].slice(0, 8)
   const featuredArticles = BLOG_ARTICLES.slice(0, 6)
   const homeSchemas = buildHomeSchemas()
 
@@ -101,7 +112,23 @@ export function HomePage() {
 
       {/* B. HERO SECTION */}
       <section className="relative overflow-hidden pt-10 pb-16 sm:pt-16 sm:pb-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Joyful watercolor aura blobs */}
+        <div
+          className="pointer-events-none absolute -top-24 -left-24 h-96 w-96 rounded-full opacity-45 blur-3xl"
+          style={{ backgroundColor: '#FFB3CC' }}
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute top-12 left-1/3 h-80 w-80 rounded-full opacity-35 blur-3xl"
+          style={{ backgroundColor: '#FFE09E' }}
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute -bottom-24 right-0 h-96 w-96 rounded-full opacity-40 blur-3xl"
+          style={{ backgroundColor: '#CDBFFF' }}
+          aria-hidden="true"
+        />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10">
             {/* Editorial Copy */}
             <motion.div
@@ -111,14 +138,14 @@ export function HomePage() {
               className="lg:col-span-6 space-y-6"
             >
               <div
-                className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold tracking-[0.14em] uppercase"
+                className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold tracking-[0.14em] uppercase shadow-xs"
                 style={{
                   backgroundColor: 'var(--bg-surface)',
-                  borderColor: 'var(--border-subtle)',
-                  color: 'var(--accent-gold)',
+                  borderColor: 'var(--border-strong)',
+                  color: 'var(--accent-rose)',
                 }}
               >
-                <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
+                <Sparkles className="h-3.5 w-3.5 text-[#E88B1F]" aria-hidden="true" />
                 <span>Cardelle · Every Feeling Deserves a Card</span>
               </div>
 
@@ -129,25 +156,31 @@ export function HomePage() {
                   color: 'var(--text-primary)',
                 }}
               >
-                Make Someone&apos;s Day Beautiful.
+                Make Someone&apos;s{' '}
+                <span
+                  className="bg-clip-text text-transparent"
+                  style={{ backgroundImage: 'var(--gradient-brand)' }}
+                >
+                  Day Beautiful.
+                </span>
               </h1>
 
               <p
                 className="max-w-xl text-base sm:text-lg leading-relaxed"
                 style={{ color: 'var(--text-secondary)' }}
               >
-                Every feeling deserves a card. Personalize editorial digital greeting cards and send a warm keepsake to someone you love—anywhere in the world.
+                Every feeling deserves a card. Personalize vibrant digital greeting cards—from mixtape love notes and 3D butterfly crests to birthday celebrations—and send a warm keepsake anywhere in the world.
               </p>
 
               <div className="flex flex-wrap items-center gap-3.5 pt-2">
                 <Link
                   to="/create"
-                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm sm:text-base font-semibold text-[#FFF9F3] shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm sm:text-base font-semibold text-white shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg"
                   style={{
-                    background: 'linear-gradient(135deg, #472C42 0%, #663E5F 100%)',
+                    background: 'var(--gradient-cta)',
                   }}
                 >
-                  <Feather className="h-4 w-4 text-[#D9B77E]" aria-hidden="true" />
+                  <Feather className="h-4 w-4 text-[#FFE599]" aria-hidden="true" />
                   <span>Create Your First Card</span>
                 </Link>
 
@@ -161,7 +194,7 @@ export function HomePage() {
                   }}
                 >
                   <span>Explore Designs</span>
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  <ArrowRight className="h-4 w-4 text-[var(--accent-rose)]" aria-hidden="true" />
                 </Link>
               </div>
 
@@ -246,20 +279,21 @@ export function HomePage() {
                   className="group flex h-full flex-col justify-between rounded-3xl border p-4 transition-all duration-300 hover:-translate-y-1"
                   style={{
                     backgroundColor: 'var(--bg-surface)',
-                    borderColor: 'var(--border-subtle)',
+                    backgroundImage: `linear-gradient(155deg, ${category.accentBg}55 0%, transparent 65%)`,
+                    borderColor: category.accentBg,
                     boxShadow: 'var(--shadow-soft)',
                   }}
                 >
                   <div className="flex items-center justify-between gap-2">
                     <span
-                      className="flex h-11 w-11 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-110"
+                      className="flex h-11 w-11 items-center justify-center rounded-2xl shadow-xs transition-transform duration-300 group-hover:scale-110"
                       style={{ backgroundColor: category.accentBg }}
                     >
                       <CategoryIcon name={category.iconName} />
                     </span>
                     <ArrowRight
-                      className="h-4 w-4 opacity-0 -translate-x-1 transition-all duration-200 group-hover:opacity-75 group-hover:translate-x-0"
-                      style={{ color: 'var(--text-primary)' }}
+                      className="h-4 w-4 opacity-0 -translate-x-1 transition-all duration-200 group-hover:opacity-85 group-hover:translate-x-0"
+                      style={{ color: 'var(--accent-rose)' }}
                       aria-hidden="true"
                     />
                   </div>
@@ -339,8 +373,9 @@ export function HomePage() {
                 icon: Palette,
                 title: 'Choose your favourite design.',
                 description:
-                  'Browse botanical arches, moonlit foil, or minimalist vellum tailored to the person and occasion.',
-                bg: 'var(--bg-blush)',
+                  'Browse botanical arches, mixtape love notes, 3D butterfly crests, or minimalist vellum tailored to the moment.',
+                bg: '#FFD6E5',
+                ink: '#C8235D',
               },
               {
                 step: '02',
@@ -348,7 +383,8 @@ export function HomePage() {
                 title: 'Add a personal message.',
                 description:
                   'Write from the heart, pick your favorite paper palette and calligraphy font, and seal it with your initials.',
-                bg: 'var(--bg-lavender)',
+                bg: '#E3DCFF',
+                ink: '#6438C9',
               },
               {
                 step: '03',
@@ -356,7 +392,8 @@ export function HomePage() {
                 title: 'Share happiness with someone special.',
                 description:
                   'Generate an instant envelope-reveal link for WhatsApp, copy it anywhere, or download a 2-page PDF, PNG, or JPG keepsake.',
-                bg: 'var(--bg-muted)',
+                bg: '#D4F5E5',
+                ink: '#178A68',
               },
             ].map((item) => {
               const Icon = item.icon
@@ -366,21 +403,22 @@ export function HomePage() {
                   className="relative flex flex-col justify-between rounded-3xl border p-7 sm:p-8"
                   style={{
                     backgroundColor: 'var(--bg-surface)',
-                    borderColor: 'var(--border-subtle)',
+                    backgroundImage: `linear-gradient(155deg, ${item.bg}45 0%, transparent 60%)`,
+                    borderColor: item.bg,
                     boxShadow: 'var(--shadow-soft)',
                   }}
                 >
                   <div>
                     <div className="flex items-center justify-between">
                       <span
-                        className="flex h-12 w-12 items-center justify-center rounded-2xl"
+                        className="flex h-12 w-12 items-center justify-center rounded-2xl shadow-xs"
                         style={{ backgroundColor: item.bg }}
                       >
-                        <Icon className="h-5 w-5" style={{ color: 'var(--text-primary)' }} aria-hidden="true" />
+                        <Icon className="h-5 w-5" style={{ color: item.ink }} aria-hidden="true" />
                       </span>
                       <span
-                        className="text-3xl font-semibold opacity-45"
-                        style={{ fontFamily: 'var(--font-display)', color: 'var(--accent-gold)' }}
+                        className="text-3xl font-semibold opacity-70"
+                        style={{ fontFamily: 'var(--font-display)', color: item.ink }}
                       >
                         {item.step}
                       </span>
@@ -484,37 +522,41 @@ export function HomePage() {
           <div
             className="relative overflow-hidden rounded-[2.25rem] border p-8 sm:p-12 lg:p-16"
             style={{
-              background: 'linear-gradient(135deg, #472C42 0%, #341E30 55%, #4A2B45 100%)',
-              borderColor: 'rgba(217, 183, 126, 0.35)',
-              color: '#FFF9F3',
+              background: 'linear-gradient(135deg, #4B194F 0%, #9E2A59 52%, #502680 100%)',
+              borderColor: 'rgba(255, 229, 153, 0.45)',
+              color: '#FFF9FD',
             }}
           >
-            {/* Decorative gold radial highlight */}
+            {/* Decorative gold & coral radial highlights */}
             <div
-              className="pointer-events-none absolute -top-24 -right-24 h-80 w-80 rounded-full opacity-25 blur-3xl"
-              style={{ backgroundColor: '#D9B77E' }}
+              className="pointer-events-none absolute -top-24 -right-24 h-80 w-80 rounded-full opacity-35 blur-3xl"
+              style={{ backgroundColor: '#FFD166' }}
+            />
+            <div
+              className="pointer-events-none absolute -bottom-24 -left-16 h-72 w-72 rounded-full opacity-30 blur-3xl"
+              style={{ backgroundColor: '#FF6B9D' }}
             />
 
             <div className="relative z-10 grid grid-cols-1 items-center gap-10 lg:grid-cols-12">
               <div className="lg:col-span-7 space-y-5">
-                <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[#D9B77E]">
+                <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[#FFE599]">
                   Why Thoughtful Words Matter
                 </p>
-                <h2 className="text-3xl sm:text-5xl font-semibold leading-tight text-[#FFF9F3]">
+                <h2 className="text-3xl sm:text-5xl font-semibold leading-tight text-[#FFF9FD]">
                   Sometimes, a Few Words Mean Everything.
                 </h2>
-                <p className="text-base sm:text-lg leading-relaxed text-[#F8DDE4]/90">
+                <p className="text-base sm:text-lg leading-relaxed text-[#FFDCEB]">
                   In an age of hurried three-word texts and disappearing notifications, taking two quiet minutes to choose artwork, linger over a sentence, and seal a card with someone’s name feels deeply rare.
                 </p>
-                <p className="text-sm sm:text-base leading-relaxed text-[#FFF9F3]/80">
+                <p className="text-sm sm:text-base leading-relaxed text-[#FFF9F3]/85">
                   Whether it is a mother who carried you, a friend ten time zones away, or a partner celebrating another year by your side—a card becomes a small room they can walk back into whenever they need to remember they are loved.
                 </p>
                 <div className="pt-2">
                   <Link
                     to="/create"
-                    className="inline-flex min-h-12 items-center gap-2 rounded-full bg-[#FFF9F3] px-7 py-3 text-sm font-semibold text-[#472C42] shadow-md transition-transform hover:-translate-y-0.5"
+                    className="inline-flex min-h-12 items-center gap-2 rounded-full bg-[#FFF9FD] px-7 py-3 text-sm font-semibold text-[#581E52] shadow-md transition-transform hover:-translate-y-0.5"
                   >
-                    <Sparkles className="h-4 w-4 text-[#B5546D]" aria-hidden="true" />
+                    <Sparkles className="h-4 w-4 text-[#D93B6B]" aria-hidden="true" />
                     <span>Write Someone&apos;s Keepsake</span>
                   </Link>
                 </div>
@@ -581,9 +623,10 @@ export function HomePage() {
               </div>
               <Link
                 to="/love-calendar"
-                className="inline-flex shrink-0 min-h-11 items-center gap-2 rounded-full bg-[#472C42] px-6 py-3 text-sm font-semibold text-[#FFF9F3] shadow-sm transition-transform hover:-translate-y-0.5"
+                className="inline-flex shrink-0 min-h-11 items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white shadow-sm transition-transform hover:-translate-y-0.5"
+                style={{ background: 'var(--gradient-cta)' }}
               >
-                <CalendarHeart className="h-4 w-4 text-[#D9B77E]" aria-hidden="true" />
+                <CalendarHeart className="h-4 w-4 text-[#FFE599]" aria-hidden="true" />
                 <span>Explore The Love Calendar</span>
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
@@ -596,8 +639,8 @@ export function HomePage() {
                   to={`/love-calendar/${month.slug}`}
                   className="rounded-2xl border px-3.5 py-2.5 transition-all hover:-translate-y-0.5"
                   style={{
-                    backgroundColor: 'var(--bg-canvas)',
-                    borderColor: 'var(--border-subtle)',
+                    backgroundColor: `${month.accentColor}18`,
+                    borderColor: `${month.accentColor}48`,
                   }}
                 >
                   <span className="block text-[0.65rem] font-semibold tracking-[0.14em] uppercase" style={{ color: month.accentColor }}>
@@ -639,7 +682,10 @@ export function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {featuredArticles.map((article) => (
+            {featuredArticles.map((article, articleIdx) => {
+              const articleStageColors = ['#FFD8E8', '#E7DDFF', '#FFEEC7', '#D7F5EA', '#FFE2D4', '#D8ECFF']
+              const stageBg = articleStageColors[articleIdx % articleStageColors.length]
+              return (
               <article
                 key={article.slug}
                 className="group flex flex-col justify-between rounded-3xl border p-6 transition-all duration-300 hover:-translate-y-1"
@@ -652,14 +698,14 @@ export function HomePage() {
                 <div>
                   <div
                     className="mb-5 flex h-40 items-center justify-center rounded-2xl p-4"
-                    style={{ backgroundColor: 'var(--bg-canvas)' }}
+                    style={{ background: `linear-gradient(145deg, ${stageBg} 0%, var(--bg-canvas) 100%)` }}
                   >
                     <div className="h-28 w-36 transition-transform duration-300 group-hover:scale-105">
                       <CardArtwork
                         motif={article.coverMotif}
-                        accent="#E9A6B5"
-                        foil="#D9B77E"
-                        text="#472C42"
+                        accent="#D93B6B"
+                        foil="#F0B43A"
+                        text="#25132B"
                       />
                     </div>
                   </div>
@@ -692,7 +738,8 @@ export function HomePage() {
                   </Link>
                 </div>
               </article>
-            ))}
+              )
+            })}
           </div>
         </div>
       </section>

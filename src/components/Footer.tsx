@@ -10,28 +10,33 @@ export function Footer() {
 
   return (
     <footer
-      className="border-t pt-16 pb-10 transition-colors"
+      className="relative border-t pt-16 pb-10 transition-colors overflow-hidden"
       style={{
-        backgroundColor: 'var(--bg-surface)',
+        background: 'linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-muted) 100%)',
         borderColor: 'var(--border-subtle)',
       }}
     >
+      <div
+        className="absolute top-0 inset-x-0 h-[3px]"
+        style={{ background: 'var(--gradient-rainbow)' }}
+        aria-hidden="true"
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
           {/* Brand Column */}
           <div className="md:col-span-5 space-y-4">
             <Link to="/" className="inline-flex items-center gap-2.5">
               <span
-                className="flex h-10 w-10 items-center justify-center rounded-2xl"
+                className="flex h-10 w-10 items-center justify-center rounded-2xl shadow-sm"
                 style={{
-                  background: 'linear-gradient(135deg, #472C42 0%, #6B4063 100%)',
-                  border: '1px solid rgba(217, 183, 126, 0.55)',
+                  background: 'var(--gradient-brand)',
+                  border: '1px solid rgba(255, 255, 255, 0.45)',
                 }}
               >
                 <svg viewBox="0 0 32 32" className="h-5 w-5" fill="none" aria-hidden="true">
                   <rect x="4" y="6.5" width="24" height="19" rx="3.2" stroke="#FFF9F3" strokeWidth="1.6" />
-                  <path d="M5 9L16 17.2L27 9" stroke="#D9B77E" strokeWidth="1.6" strokeLinecap="round" />
-                  <circle cx="16" cy="18" r="4" fill="#C86A80" stroke="#D9B77E" strokeWidth="1" />
+                  <path d="M5 9L16 17.2L27 9" stroke="#FFE599" strokeWidth="1.6" strokeLinecap="round" />
+                  <circle cx="16" cy="18" r="4" fill="#FF5E8A" stroke="#FFE599" strokeWidth="1" />
                   <path d="M17.4 16.6C17 16.2 16.5 16 15.9 16C14.8 16 14 16.9 14 18C14 19.1 14.8 20 15.9 20C16.5 20 17 19.8 17.4 19.4" stroke="#FFF9F3" strokeWidth="1.15" strokeLinecap="round" />
                 </svg>
               </span>
@@ -39,7 +44,7 @@ export function Footer() {
                 <span className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
                   Cardelle
                 </span>
-                <span className="text-[0.65rem] font-medium tracking-[0.14em] uppercase" style={{ color: 'var(--accent-gold)' }}>
+                <span className="text-[0.65rem] font-medium tracking-[0.14em] uppercase" style={{ color: 'var(--accent-rose)' }}>
                   {SITE_CONFIG.tagline}
                 </span>
               </span>

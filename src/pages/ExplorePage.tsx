@@ -197,11 +197,11 @@ export function ExplorePage() {
             <button
               type="button"
               onClick={() => setFilter('category', 'all')}
-              className="rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-colors cursor-pointer"
+              className="rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all cursor-pointer"
               style={{
-                backgroundColor: activeCategory === 'all' ? '#472C42' : 'var(--bg-canvas)',
-                borderColor: activeCategory === 'all' ? '#472C42' : 'var(--border-subtle)',
-                color: activeCategory === 'all' ? '#FFF9F3' : 'var(--text-secondary)',
+                background: activeCategory === 'all' ? 'var(--gradient-cta)' : 'var(--bg-canvas)',
+                borderColor: activeCategory === 'all' ? 'transparent' : 'var(--border-subtle)',
+                color: activeCategory === 'all' ? '#FFFFFF' : 'var(--text-secondary)',
               }}
             >
               All Occasions
@@ -213,11 +213,11 @@ export function ExplorePage() {
                   key={cat.slug}
                   type="button"
                   onClick={() => setFilter('category', cat.slug)}
-                  className="rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-colors cursor-pointer"
+                  className="rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all cursor-pointer hover:opacity-90"
                   style={{
-                    backgroundColor: selected ? '#472C42' : 'var(--bg-canvas)',
-                    borderColor: selected ? '#472C42' : 'var(--border-subtle)',
-                    color: selected ? '#FFF9F3' : 'var(--text-secondary)',
+                    background: selected ? 'var(--gradient-cta)' : `${cat.accentBg}85`,
+                    borderColor: selected ? 'transparent' : cat.accentBg,
+                    color: selected ? '#FFFFFF' : '#25132B',
                   }}
                 >
                   {cat.name}
@@ -247,7 +247,8 @@ export function ExplorePage() {
             <button
               type="button"
               onClick={clearAllFilters}
-              className="inline-flex items-center gap-2 rounded-full bg-[#472C42] px-6 py-2.5 text-sm font-semibold text-[#FFF9F3] cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold text-white cursor-pointer"
+              style={{ background: 'var(--gradient-cta)' }}
             >
               Show All Designs
             </button>
