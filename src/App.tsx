@@ -5,6 +5,7 @@ import { ConsentBanner } from './components/ConsentBanner'
 import { Footer } from './components/Footer'
 import { GoogleAnalytics } from './components/GoogleAnalytics'
 import { Navbar } from './components/Navbar'
+import { RouteMetaSync } from './components/RouteMetaSync'
 import { SeoHead } from './components/SeoHead'
 
 const HomePage = lazy(() =>
@@ -48,10 +49,11 @@ const LegalPage = lazy(() =>
 )
 
 function ScrollToTop() {
-  const { pathname, search } = useLocation()
+  const { pathname, search, hash } = useLocation()
   useEffect(() => {
+    if (hash) return
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
-  }, [pathname, search])
+  }, [pathname, search, hash])
   return null
 }
 
@@ -111,6 +113,7 @@ export function App() {
     <MotionConfig reducedMotion="user">
       <BrowserRouter>
         <ScrollToTop />
+        <RouteMetaSync />
         <GoogleAnalytics />
         <div className="flex min-h-dvh flex-col">
           <a

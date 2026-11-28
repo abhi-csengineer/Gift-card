@@ -123,6 +123,8 @@ export function InspirationPage() {
           description={article.excerpt}
           canonicalPath={`/inspiration/${article.slug}`}
           ogType="article"
+          publishedTime={isoPublished || undefined}
+          articleSection={article.category}
           jsonLd={articleSchema}
         />
 

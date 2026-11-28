@@ -950,22 +950,24 @@ export const CARD_TEMPLATES: CardTemplate[] = [
   // 22
   {
     id: 'confetti-birthday-spark',
-    title: 'Ribbon & Confetti Celebration',
+    title: 'Birthday Cake & Balloons',
     occasion: 'Birthday',
     category: 'birthday',
     categories: ['birthday', 'friendship', 'congratulations'],
     collection: 'birthday',
-    shortDescription: 'Playful celebratory confetti ribbons and golden sparks on warm blush.',
+    shortDescription: 'Glossy party balloons, lit birthday cake candles, and glowing golden bokeh.',
     motif: 'confetti-celebration',
-    defaultPaletteId: 'soft-blush',
-    defaultPattern: 'scalloped-frame',
+    defaultPaletteId: 'coral-peach',
+    defaultPattern: 'vellum',
     defaultFontId: 'handwritten-script',
-    defaultHeadline: 'Happiest Birthday to You!',
+    defaultHeadline: 'Happy Birthday!',
     defaultMessage:
-      'Here is to cake for breakfast, loud laughter with people who adore you, and a year overflowing with bright adventures.',
-    defaultEffects: ['confetti'],
+      'May this special day bring you lots of happiness, good health, success, and positive vibes.',
+    defaultEffects: ['confetti', 'stars'],
     defaultStickers: ['sparkle-burst'],
     sealInitial: 'H',
+    featured: true,
+    badge: 'Fan Favorite',
   },
   // 23
   {

@@ -26,7 +26,8 @@ export function OccasionCard({
 
   return (
     <article
-      className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1"
+      id={occasion.id}
+      className="group relative flex scroll-mt-24 flex-col justify-between overflow-hidden rounded-3xl border p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1"
       style={{
         backgroundColor: 'var(--bg-surface)',
         borderColor: 'var(--border-subtle)',

@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useEffect, useMemo, useState } from 'react'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
   ArrowLeft,
@@ -67,6 +67,7 @@ const CATEGORY_FILTERS: { id: LoveCalendarDiscoveryFilter; label: string }[] = [
 
 export function LoveCalendarPage() {
   const { monthSlug } = useParams<{ monthSlug?: string }>()
+  const { hash } = useLocation()
   const { resolvedTheme } = useTheme()
   const { reducedMotion } = useReducedMotionPref()
 
@@ -83,6 +84,21 @@ export function LoveCalendarPage() {
 
   const activeMonth = useMemo(() => getLoveCalendarMonth(monthSlug), [monthSlug])
   const currentCalendarMonth = CURRENT_CALENDAR_MONTH
+
+  useEffect(() => {
+    if (!hash) return
+    const targetId = decodeURIComponent(hash.slice(1))
+    const timer = window.setTimeout(() => {
+      const target = document.getElementById(targetId)
+      if (target) {
+        target.scrollIntoView({
+          behavior: reducedMotion ? 'auto' : 'smooth',
+          block: 'start',
+        })
+      }
+    }, 60)
+    return () => window.clearTimeout(timer)
+  }, [hash, activeMonth?.slug, reducedMotion])
 
   const upcomingOccasionsList = useMemo(
     () => getUpcomingOccasions(CURRENT_CALENDAR_DATE, 44).map((item) => item.occasion),

@@ -3,27 +3,12 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
   ArrowRight,
-  Award,
   BookOpen,
-  Cake,
   CalendarHeart,
-  Coffee,
-  Compass,
   Feather,
-  Flame,
-  Flower2,
-  Gem,
-  Heart,
-  HeartHandshake,
-  Home,
-  MailCheck,
-  Moon,
   Palette,
   Send,
-  Smile,
   Sparkles,
-  Sun,
-  Trophy,
 } from 'lucide-react'
 import {
   BLOG_ARTICLES,
@@ -36,7 +21,9 @@ import { SITE_CONFIG, buildCanonicalUrl } from '../config/siteConfig'
 import { loadFavorites, toggleFavoriteId } from '../utils/cardStorage'
 import { AdPlacement } from '../components/AdPlacement'
 import { CardArtwork } from '../components/CardArtwork'
+import { CategoryIcon } from '../components/CategoryIcon'
 import { HeroCardDeck } from '../components/HeroCardDeck'
+import { QuickActions } from '../components/QuickActions'
 import { QuickPreviewDialog } from '../components/QuickPreviewDialog'
 import { SeoHead } from '../components/SeoHead'
 import { TemplateCard } from '../components/TemplateCard'
@@ -87,50 +74,15 @@ function buildHomeSchemas() {
   ]
 }
 
-function CategoryIcon({ name }: { name: string }) {
-  const cls = 'h-5 w-5 text-[#472C42]'
-  switch (name) {
-    case 'Sparkles':
-      return <Sparkles className={cls} aria-hidden="true" />
-    case 'Compass':
-      return <Compass className={cls} aria-hidden="true" />
-    case 'Flower2':
-      return <Flower2 className={cls} aria-hidden="true" />
-    case 'Award':
-      return <Award className={cls} aria-hidden="true" />
-    case 'Cake':
-      return <Cake className={cls} aria-hidden="true" />
-    case 'Gem':
-      return <Gem className={cls} aria-hidden="true" />
-    case 'Heart':
-      return <Heart className={cls} aria-hidden="true" />
-    case 'HeartHandshake':
-      return <HeartHandshake className={cls} aria-hidden="true" />
-    case 'Home':
-      return <Home className={cls} aria-hidden="true" />
-    case 'Moon':
-      return <Moon className={cls} aria-hidden="true" />
-    case 'Smile':
-      return <Smile className={cls} aria-hidden="true" />
-    case 'Sun':
-      return <Sun className={cls} aria-hidden="true" />
-    case 'MailHeart':
-      return <MailCheck className={cls} aria-hidden="true" />
-    case 'Trophy':
-      return <Trophy className={cls} aria-hidden="true" />
-    case 'Flame':
-      return <Flame className={cls} aria-hidden="true" />
-    case 'Coffee':
-    default:
-      return <Coffee className={cls} aria-hidden="true" />
-  }
-}
-
 export function HomePage() {
   const [favorites, setFavorites] = useState<string[]>(() => loadFavorites())
   const [previewId, setPreviewId] = useState<string | null>(null)
 
-  const featuredCards = CARD_TEMPLATES.filter((c) => c.featured).slice(0, 8)
+  const featuredPool = CARD_TEMPLATES.filter((c) => c.featured)
+  const featuredCards = [
+    ...featuredPool.filter((c) => c.id === 'confetti-birthday-spark'),
+    ...featuredPool.filter((c) => c.id !== 'confetti-birthday-spark'),
+  ].slice(0, 8)
   const featuredArticles = BLOG_ARTICLES.slice(0, 6)
   const homeSchemas = buildHomeSchemas()
 
@@ -254,6 +206,9 @@ export function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* B2. QUICK ACTIONS */}
+      <QuickActions />
 
       {/* C. POPULAR CATEGORIES */}
       <section className="py-16 sm:py-20 border-t" style={{ borderColor: 'var(--border-subtle)' }}>

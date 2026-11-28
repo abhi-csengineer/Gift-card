@@ -463,6 +463,43 @@ function drawCardBackdropAndBorders(
   ctx.fillStyle = glow2
   ctx.fillRect(0, 0, width, height)
 
+  // 2b. Dreamy warm bokeh lights & fairy light dots matching GreetingCardPreview
+  const bokehOrbs: [number, number, number, string, number][] = [
+    [width * 0.14, height * 0.1, 130 * unit, '#FFF3CC', 0.42],
+    [width * 0.86, height * 0.16, 115 * unit, '#FFE5EC', 0.36],
+    [width * 0.16, height * 0.84, 95 * unit, '#FFF5D6', 0.32],
+    [width * 0.84, height * 0.88, 150 * unit, palette.accent, 0.2],
+  ]
+  for (const [bx, by, br, col, alpha] of bokehOrbs) {
+    ctx.save()
+    ctx.globalAlpha = alpha
+    const bGrad = ctx.createRadialGradient(bx, by, 4 * unit, bx, by, br)
+    bGrad.addColorStop(0, col)
+    bGrad.addColorStop(0.55, `${palette.foil}66`)
+    bGrad.addColorStop(1, 'transparent')
+    ctx.fillStyle = bGrad
+    ctx.beginPath()
+    ctx.arc(bx, by, br, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.restore()
+  }
+
+  const fairyDots: [number, number, number, string, number][] = [
+    [width * 0.12, height * 0.16, 9 * unit, '#FFE8A3', 0.52],
+    [width * 0.86, height * 0.24, 11 * unit, '#FFD6A5', 0.48],
+    [width * 0.08, height * 0.52, 7 * unit, palette.foil, 0.45],
+    [width * 0.9, height * 0.76, 9 * unit, '#FFE8A3', 0.5],
+  ]
+  for (const [fx, fy, fr, col, alpha] of fairyDots) {
+    ctx.save()
+    ctx.globalAlpha = alpha
+    ctx.fillStyle = col
+    ctx.beginPath()
+    ctx.arc(fx, fy, fr, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.restore()
+  }
+
   // 3. Pattern & Borders
   const template = getTemplateById(card.templateId)
   const activePattern = card.pattern ?? template.defaultPattern
@@ -521,6 +558,33 @@ function drawCardBackdropAndBorders(
     ctx.roundRect(outerPad, outerPad, width - outerPad * 2, height - outerPad * 2, 26 * unit)
     ctx.stroke()
 
+    // Corner filigree L-brackets matching GreetingCardPreview
+    const cPad = 68 * unit
+    const cArm = 46 * unit
+    ctx.save()
+    ctx.strokeStyle = palette.foil
+    ctx.fillStyle = palette.foil
+    ctx.globalAlpha = 0.78
+    ctx.lineWidth = 2.2 * unit
+    ctx.lineCap = 'round'
+    const corners: [number, number, number, number][] = [
+      [cPad, cPad, 1, 1],
+      [width - cPad, cPad, -1, 1],
+      [width - cPad, height - cPad, -1, -1],
+      [cPad, height - cPad, 1, -1],
+    ]
+    for (const [cx, cy, sx, sy] of corners) {
+      ctx.beginPath()
+      ctx.moveTo(cx, cy + sy * cArm)
+      ctx.lineTo(cx, cy)
+      ctx.lineTo(cx + sx * cArm, cy)
+      ctx.stroke()
+      ctx.beginPath()
+      ctx.arc(cx + sx * 12 * unit, cy + sy * 12 * unit, 3.2 * unit, 0, Math.PI * 2)
+      ctx.fill()
+    }
+    ctx.restore()
+
     if (activePattern === 'linen-minimal' || activePattern === 'double-gold') {
       const innerPad = 72 * unit
       ctx.strokeStyle = activePattern === 'double-gold' ? palette.foil : `${textColor}30`
@@ -563,6 +627,170 @@ function drawCardBackdropAndBorders(
 
   // 4. Decorative stickers & effect visuals
   drawDecorativeOverlay(ctx, card, width, height, palette.accent, palette.foil, unit)
+}
+
+function isDarkHexColor(hex: string): boolean {
+  const clean = hex.trim().toLowerCase()
+  return (
+    clean.startsWith('#1') ||
+    clean.startsWith('#2') ||
+    clean.startsWith('#3') ||
+    clean.startsWith('#4') ||
+    clean.startsWith('#5')
+  )
+}
+
+function drawCurvedBrushUnderline(
+  ctx: CanvasRenderingContext2D,
+  centerX: number,
+  y: number,
+  spanWidth: number,
+  color: string,
+  unit: number,
+) {
+  ctx.save()
+  ctx.strokeStyle = color
+  ctx.lineWidth = 5 * unit
+  ctx.lineCap = 'round'
+  ctx.beginPath()
+  ctx.moveTo(centerX - spanWidth / 2, y + 4 * unit)
+  ctx.bezierCurveTo(
+    centerX - spanWidth * 0.18,
+    y - 5 * unit,
+    centerX + spanWidth * 0.22,
+    y - 6 * unit,
+    centerX + spanWidth / 2,
+    y + 1 * unit,
+  )
+  ctx.stroke()
+  ctx.restore()
+}
+
+function drawBrushStrokeBannerOnCanvas(
+  ctx: CanvasRenderingContext2D,
+  centerX: number,
+  centerY: number,
+  text: string,
+  bgColor: string,
+  bannerTextColor: string,
+  heartColor: string,
+  maxBannerWidth: number,
+  fontPx: number,
+  unit: number,
+) {
+  ctx.save()
+  ctx.font = `600 ${fontPx}px "Caveat", "Dancing Script", cursive`
+  const display = `${text}  ♡`
+  const measured = ctx.measureText(display).width
+  const bannerW = Math.min(maxBannerWidth, Math.max(240 * unit, measured + 76 * unit))
+  const bannerH = Math.max(52 * unit, fontPx * 1.55)
+  const left = centerX - bannerW / 2
+  const top = centerY - bannerH / 2
+
+  ctx.shadowColor = 'rgba(42, 23, 38, 0.14)'
+  ctx.shadowBlur = 10 * unit
+  ctx.shadowOffsetY = 4 * unit
+  ctx.fillStyle = bgColor
+  ctx.beginPath()
+  ctx.moveTo(left + 14 * unit, top + 6 * unit)
+  ctx.bezierCurveTo(
+    left + bannerW * 0.25,
+    top + 1 * unit,
+    left + bannerW * 0.72,
+    top + 3 * unit,
+    left + bannerW - 10 * unit,
+    top + 7 * unit,
+  )
+  ctx.bezierCurveTo(
+    left + bannerW + 2 * unit,
+    top + bannerH * 0.35,
+    left + bannerW - 4 * unit,
+    top + bannerH * 0.72,
+    left + bannerW - 14 * unit,
+    top + bannerH - 5 * unit,
+  )
+  ctx.bezierCurveTo(
+    left + bannerW * 0.65,
+    top + bannerH - 1 * unit,
+    left + bannerW * 0.28,
+    top + bannerH + 1 * unit,
+    left + 12 * unit,
+    top + bannerH - 6 * unit,
+  )
+  ctx.bezierCurveTo(
+    left - 2 * unit,
+    top + bannerH * 0.72,
+    left + 4 * unit,
+    top + bannerH * 0.34,
+    left + 14 * unit,
+    top + 6 * unit,
+  )
+  ctx.closePath()
+  ctx.fill()
+
+  ctx.shadowColor = 'transparent'
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'middle'
+  const pureTextW = ctx.measureText(text).width
+  const heartW = ctx.measureText(' ♡').width
+  const totalW = Math.min(bannerW - 36 * unit, pureTextW + heartW)
+  const textX = centerX - heartW / 2
+  ctx.fillStyle = bannerTextColor
+  ctx.fillText(text, textX, centerY + unit, bannerW - 56 * unit)
+  ctx.fillStyle = heartColor
+  ctx.fillText(' ♡', textX + Math.min(pureTextW, bannerW - 56 * unit) / 2 + heartW * 0.45, centerY + unit)
+  ctx.restore()
+  return { totalW, bannerH }
+}
+
+function drawSculptedWaxSeal(
+  ctx: CanvasRenderingContext2D,
+  cx: number,
+  cy: number,
+  radius: number,
+  accent: string,
+  foil: string,
+  sealText: string,
+  unit: number,
+) {
+  ctx.save()
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.24)'
+  ctx.shadowBlur = 14 * unit
+  ctx.shadowOffsetY = 6 * unit
+  ctx.fillStyle = accent
+  ctx.beginPath()
+  ctx.arc(cx, cy, radius, 0, Math.PI * 2)
+  ctx.fill()
+
+  ctx.shadowColor = 'transparent'
+  const sheen = ctx.createRadialGradient(
+    cx - radius * 0.35,
+    cy - radius * 0.35,
+    2 * unit,
+    cx,
+    cy,
+    radius,
+  )
+  sheen.addColorStop(0, 'rgba(255, 255, 255, 0.36)')
+  sheen.addColorStop(0.6, 'transparent')
+  sheen.addColorStop(1, 'rgba(0, 0, 0, 0.2)')
+  ctx.fillStyle = sheen
+  ctx.beginPath()
+  ctx.arc(cx, cy, radius, 0, Math.PI * 2)
+  ctx.fill()
+
+  ctx.strokeStyle = foil
+  ctx.lineWidth = 2.2 * unit
+  ctx.beginPath()
+  ctx.arc(cx, cy, radius * 0.81, 0, Math.PI * 2)
+  ctx.stroke()
+
+  ctx.fillStyle = '#FFF9F3'
+  ctx.font = `600 ${Math.round(radius * 0.75)}px "Cormorant Garamond", Georgia, serif`
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'middle'
+  ctx.fillText(sealText, cx, cy + unit)
+  ctx.restore()
 }
 
 /**
@@ -611,47 +839,41 @@ export async function renderCardSideToCanvas(
   const relationship = card.relationship?.trim() || ''
 
   if (side === 'front') {
-    // 1. Occasion & optional relationship pill(s)
+    // 1. Engraved stationery crest header
     ctx.save()
     ctx.font = `600 ${Math.round(20 * unit)}px "Plus Jakarta Sans", sans-serif`
     const occText = template.occasion.toUpperCase()
-    const occW = Math.min(contentWidth, ctx.measureText(occText).width + 58 * unit)
-    const relText = relationship ? `For ${relationship}` : ''
-    const relW = relText
-      ? Math.min(contentWidth * 0.55, ctx.measureText(relText).width + 44 * unit)
-      : 0
-    const gap = relText ? 14 * unit : 0
-    const totalPillsW = occW + gap + relW
-    const pillY = (layout === 'landscape' ? 105 : 120) * unit
-    const pillH = 48 * unit
+    const occW = Math.min(contentWidth * 0.78, ctx.measureText(occText).width + 16 * unit)
+    const headerY = (layout === 'landscape' ? 124 : 140) * unit
+    const lineLen = 36 * unit
 
-    let pillStartX = width / 2 - totalPillsW / 2
-    if (textAlign === 'left') pillStartX = padX
-    else if (textAlign === 'right') pillStartX = width - padX - totalPillsW
+    ctx.textBaseline = 'middle'
+    let headerCenterX = width / 2
+    if (textAlign === 'left') {
+      headerCenterX = padX + occW / 2 + lineLen + 14 * unit
+    } else if (textAlign === 'right') {
+      headerCenterX = width - padX - occW / 2 - lineLen - 14 * unit
+    }
 
-    // Occasion pill
-    ctx.fillStyle = palette.badgeBg
-    ctx.strokeStyle = `${palette.foil}88`
-    ctx.lineWidth = 1.5 * unit
+    ctx.strokeStyle = `${palette.foil}BF`
+    ctx.lineWidth = 1.8 * unit
     ctx.beginPath()
-    ctx.roundRect(pillStartX, pillY, occW, pillH, pillH / 2)
-    ctx.fill()
+    ctx.moveTo(headerCenterX - occW / 2 - 12 * unit - lineLen, headerY)
+    ctx.lineTo(headerCenterX - occW / 2 - 12 * unit, headerY)
+    ctx.moveTo(headerCenterX + occW / 2 + 12 * unit, headerY)
+    ctx.lineTo(headerCenterX + occW / 2 + 12 * unit + lineLen, headerY)
     ctx.stroke()
 
     ctx.fillStyle = textColor
+    ctx.globalAlpha = 0.85
     ctx.textAlign = 'center'
-    ctx.textBaseline = 'middle'
-    ctx.fillText(occText, pillStartX + occW / 2, pillY + pillH / 2, occW - 24 * unit)
+    ctx.fillText(occText, headerCenterX, headerY, occW)
 
-    // Relationship pill
-    if (relText) {
-      const rx = pillStartX + occW + gap
-      ctx.fillStyle = `${palette.foil}38`
-      ctx.beginPath()
-      ctx.roundRect(rx, pillY, relW, pillH, pillH / 2)
-      ctx.fill()
-      ctx.fillStyle = textColor
-      ctx.fillText(relText, rx + relW / 2, pillY + pillH / 2, relW - 20 * unit)
+    if (relationship) {
+      ctx.font = `italic 500 ${Math.round(25 * unit)}px "Cormorant Garamond", Georgia, serif`
+      ctx.fillStyle = palette.accent
+      ctx.globalAlpha = 0.9
+      ctx.fillText(`For ${relationship}`, headerCenterX, headerY + 34 * unit, contentWidth)
     }
     ctx.restore()
 
@@ -740,14 +962,39 @@ export async function renderCardSideToCanvas(
       cursorY += lineH
     }
 
-    // Recipient line: "For {displayRecipient}"
-    ctx.save()
-    ctx.globalAlpha = 0.84
-    ctx.fillStyle = textColor
-    const recPx = Math.round(30 * unit)
-    ctx.font = `500 ${recPx}px "Plus Jakarta Sans", sans-serif`
-    ctx.fillText(`For ${displayRecipient}`, anchorX, cursorY + 18 * unit, contentWidth)
-    ctx.restore()
+    // Curved golden brush-stroke underline below headline
+    const underlineX =
+      textAlign === 'left'
+        ? padX + 135 * unit
+        : textAlign === 'right'
+          ? width - padX - 135 * unit
+          : width / 2
+    drawCurvedBrushUnderline(ctx, underlineX, cursorY - lineH * 0.56, 260 * unit, '#F4B83A', unit)
+
+    // Painted Brush-Stroke Accent Ribbon for recipient / relationship
+    const isDark = isDarkHexColor(textColor)
+    const frontRibbonBg = isDark ? '#F9C95A' : '#FFF3D4'
+    const frontRibbonLabel = relationship
+      ? `For ${displayRecipient} · ${relationship}`
+      : `Warmest wishes for ${displayRecipient}`
+    const ribbonCenterX =
+      textAlign === 'left'
+        ? padX + 210 * unit
+        : textAlign === 'right'
+          ? width - padX - 210 * unit
+          : width / 2
+    drawBrushStrokeBannerOnCanvas(
+      ctx,
+      ribbonCenterX,
+      cursorY + 28 * unit,
+      frontRibbonLabel,
+      frontRibbonBg,
+      '#2A1726',
+      palette.accent,
+      contentWidth,
+      Math.round(32 * unit),
+      unit,
+    )
 
     // 4. Bottom Cardelle ornament
     ctx.save()
@@ -801,23 +1048,20 @@ export async function renderCardSideToCanvas(
 
   // 2. Bottom Sign-off & Wax Seal geometry (reserve safe bottom zone)
   const sealCenterY = height - (layout === 'landscape' ? 115 : 140) * unit
-  const signOffNameY = sealCenterY - 58 * unit
-  const signOffLabelY = signOffNameY - 48 * unit
-  const middleTop = salutationY + 24 * unit
-  const middleBottom = signOffLabelY - 46 * unit
+  const signOffBannerY = sealCenterY - 68 * unit
+  const middleTop = salutationY + 30 * unit
+  const middleBottom = signOffBannerY - 56 * unit
   const availableMiddleH = Math.max(180 * unit, middleBottom - middleTop)
 
-  // 3. Auto-fit full message + optional gift note so long messages NEVER clip
-  const giftNoteText = card.giftNote?.trim() || ''
+  // 3. Auto-fit full message + brush highlight banner so long messages NEVER clip
+  const giftNoteText = card.giftNote?.trim() || 'Keep smiling, keep shining!'
   let bodyPx = Math.round(
     (font.id === 'handwritten-script' || font.id === 'caveat-note' ? 46 : 36) * sizeScale * unit,
   )
   const minBodyPx = Math.round(20 * unit)
   let msgLines: string[] = []
   let lineHeight = 0
-  let giftLines: string[] = []
-  let giftBoxH = 0
-  let giftPx = Math.round(23 * unit)
+  const bannerReserveH = 86 * unit
 
   const measureInsideBlock = () => {
     ctx.font = `400 ${bodyPx}px "${font.canvasFamily}", Georgia, serif`
@@ -827,22 +1071,11 @@ export async function renderCardSideToCanvas(
     for (const line of msgLines) {
       msgH += line === '' ? lineHeight * 0.55 : lineHeight
     }
-
-    giftBoxH = 0
-    giftLines = []
-    if (giftNoteText) {
-      ctx.font = `500 ${giftPx}px "Plus Jakarta Sans", sans-serif`
-      giftLines = wrapTextLines(ctx, `✦  ${giftNoteText}`, contentWidth - 72 * unit)
-      giftBoxH = Math.max(62 * unit, giftLines.length * (giftPx * 1.35) + 28 * unit) + 28 * unit
-    }
-    return msgH + giftBoxH
+    return msgH + bannerReserveH
   }
 
   while (measureInsideBlock() > availableMiddleH && bodyPx > minBodyPx) {
     bodyPx -= Math.round(2 * unit)
-    if (giftNoteText && giftPx > 18 * unit && bodyPx < 28 * unit) {
-      giftPx = Math.round(19 * unit)
-    }
   }
 
   const totalBlockH = measureInsideBlock()
@@ -898,68 +1131,43 @@ export async function renderCardSideToCanvas(
     }
   }
 
-  // Optional gift note pill
-  if (giftNoteText && giftLines.length > 0) {
-    const giftY = msgCursorY + 12 * unit
-    const pillH = Math.max(58 * unit, giftLines.length * (giftPx * 1.35) + 26 * unit)
-    ctx.font = `500 ${giftPx}px "Plus Jakarta Sans", sans-serif`
-    const widestLine = Math.max(...giftLines.map((l) => ctx.measureText(l).width))
-    const boxW = Math.min(contentWidth, Math.max(260 * unit, widestLine + 76 * unit))
-    let boxX = width / 2 - boxW / 2
-    if (textAlign === 'left') boxX = padX
-    else if (textAlign === 'right') boxX = width - padX - boxW
+  // Painted highlight brush banner (gift note or joyful default)
+  const isDark = isDarkHexColor(textColor)
+  const insideRibbonBg = isDark ? '#F9C95A' : '#FFF3D4'
+  const insideRibbonX =
+    textAlign === 'left'
+      ? padX + 200 * unit
+      : textAlign === 'right'
+        ? width - padX - 200 * unit
+        : width / 2
+  drawBrushStrokeBannerOnCanvas(
+    ctx,
+    insideRibbonX,
+    msgCursorY + 34 * unit,
+    giftNoteText,
+    insideRibbonBg,
+    '#2A1726',
+    palette.accent,
+    contentWidth,
+    Math.round(31 * unit),
+    unit,
+  )
 
-    ctx.save()
-    ctx.fillStyle = `${palette.foil}28`
-    ctx.strokeStyle = `${palette.foil}99`
-    ctx.lineWidth = 1.6 * unit
-    ctx.beginPath()
-    ctx.roundRect(boxX, giftY, boxW, pillH, Math.min(28 * unit, pillH / 2))
-    ctx.fill()
-    ctx.stroke()
+  // Sign-off Dark Plum Brush Banner & Sculpted Wax Seal
+  drawBrushStrokeBannerOnCanvas(
+    ctx,
+    width / 2,
+    signOffBannerY,
+    `With love, ${displaySender}`,
+    isDark ? '#2A1726' : palette.accent,
+    '#FFF9F3',
+    '#F9C95A',
+    contentWidth,
+    Math.round(34 * unit),
+    unit,
+  )
 
-    ctx.fillStyle = textColor
-    ctx.textAlign = 'center'
-    ctx.textBaseline = 'middle'
-    const firstLineY = giftY + pillH / 2 - ((giftLines.length - 1) * giftPx * 1.35) / 2
-    giftLines.forEach((gLine, idx) => {
-      ctx.fillText(gLine, boxX + boxW / 2, firstLineY + idx * giftPx * 1.35)
-    })
-    ctx.restore()
-  }
-
-  // Sign-off & Wax Seal
-  ctx.save()
-  ctx.textAlign = 'center'
-  ctx.textBaseline = 'alphabetic'
-  ctx.globalAlpha = 0.78
-  ctx.fillStyle = textColor
-  ctx.font = `500 ${Math.round(19 * unit)}px "Plus Jakarta Sans", sans-serif`
-  ctx.fillText('WITH WARMTH & LOVE', width / 2, signOffLabelY)
-  ctx.restore()
-
-  ctx.fillStyle = textColor
-  ctx.textAlign = 'center'
-  ctx.textBaseline = 'alphabetic'
-  ctx.font = `600 ${Math.round(44 * unit)}px "Cormorant Garamond", Georgia, serif`
-  ctx.fillText(displaySender, width / 2, signOffNameY, contentWidth)
-
-  ctx.save()
-  ctx.fillStyle = palette.accent
-  ctx.beginPath()
-  ctx.arc(width / 2, sealCenterY, 32 * unit, 0, Math.PI * 2)
-  ctx.fill()
-  ctx.strokeStyle = palette.foil
-  ctx.lineWidth = 2.2 * unit
-  ctx.beginPath()
-  ctx.arc(width / 2, sealCenterY, 26 * unit, 0, Math.PI * 2)
-  ctx.stroke()
-  ctx.fillStyle = '#FFF9F3'
-  ctx.font = `600 ${Math.round(24 * unit)}px "Cormorant Garamond", Georgia, serif`
-  ctx.textAlign = 'center'
-  ctx.textBaseline = 'middle'
-  ctx.fillText(displaySeal, width / 2, sealCenterY + unit)
-  ctx.restore()
+  drawSculptedWaxSeal(ctx, width / 2, sealCenterY, 32 * unit, palette.accent, palette.foil, displaySeal, unit)
 
   return canvas
 }
@@ -1047,14 +1255,15 @@ export async function exportCardToImage(
     cursorY += headlinePx * 1.16
   }
 
-  // Divider ornament
-  ctx.strokeStyle = palette.foil
-  ctx.lineWidth = 2
-  ctx.beginPath()
-  const lineStart = textAlign === 'left' ? 140 : textAlign === 'right' ? width - 300 : width / 2 - 80
-  ctx.moveTo(lineStart, cursorY + 4)
-  ctx.lineTo(lineStart + 160, cursorY + 4)
-  ctx.stroke()
+  // Curved golden brush-stroke underline ornament
+  drawCurvedBrushUnderline(
+    ctx,
+    textAlign === 'left' ? 260 : textAlign === 'right' ? width - 260 : width / 2,
+    cursorY - headlinePx * 0.45,
+    240,
+    '#F4B83A',
+    1,
+  )
   cursorY += layout === 'landscape' ? 54 : 66
 
   // Salutation
@@ -1070,7 +1279,7 @@ export async function exportCardToImage(
   const bodyPx = Math.round(baseBody * sizeScale)
   const lineHeight = Math.round(bodyPx * 1.48)
   ctx.font = `400 ${bodyPx}px "${font.canvasFamily}", Georgia, serif`
-  const maxLines = layout === 'landscape' ? 6 : 9
+  const maxLines = layout === 'landscape' ? 5 : 8
   const msgLines = wrapTextLines(
     ctx,
     card.message.trim() || template.defaultMessage,
@@ -1086,57 +1295,48 @@ export async function exportCardToImage(
     }
   }
 
-  // Optional gift note
-  if (card.giftNote?.trim()) {
-    const giftY = Math.min(height - 230, cursorY + 26)
-    ctx.save()
-    ctx.fillStyle = `${palette.foil}25`
-    ctx.strokeStyle = `${palette.foil}AA`
-    ctx.lineWidth = 1.5
-    const boxW = Math.min(640, width - 220)
-    ctx.beginPath()
-    ctx.roundRect(width / 2 - boxW / 2, giftY, boxW, 60, 20)
-    ctx.fill()
-    ctx.stroke()
-    ctx.fillStyle = textColor
-    ctx.font = '500 22px "Plus Jakarta Sans", sans-serif'
-    ctx.textAlign = 'center'
-    ctx.textBaseline = 'middle'
-    ctx.fillText(`✦  ${card.giftNote.trim().slice(0, 60)}`, width / 2, giftY + 30)
-    ctx.restore()
-  }
-
-  // Sign-off & Seal
-  const signOffY = height - (layout === 'landscape' ? 135 : 175)
-  ctx.textAlign = 'center'
-  ctx.textBaseline = 'alphabetic'
-  ctx.fillStyle = `${textColor}99`
-  ctx.font = '500 20px "Plus Jakarta Sans", sans-serif'
-  ctx.fillText('WITH WARMTH & LOVE', width / 2, signOffY - 36)
-
-  ctx.fillStyle = textColor
-  ctx.font = `600 42px "Cormorant Garamond", Georgia, serif`
-  ctx.fillText(card.senderName.trim() || 'Always Yours', width / 2, signOffY + 12)
-
-  ctx.save()
-  ctx.fillStyle = palette.accent
-  ctx.beginPath()
-  ctx.arc(width / 2, height - 96, 30, 0, Math.PI * 2)
-  ctx.fill()
-  ctx.strokeStyle = palette.foil
-  ctx.lineWidth = 2
-  ctx.beginPath()
-  ctx.arc(width / 2, height - 96, 24, 0, Math.PI * 2)
-  ctx.stroke()
-  ctx.fillStyle = '#FFF9F3'
-  ctx.font = '600 24px "Cormorant Garamond", Georgia, serif'
-  ctx.textBaseline = 'middle'
-  ctx.fillText(
-    (card.sealText || template.sealInitial || 'C').slice(0, 2).toUpperCase(),
+  // Painted brush-stroke highlight banner (gift note or joyful default)
+  const isDark = isDarkHexColor(textColor)
+  const bannerLabel = card.giftNote?.trim() || 'Keep smiling, keep shining!'
+  const bannerY = Math.min(height - 245, cursorY + 34)
+  drawBrushStrokeBannerOnCanvas(
+    ctx,
     width / 2,
-    height - 95,
+    bannerY,
+    bannerLabel,
+    isDark ? '#F9C95A' : '#FFF3D4',
+    '#2A1726',
+    palette.accent,
+    width - 220,
+    30,
+    1,
   )
-  ctx.restore()
+
+  // Sign-off Dark Plum Brush Banner & Sculpted Wax Seal
+  const signOffBannerY = height - (layout === 'landscape' ? 155 : 172)
+  drawBrushStrokeBannerOnCanvas(
+    ctx,
+    width / 2,
+    signOffBannerY,
+    `With love, ${card.senderName.trim() || 'Always Yours'}`,
+    isDark ? '#2A1726' : palette.accent,
+    '#FFF9F3',
+    '#F9C95A',
+    width - 220,
+    32,
+    1,
+  )
+
+  drawSculptedWaxSeal(
+    ctx,
+    width / 2,
+    height - 92,
+    30,
+    palette.accent,
+    palette.foil,
+    (card.sealText || template.sealInitial || 'C').slice(0, 2).toUpperCase(),
+    1,
+  )
 
   const slug = recipient
     .toLowerCase()
